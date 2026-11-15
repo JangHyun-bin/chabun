@@ -154,7 +154,7 @@ export function FlowBoard({layout:target,emergencyActive=false,attention=[],noti
  return <div className="fs-board-wrap"><div ref={host} className="fs-board" data-testid="flow-board" data-layout={display.layout} data-target={target} data-emergency={display.cells.emergency.visible} data-moving={moving} data-profile={frame.mode} data-quiet={quiet}>
   {cellIds.map(id=>{
    const cell=display.cells[id],r=cell.slot,warm=attention.includes(id)
-   const style:CSSProperties={left:0,top:0,width:r.width,height:r.height,transform:`translate(${r.left}px, ${r.top}px)`,'--fs-footer-inset':`${cell.footer}px`} as CSSProperties
+   const style:CSSProperties={left:0,top:0,width:r.width,height:r.height,transform:`translate(${r.left}px, ${r.top}px)`,'--fs-footer-left':`${cell.shear.footer}px`,'--fs-column-right':`${cell.shear.column}px`} as CSSProperties
    return <CareSurface key={id} data-cell={id} data-cell-visible={cell.visible} data-compact={cell.variant==='summary'} data-priority={id===priority} data-lit={id===priority||id==='emergency'||priority==='emergency'&&id==='guide'} data-attention={warm} tone={warm||id==='emergency'?'call':id==='guide'?'safety':'plain'} shape={frame.mode==='document'?undefined:emptyShape} interactiveMaterial className="fs-cell">
     <div className="fs-cell-body" hidden={!cell.visible} data-scroll={cell.scroll} data-slot-x={r.left} data-slot-y={r.top} style={style} aria-hidden={!cell.visible} inert={!cell.visible}>{renderCell(id,cell.variant==='summary')}</div>
    </CareSurface>

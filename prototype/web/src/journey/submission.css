@@ -11,7 +11,9 @@
 .journey-send-options span { min-width: 0; }
 .journey-send-options small { display: block; font-size: var(--ac-type-label); color: var(--ac-muted); margin-top: var(--ac-space-2); }
 .journey-send-preview, .journey-receipt { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ac-space-6); padding: var(--ac-space-6); border: 1px solid var(--ac-line); border-radius:var(--ac-radius-control); }
-.journey-send-preview h2 { font-size: var(--ac-type-section); }
+/* The preview reads as one bordered list (Figma 05): payload sections divide inside it, the recipient row on top has no rule. */
+.journey-send-preview { gap: 0; padding-block: var(--ac-space-2); }
+.journey-send-preview > .journey-payload:first-child > section { border-block-start: 0; }
 .journey-payload { display: grid; gap: var(--ac-space-6); }
 .journey-payload section { display: grid; gap: var(--ac-space-3); padding-block: var(--ac-space-4); border-block-start: 1px solid var(--ac-line); }
 .journey-payload h3 { font-size: var(--ac-type-supporting); font-weight: 500; }

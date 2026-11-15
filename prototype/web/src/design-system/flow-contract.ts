@@ -13,6 +13,6 @@ export type FlowShape={polygon:Point[];bounds:SlotRect;path:string;areaFraction:
 // Weighted Voronoi (power diagram): a board point belongs to the cell whose plane is highest there.
 export type FlowPlane={x:number;y:number;offset:number}
 export type FlowShapeFrame={width:number;height:number;planes:Record<CellId,FlowPlane>;shapes:Record<CellId,FlowShape|null>}
-// `footer` shifts a lead cell's bottom action row right so it keeps its seam distance where a slanted seam has moved in.
-export type FlowPlannedCell={id:CellId;shape:FlowShape|null;slot:SlotRect;footer:number;variant:'full'|'summary';visible:boolean;scroll:boolean}
+// `shear` follows a lead cell's slanted seams inside its slot: the footer row starts `footer` px in, everything above keeps `column` px clear on the right.
+export type FlowPlannedCell={id:CellId;shape:FlowShape|null;slot:SlotRect;shear:{footer:number;column:number};variant:'full'|'summary';visible:boolean;scroll:boolean}
 export type FlowPlan={layout:FlowLayout;mode:FlowMode;width:number;height:number;planes:Record<CellId,FlowPlane>;cells:Record<CellId,FlowPlannedCell>}
