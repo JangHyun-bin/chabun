@@ -4,7 +4,7 @@ import './host.css'
 export type DialResult = 'opened' | 'unavailable' | 'rejected'
 export type HandoffCommand = 'journey' | 'start' | 'approve' | 'renew' | 'retry'
 export type AppWindowSize = { width: number; height: number; scale: number }
-type ChabunNative = { host(): string; handoff(command: HandoffCommand, argJson: string): void; dial(number: '119'): string }
+type ChabunNative = { host(): string; handoff(command: HandoffCommand, argJson: string): void; dial(number: string): string }
 type WindowPx = { width: number; height: number }
 
 declare global {
@@ -71,8 +71,11 @@ export function sendHandoff(command: HandoffCommand, argument: Record<string, st
   bridge?.handoff(command, JSON.stringify(argument))
 }
 
-export function dial119(): DialResult | null {
+function dial(number: string): DialResult | null {
   if (!bridge) return null
-  const result = bridge.dial('119')
+  const result = bridge.dial(number)
   return result === 'opened' || result === 'unavailable' ? result : 'rejected'
 }
+export function dial119(): DialResult | null { return dial('119') }
+// Must match REGISTERED_INSURER_PHONE in ChabunNative.kt; native rejects any other number.
+export function dialInsurer(phone: string): DialResult | null { return dial(phone) }

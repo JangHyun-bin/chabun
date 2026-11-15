@@ -1,6 +1,7 @@
 .journey-review-content { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ac-space-6); }
 .journey-submission { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ac-space-6); min-width: 0; }
-.journey-submission-demo { display: grid; justify-items: start; gap: var(--ac-space-3); }
+.journey-submission-error { padding: var(--ac-space-4); border: 1px solid var(--ac-line); border-radius: var(--ac-radius-control); font-size: var(--ac-type-body); }
+.journey-insurer-call { display: grid; justify-items: start; gap: var(--ac-space-3); }
 .journey-recipient { display: grid; gap: var(--ac-space-3); font-size: var(--ac-type-supporting); }
 .journey-recipient input { min-height: 56px; width: 100%; padding: var(--ac-space-3) var(--ac-space-4); border: 1px solid var(--ac-line); border-radius:var(--ac-radius-control); background: var(--ac-control); color: var(--ac-text); font: inherit; }
 .journey-send-options { min-width: 0; border: 0; padding: 0; margin: 0; display: grid; gap: var(--ac-space-3); }

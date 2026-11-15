@@ -5,6 +5,8 @@ import { EvidenceView } from './ReportPanel'
 import { canSubmit, preparePayload, type ApprovalInput, type ApprovalCommitResult, type CaseCommand, type JourneyCase, type PayloadSelection, type PayloadSnapshot } from './case'
 import './submission.css'
 import { isExampleReport } from './example-report'
+import { registeredProfile } from './insurer-profile'
+import { dialInsurer } from '@/host/pleos-host'
 
 type Target = 'insurance' | 'vehicle' | 'share'
 type Draft = { recipient: string; selection: PayloadSelection }
@@ -20,8 +22,20 @@ const failures: Record<Exclude<ApprovalCommitResult, { ok: true }>['reason'], st
   quota: '저장 공간이 부족해요. 요청은 시작되지 않았어요.',
   invalid: '자료를 보관하지 못했어요. 요청은 시작되지 않았어요.',
 }
-function emptyDraft(): Draft { return { recipient: '', selection: { observationIds: [], statementIds: [], evidenceIds: [], includeDiagram: false, includeReport: false } } }
-function emptyDrafts(): Record<Target, Draft> { return { insurance: emptyDraft(), vehicle: emptyDraft(), share: emptyDraft() } }
+const defaultRecipients: Record<Target, string> = { insurance: registeredProfile.insurer.name, vehicle: registeredProfile.vehicleSupport, share: '' }
+// Starts with everything that can be sent as-is: confirmed content and secured evidence. Items still needing review stay unchecked.
+export function suggestedDraft(value: JourneyCase, target: Target): Draft {
+  const evidenceIds = value.evidence.filter(item => item.availability === 'available' && item.assetId).map(item => item.id)
+  const selection: PayloadSelection = {
+    observationIds: value.observations.map(item => item.id),
+    statementIds: value.statements.filter(item => item.text.trim() && item.confirmedRevision === item.revision).map(item => item.id),
+    evidenceIds, includeDiagram: !!value.diagram, includeReport: !!value.report,
+  }
+  if (selection.includeReport && !preparePayload(value, selection).ok) selection.includeReport = false
+  if (selection.includeDiagram && !preparePayload(value, selection).ok) selection.includeDiagram = false
+  return { recipient: defaultRecipients[target], selection }
+}
+function emptyDrafts(): Record<Target, Draft | null> { return { insurance: null, vehicle: null, share: null } }
 function hasSelection(selection: PayloadSelection) { return selection.observationIds.length + selection.statementIds.length + selection.evidenceIds.length > 0 || selection.includeDiagram || selection.includeReport }
 
 function pauseCollapsedMedia(event: SyntheticEvent<HTMLDetailsElement>) {
@@ -58,8 +72,8 @@ export function SubmissionPanel({ value, onApprove, onCommand, onCancel, onDirty
   const recipient = useRef<HTMLInputElement>(null)
   const [error, setError] = useState('')
   const [approved, setApproved] = useState(false)
-  const draft = drafts[target]
-  const dirty = busy || preview !== null || Object.values(drafts).some(item => !!item.recipient || hasSelection(item.selection))
+  const draft = drafts[target] ?? suggestedDraft(value, target)
+  const dirty = busy || preview !== null || Object.values(drafts).some(item => item !== null && (!!item.recipient || hasSelection(item.selection)))
   const currentRequest = target === 'share' ? null : value.submissions.find(item => item.id === value.activeSubmissionIds[target])
   const currentShare = target === 'share' ? value.shares.at(-1) : null
   const allowed = target === 'share' || canSubmit(value, target)
@@ -70,7 +84,12 @@ export function SubmissionPanel({ value, onApprove, onCommand, onCancel, onDirty
     window.addEventListener('beforeunload', warn)
     return () => window.removeEventListener('beforeunload', warn)
   }, [dirty])
-  function change(next: Partial<Draft>) { setDrafts(previous => ({ ...previous, [target]: { ...previous[target], ...next } })); setError(''); setApproved(false) }
+  const [callNote, setCallNote] = useState('')
+  function change(next: Partial<Draft>) { setDrafts(previous => ({ ...previous, [target]: { ...(previous[target] ?? suggestedDraft(value, target)), ...next } })); setError(''); setApproved(false) }
+  function callInsurer() {
+    const result = dialInsurer(registeredProfile.insurer.phone)
+    setCallNote(result === 'opened' ? '전화 화면을 열었어요. 통화 버튼은 직접 눌러주세요.' : `차에서 전화 화면을 열 수 없어요. 휴대폰에서 ${registeredProfile.insurer.display}로 전화해주세요.`)
+  }
   useImperativeHandle(ref, () => ({ preserveDraft: () => {
     const input = recipient.current
     if (input && input.value !== draft.recipient) change({ recipient: input.value })
@@ -94,16 +113,17 @@ export function SubmissionPanel({ value, onApprove, onCommand, onCancel, onDirty
       const result = await onApprove({ ...preview.input, now: new Date().toISOString() }, preview.payload)
       if (!result.ok) { setError(failures[result.reason]); return }
       setPreview(null); setApproved(true)
-      setDrafts(previous => ({ ...previous, [target]: emptyDraft() }))
+      setDrafts(previous => ({ ...previous, [target]: null }))
     } finally { submitting.current = false; setBusy(false) }
   }
   return <section className="journey-submission journey-editor-panel" aria-label="전송 검토">
-    <JourneyEditorLayout guidanceKey={[target,!!preview,busy,approved,currentRequest?.status,currentShare?.status].join('/')} step="전송 검토" title="보낼 범위를 직접 선택해주세요" description={'수신처와 내용을 확인한 뒤 요청할 수 있어요.'} primary={allowed||preview ? (preview
+    <JourneyEditorLayout step="전송 검토" title="보낼 범위를 직접 선택해주세요" description={'수신처와 내용을 확인한 뒤 요청할 수 있어요.'} primary={allowed||preview ? (preview
       ? <JourneyAction disabled={busy} onClick={() => void approve()}>{busy ? '승인 내용 보관 중' : target === 'share' ? '이 내용으로 공유 요청' : '이 내용으로 요청'}</JourneyAction>
       : <JourneyAction onClick={showPreview}>선택한 내용 미리보기</JourneyAction>) : null}>
 
-    <div className="journey-submission-demo" aria-label="시연 안내"><JourneyStatus tone="unknown">시연 · 실제 외부 전송 없음</JourneyStatus><p className="journey-supporting">보험사 접수·차량 지원·공유 결과는 시연이에요. 경위서는 예시이며 승인해도 실제 외부 기관에 보내지 않아요.</p></div>
-    <nav className="journey-record-tabs journey-review-tabs" aria-label="보낼 대상">{(['insurance', 'vehicle', 'share'] as const).map(item => <button key={item} disabled={busy} aria-pressed={target === item} onClick={() => { setTarget(item); setPreview(null); setError(''); setApproved(false) }}>{labels[item]}</button>)}</nav>
+    <nav className="journey-record-tabs journey-review-tabs" aria-label="보낼 대상">{(['insurance', 'vehicle', 'share'] as const).map(item => <button key={item} disabled={busy} aria-pressed={target === item} onClick={() => { setTarget(item); setPreview(null); setError(''); setCallNote(''); setApproved(false) }}>{labels[item]}</button>)}</nav>
+    {error && <p role="status" className="journey-submission-error">{error}</p>}
+    {target === 'insurance' && <div className="journey-report-tools journey-insurer-call"><button onClick={callInsurer}>보험사에 전화하기 · {registeredProfile.insurer.display}</button>{callNote && <p role="status" className="journey-supporting">{callNote}</p>}</div>}
     {approved && <p role="status">승인한 내용이 보관됐어요</p>}
     {currentRequest && <section className="journey-receipt" aria-label="요청 결과">
       <JourneyStatus tone="unknown">시연 결과 · 실제 접수 아님</JourneyStatus>
@@ -111,19 +131,20 @@ export function SubmissionPanel({ value, onApprove, onCommand, onCancel, onDirty
         {currentRequest.transport === 'approved' ? '승인 완료 · 전송 전' : currentRequest.transport === 'sending' ? '전송 중 · 접수 미확인' : currentRequest.transport === 'sent' && currentRequest.status === 'sent' ? '전송 완료 · 접수 미확인' : currentRequest.status === 'received' ? '접수 확인됨' : currentRequest.status === 'failed' ? '전송 실패 확인됨' : currentRequest.status === 'not_received' ? '미접수 확인됨' : '접수 결과 확인 중'}
       </JourneyStatus>
       <p>{currentRequest.recipient ?? labels[target]}</p>
-      {currentRequest.status === 'received' && <><strong>{currentRequest.externalReceipt?.number ?? '접수번호 확인 중'}</strong><p className="journey-supporting">시연 접수번호 · 실제 보험사·차량 지원 접수번호가 아니에요.</p>
+      {currentRequest.status === 'received' && <><strong>{currentRequest.externalReceipt?.number ?? '접수번호 확인 중'}</strong>
         {currentRequest.externalReceipt && <p>{currentRequest.externalReceipt.agencyName} · {new Date(currentRequest.externalReceipt.receivedAt).toLocaleString('ko-KR')}<br />{currentRequest.externalReceipt.next}</p>}</>}
       <details onToggle={pauseCollapsedMedia}><summary>승인했던 내용</summary>{currentRequest.payload ? <PayloadContent payload={currentRequest.payload} caseId={value.id} active={active} exampleReport /> : <p>과거 전송 내용 확인 불가</p>}</details>
       {!allowed && currentRequest.status !== 'received' && <p className="journey-supporting">결과가 확인되지 않은 동안에는 같은 요청을 다시 보내지 않아요.</p>}
     </section>}
     {currentShare && <section className="journey-receipt" aria-label="공유 결과"><JourneyStatus tone={currentShare.status === 'confirmed' ? 'confirmed' : currentShare.status === 'failed' ? 'failed' : 'pending'}>
       {currentShare.status === 'confirmed' ? '공유 확인됨' : currentShare.status === 'failed' ? '공유 실패 확인됨' : '공유 결과 확인 중'}</JourneyStatus>
-      <p className="journey-supporting">시연 공유 결과 · 실제 상대방에게 보내지 않았어요.</p><p>{currentShare.recipient}</p><details onToggle={pauseCollapsedMedia}><summary>공유 승인한 내용</summary><PayloadContent payload={currentShare.payload} caseId={value.id} active={active} exampleReport /></details>
+<p>{currentShare.recipient}</p><details onToggle={pauseCollapsedMedia}><summary>공유 승인한 내용</summary><PayloadContent payload={currentShare.payload} caseId={value.id} active={active} exampleReport /></details>
     </section>}
     {allowed && !preview && <>
-      <label className="journey-recipient">수신처<input ref={recipient} maxLength={100} value={draft.recipient} onChange={event => change({ recipient: event.target.value })} /></label>
-      <p className="journey-supporting">목적 · {purposes[target]}</p>
+      <label className="journey-recipient">수신처<input ref={recipient} maxLength={100} value={draft.recipient} placeholder={target === 'share' ? '상대방 이름이나 연락처' : undefined} onChange={event => change({ recipient: event.target.value })} /></label>
+      <p className="journey-supporting">목적 · {purposes[target]}{target === 'insurance' ? ' · 등록한 보험사를 넣어뒀어요' : ''}</p>
       <fieldset className="journey-send-options"><legend>보낼 내용</legend>
+        <p className="journey-supporting">확인을 마친 기록과 확보한 자료를 미리 골라뒀어요. 보내고 싶지 않은 항목은 선택을 해제해주세요.</p>
         {value.observations.map(item => <label key={item.id}><input type="checkbox" checked={draft.selection.observationIds.includes(item.id)} onChange={() => toggle('observationIds', item.id)} /><span>{item.label} · {item.value}</span></label>)}
         {value.statements.map((item, index) => <label key={item.id}><input type="checkbox" checked={draft.selection.statementIds.includes(item.id)} onChange={() => toggle('statementIds', item.id)} /><span>남긴 이야기 {index + 1}<small>{item.text}{item.confirmedRevision !== item.revision ? ' · 확인 필요' : ''}</small></span></label>)}
         {value.evidence.map(item => <label key={item.id}><input type="checkbox" aria-label={item.label} disabled={item.availability !== 'available'} checked={draft.selection.evidenceIds.includes(item.id)} onChange={() => toggle('evidenceIds', item.id)} /><span>{item.label}{item.availability !== 'available' && <small>확보하지 못한 자료</small>}</span></label>)}
@@ -139,11 +160,10 @@ export function SubmissionPanel({ value, onApprove, onCommand, onCancel, onDirty
     </section>}
     {target !== 'share' && value.submissions.some(item => item.agency === target && item.id !== currentRequest?.id) && <details className="journey-receipt" onToggle={pauseCollapsedMedia}><summary>이전 요청 내용</summary>
       {value.submissions.filter(item => item.agency === target && item.id !== currentRequest?.id).map(item => <section key={item.id}><h3>{item.recipient ?? labels[target]}</h3>
-        <p className="journey-supporting">이전 시연 요청 · 실제 외부 접수 아님</p><p>{item.approvedAt ? new Date(item.approvedAt).toLocaleString('ko-KR') : '과거 요청'}</p>{item.payload ? <PayloadContent payload={item.payload} caseId={value.id} active={active} exampleReport /> : <p>과거 전송 내용 확인 불가</p>}
+        <p>{item.approvedAt ? new Date(item.approvedAt).toLocaleString('ko-KR') : '과거 요청'}</p>{item.payload ? <PayloadContent payload={item.payload} caseId={value.id} active={active} exampleReport /> : <p>과거 전송 내용 확인 불가</p>}
       </section>)}
     </details>}
-    {target === 'share' && value.shares.length > 1 && <details className="journey-receipt" onToggle={pauseCollapsedMedia}><summary>이전 공유 내용</summary>{value.shares.slice(0, -1).map(item => <section key={item.id}><h3>{item.recipient}</h3><p className="journey-supporting">이전 시연 공유 · 실제 외부 전송 없음</p><PayloadContent payload={item.payload} caseId={value.id} active={active} exampleReport /></section>)}</details>}
-    {error && <p role="status">{error}</p>}
+    {target === 'share' && value.shares.length > 1 && <details className="journey-receipt" onToggle={pauseCollapsedMedia}><summary>이전 공유 내용</summary>{value.shares.slice(0, -1).map(item => <section key={item.id}><h3>{item.recipient}</h3><PayloadContent payload={item.payload} caseId={value.id} active={active} exampleReport /></section>)}</details>}
     <JourneyAction secondary disabled={busy || currentRequest?.transport === 'sending'} onClick={() => { setDrafts(emptyDrafts()); setPreview(null); setError(''); onCancel() }}>전송 검토 닫기</JourneyAction>
     {footer}
     </JourneyEditorLayout>

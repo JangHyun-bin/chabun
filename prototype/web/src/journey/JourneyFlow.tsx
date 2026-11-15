@@ -21,7 +21,8 @@ import './journey-flow.css'
 const stepVoice: Partial<Record<FlowScene, string>> = flowVoices
 
 type DialCountdown = { kind: 'idle' | 'cancelled' | 'opened' } | { kind: 'running'; deadline: number; seconds: number }
-const callLabels = { connecting: '119 전화 화면을 열었어요', connected: '통화 연결 시연', ended: '통화 종료 시연' }
+// The guide cell already states the call scene in full; the 119 cell keeps only a short status so the same sentence is not shown twice.
+const callStatus = { connecting: '전화 화면 열림', connected: '통화 중', ended: '통화 종료' }
 const guideTasks: Partial<Record<FlowScene, { title: string; note: string }>> = {
   situation: { title: '괜찮으세요?', note: '충돌을 감지했어요. 다친 사람이 있거나 위험하면 119 전화 화면을 열 수 있어요.' },
   'situation-airbag': { title: '괜찮으세요?', note: '에어백 전개 신호가 왔어요. 다친 사람이 있는지 먼저 확인해 주세요.' },
@@ -270,8 +271,7 @@ export function JourneyFlow({ value, device, active, saved, onCommand, onSave, o
         {act('지금 연결', () => void startCall())}
         {emergency && act('괜찮아요', () => void answerSituation(noUrgentDanger), true)}
       </> : <>
-        <p>{callLabels[call]}</p>
-        <CareStatus tone="unknown">실제 통화·구호 접수 미확인</CareStatus>
+        <CareStatus tone="unknown">{callStatus[call]} · 실제 통화·구호 접수 미확인</CareStatus>
         {call === 'ended' && act('119 전화 화면 다시 열기', () => { dialAttempted.current = false; void startCall() }, true)}
       </>}
       {dialFailed && <div role="alert"><CareStatus tone="failed">차에서 전화 화면을 열 수 없어요. 휴대폰에서 119를 눌러 주세요.</CareStatus></div>}

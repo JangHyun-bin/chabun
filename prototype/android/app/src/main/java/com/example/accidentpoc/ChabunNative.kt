@@ -78,7 +78,7 @@ internal fun hostJson(environment: FactSource, window: WindowPx, theme: HostThem
 internal class ChabunNative(
     private val describe: () -> JSONObject,
     private val onHandoff: (HandoffCommand) -> Unit,
-    private val openDialer: () -> Boolean,
+    private val openDialer: (String) -> Boolean,
 ) {
     private val main = Handler(Looper.getMainLooper())
 
@@ -90,11 +90,15 @@ internal class ChabunNative(
     }
 
     @JavascriptInterface fun dial(number: String?): String {
-        if (number != "119") return "rejected"
-        val opened = FutureTask { openDialer() }
+        // Only the emergency number and the registered insurer's line; ACTION_DIAL still waits for the driver to press call.
+        if (number !in DIALABLE) return "rejected"
+        val opened = FutureTask { openDialer(number!!) }
         main.post(opened)
         return try {
             if (opened.get(5, TimeUnit.SECONDS)) "opened" else "unavailable"
         } catch (_: Exception) { "unavailable" }
     }
 }
+
+internal val DIALABLE = setOf("119", REGISTERED_INSURER_PHONE)
+internal const val REGISTERED_INSURER_PHONE = "15880000"

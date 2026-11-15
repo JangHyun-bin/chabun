@@ -303,7 +303,7 @@ export function VoiceRecordPanel({ value, mode, onSave, durable, reloadVersion =
 
   return <section ref={section} className="journey-voice journey-editor-panel" data-voice-phase={phase} aria-label="음성 사고 기록">
     <JourneyEditorLayout step="사고 기록" title={phase === 'listening' ? '천천히 말씀해주세요' : editing || pending.length ? '이렇게 기록할까요?' : '기억나는 내용을 남겨주세요'} description={phase === 'listening' ? '확실한 내용만 말해도 돼요.' : '기억과 다른 내용은 저장 전에 고칠 수 있어요.'} primary={phase==='listening'
-      ? <JourneyAction onClick={() => void finishRecording()} disabled={finishing}><Square aria-hidden="true" />말하기 마치기</JourneyAction>
+      ? <JourneyAction onClick={() => void finishRecording()} disabled={finishing}><Square aria-hidden="true" />기록 마치기</JourneyAction>
       : guided && phase === 'saved' && !dirty.current
         ? <JourneyAction disabled={busy} onClick={() => void continueToReview()}><Check aria-hidden="true" />내용 확인으로 계속</JourneyAction>
         : editing || pending.length

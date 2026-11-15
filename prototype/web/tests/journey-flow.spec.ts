@@ -156,6 +156,8 @@ test('SC02 no media path stays usable without granting vehicle mobility or confi
   await expect(page.getByText('제공된 영상이 없어요. 남긴 기록으로 계속 확인할 수 있어요.', { exact: true })).toBeVisible()
   await button(page, '보낼 내용 확인').click()
   await page.getByLabel('수신처', { exact: true }).fill('보험사')
+  const options = page.getByRole('group', { name: '보낼 내용', exact: true })
+  for (const box of await options.getByRole('checkbox').all()) if (await box.isChecked()) await box.uncheck()
   await button(page, '선택한 내용 미리보기').click()
   await expect(page.getByText('보낼 내용을 하나 이상 선택해주세요.', { exact: true })).toBeVisible()
   await button(page, '전송 검토 닫기').click()

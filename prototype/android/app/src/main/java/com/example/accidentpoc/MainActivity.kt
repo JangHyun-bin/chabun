@@ -142,8 +142,8 @@ class MainActivity : ComponentActivity() {
         sendFacts(vehicle.facts.value, replay = true)
     }
 
-    private fun openDialer(): Boolean {
-        val dial = Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", "119", null))
+    private fun openDialer(number: String): Boolean {
+        val dial = Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", number, null))
         if (dial.resolveActivity(packageManager) == null) return false
         startActivity(dial)
         return true
