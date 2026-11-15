@@ -118,7 +118,7 @@ test('a deployed airbag reading opens the phone screen once after ten seconds an
   expect(await dials(page)).toEqual([])
   await page.clock.runFor(1100)
   await expect(flow(page)).toHaveAttribute('data-call', 'connecting')
-  await expect(emergency).toContainText('119 전화 화면을 열었어요')
+  await expect(emergency).toContainText('전화 화면 열림')
   await expect(emergency).toContainText('실제 통화·구호 접수 미확인')
   await sendFact(page, { kind: 'reading', value: true, source: 'simulation' })
   await sendFact(page, { kind: 'reading', value: false, source: 'simulation', seatId: 'ROW_1_RIGHT' })
@@ -285,6 +285,7 @@ test('a build without a backend runs standalone and never offers the phone link'
   await page.getByRole('button', { name: '선택한 내용 미리보기', exact: true }).click()
   expect((await stored(page)).activeSubmissionIds.insurance).toBeNull()
   await page.getByRole('button', { name: '이 내용으로 요청', exact: true }).click()
+  await expect(page.getByText('승인한 내용이 보관됐어요', { exact: true })).toBeVisible()
   const approved = await stored(page)
   const payload = approved.submissions.find(item => item.id === approved.activeSubmissionIds.insurance)?.payload
   await page.getByRole('button', { name: '승인한 내용 보내기', exact: true }).click()

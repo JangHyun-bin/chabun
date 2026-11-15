@@ -67,7 +67,7 @@ export function JourneyReviewPanel({ value, saving, reloading, onCommand, onAppr
   }), [preparing, diagramDirty, reportDirty, submissionDirty])
   return <>
     <div ref={reviewContent} hidden={submission} inert={reloading || preparing} aria-busy={reloading || preparing} className="journey-review-content journey-editor-panel">
-    <JourneyEditorLayout guidanceKey={tab+'/'+submission} step="사고 내용 확인" title={mode === 'product' ? '남긴 내용을 확인하세요' : '남겨진 자료를 살펴보세요'} description={'확실하지 않은 내용은 미확인으로 남겨도 돼요.'} primary={<JourneyAction disabled={preparing || diagramDirty || reportDirty} onClick={() => setSubmission(true)}>{mode === 'product' ? '내 사본 범위 선택' : '보낼 내용 확인'}</JourneyAction>}>
+    <JourneyEditorLayout step="사고 내용 확인" title={mode === 'product' ? '남긴 내용을 확인하세요' : '남겨진 자료를 살펴보세요'} description={'확실하지 않은 내용은 미확인으로 남겨도 돼요.'} primary={<JourneyAction disabled={preparing || diagramDirty || reportDirty} onClick={() => setSubmission(true)}>{mode === 'product' ? '내 사본 범위 선택' : '보낼 내용 확인'}</JourneyAction>}>
 
     <nav className="journey-record-tabs journey-review-tabs" aria-label="확인할 자료">
       {mode === 'product' && <button aria-pressed={tab === 'records'} onClick={() => setTab('records')}>사진·음성·글</button>}

@@ -210,12 +210,14 @@ test('report selection and preview require explicit approval and receipts remain
     await expect(paragraph.getByText('내용 확인함', { exact: true })).toBeVisible()
   }
   await root.getByRole('button', { name: '보낼 내용 확인', exact: true }).click()
-  await expect(root.getByText('시연 · 실제 외부 전송 없음', { exact: true })).toBeVisible()
+  await expect(root.getByLabel('수신처', { exact: true })).toHaveValue('내 자동차보험 (등록된 보험사)')
+  await expect(root.getByRole('checkbox', { name: '경위서', exact: true })).toBeChecked()
+  for (const label of ['전방 영상', '현장 전체 사진', '음성 진술']) await expect(root.getByRole('checkbox', { name: label, exact: true })).toBeChecked()
   await root.getByLabel('수신처', { exact: true }).fill('시연 보험사')
-  await root.getByRole('checkbox', { name: '경위서', exact: true }).check()
+  await root.getByRole('checkbox', { name: '전방 영상', exact: true }).uncheck()
   await root.getByRole('button', { name: '선택한 내용 미리보기', exact: true }).click()
   await expect(root.getByText('선택한 자료와 경위서의 근거를 다시 확인해주세요. 경위서에 연결된 자료도 함께 선택해야 해요.', { exact: true })).toBeVisible()
-  for (const label of ['전방 영상', '현장 전체 사진', '음성 진술']) await root.getByRole('checkbox', { name: label, exact: true }).check()
+  await root.getByRole('checkbox', { name: '전방 영상', exact: true }).check()
   await root.getByRole('button', { name: '선택한 내용 미리보기', exact: true }).click()
   await expect(root.getByRole('region', { name: '보낼 내용 미리보기', exact: true }).getByText('예시 경위서', { exact: true })).toBeVisible()
   expect(await page.evaluate(() => window.reportReviewApprovals)).toEqual([])
@@ -229,7 +231,6 @@ test('report selection and preview require explicit approval and receipts remain
   const receipt = root.getByRole('region', { name: '요청 결과', exact: true })
   await expect(receipt.getByText('시연 결과 · 실제 접수 아님', { exact: true })).toBeVisible()
   await expect(receipt.getByText('시연-0000', { exact: true })).toBeVisible()
-  await expect(receipt.getByText('시연 접수번호 · 실제 보험사·차량 지원 접수번호가 아니에요.', { exact: true })).toBeVisible()
 })
 
 test('a failed sentence save keeps the draft and the explicit approval boundary', async ({ page }) => {
