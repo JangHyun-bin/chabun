@@ -1,6 +1,4 @@
-# 차분
-
-사고 후 대처와 기록을 위한 Pleos 앱
+<p align="center"><img src="docs/readme-header.svg" alt="차분 · 사고 후 대처와 기록을 위한 Pleos 앱" width="100%"></p>
 
 ## 구성
 
@@ -18,7 +16,7 @@
 
 ## 빌드와 설치
 
-공식 Pleos Connect Emulator(API 34)에서 실행합니다.
+공식 Pleos Connect Emulator(Pleos Connect v2.1.0 시스템 이미지, API 34)에서 실행합니다. 화면 규격은 2560×1440(160dpi)이며, 앱은 그 안의 앱 창 1682×1210에서 실행합니다.
 
 개발 환경은 Node.js 22.12 이상, JDK 21, Android SDK 35, Build Tools 36.0.0입니다.
 
