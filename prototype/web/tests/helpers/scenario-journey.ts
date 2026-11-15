@@ -41,7 +41,7 @@ export async function enterJourneyRecord(page: Page) {
 
 export async function openExampleReport(page: Page) {
   await expectJourneyStep(page, 5)
-  await page.getByRole('button', { name: '예시 경위서 만들기', exact: true })
+  await page.locator('[data-cell=guide]').getByRole('button', { name: '경위서 초안 보기', exact: true })
     .or(page.getByTestId('journey-primary')).filter({ visible: true }).first().click()
   await expectJourneyStep(page, 6)
   await expect(page.getByRole('region', { name: '경위서 검토', exact: true })).toBeVisible()

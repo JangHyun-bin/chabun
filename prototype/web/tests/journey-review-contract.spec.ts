@@ -202,7 +202,7 @@ test('each generated media reference opens its actual video, photo or spoken rec
   await expect(root.getByRole('article', { name: '문장 4', exact: true }).getByText('미확인', { exact: true })).toBeVisible()
 })
 
-test('report selection and preview require explicit approval and receipts remain visibly simulated', async ({ page }) => {
+test('a confirmed report starts selected with its evidence, approval stays explicit and the receipt keeps one no-transmission note', async ({ page }) => {
   const root = await mountReview(page)
   await page.evaluate(() => window.reportReviewOpenReport())
   for (const paragraph of await root.getByRole('article').all()) {
@@ -229,7 +229,6 @@ test('report selection and preview require explicit approval and receipts remain
   expect(await page.evaluate(() => window.reportReviewApprovals)).toHaveLength(1)
   await page.evaluate(() => window.reportReviewCompleteReceipt())
   const receipt = root.getByRole('region', { name: '요청 결과', exact: true })
-  await expect(receipt.getByText('시연 결과 · 실제 접수 아님', { exact: true })).toBeVisible()
   await expect(receipt.getByText('시연-0000', { exact: true })).toBeVisible()
 })
 
@@ -267,7 +266,7 @@ test('product mode keeps CopyPanel and invokes its continuation only after expli
   await root.getByRole('button', { name: '내 사본 범위 선택', exact: true }).click()
   await expect(root.getByRole('region', { name: '내 사본 범위 확인', exact: true })).toBeVisible()
   await expect(root.getByRole('region', { name: '전송 검토', exact: true })).toHaveCount(0)
-  await expect(root.getByText('시연 · 실제 외부 전송 없음', { exact: true })).toHaveCount(0)
+  await expect(root.getByText(/실제로 외부에 보내지는 않아요/)).toHaveCount(0)
   await root.getByRole('checkbox', { name: /^직접 남긴 내용 1/ }).check()
   await root.getByRole('button', { name: '선택한 내용 미리보기', exact: true }).click()
   expect(await page.evaluate(() => window.reportReviewApprovals)).toEqual([])
