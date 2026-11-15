@@ -271,7 +271,7 @@ export function JourneyFlow({ value, device, active, saved, onCommand, onSave, o
         {act('지금 연결', () => void startCall())}
         {emergency && act('괜찮아요', () => void answerSituation(noUrgentDanger), true)}
       </> : <>
-        <CareStatus tone="unknown">{callStatus[call]} · 실제 통화·구호 접수 미확인</CareStatus>
+        <div className="journey-guide-copy journey-call-copy"><h2>{callStatus[call]}</h2><p className="fs-cell-muted">실제 통화·구호 접수 미확인</p></div>
         {call === 'ended' && act('119 전화 화면 다시 열기', () => { dialAttempted.current = false; void startCall() }, true)}
       </>}
       {dialFailed && <div role="alert"><CareStatus tone="failed">차에서 전화 화면을 열 수 없어요. 휴대폰에서 119를 눌러 주세요.</CareStatus></div>}
