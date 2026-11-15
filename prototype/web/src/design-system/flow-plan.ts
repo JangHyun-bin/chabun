@@ -15,7 +15,9 @@ const contextShare=.3,sceneShare=.56,tilt=.03,kink=.02,pinch=.015,rise=.03
 const emptySlot:SlotRect={left:0,top:0,width:0,height:0}
 // Content keeps `padding` from a seam and `Sizes.edge` from the app window border, whose corners the system may round.
 // The lead cell's workspace runs `leadPadding` from its side seams without balancing, matching the Figma vehicle frames.
-const inset=8,padding=24,leadPadding=16,focusRing=4
+// Its bottom action row follows the left seam down, so it stays `footerInset` from the seam where it sits
+// (Figma: guide footer 587 and record footer 1058 at 1682×1210; with the workspace's own inner offset, 36 lands within 10px of both).
+const inset=8,padding=24,leadPadding=16,footerInset=36,focusRing=4
 type Part={polygon:Point[];slot:SlotRect;full:boolean}
 type Partition=Partial<Record<CellId,Part>>
 type Sizes={edge:number;call:number;decoration:SlotRect;summary:number;context:number;workspace:number;full:{width:number;height:number}}
@@ -191,10 +193,14 @@ function containsSlot(shape:FlowShape,slot:SlotRect):boolean{
  return rect(left,top,right,bottom).every(point=>insidePolygon(point,boundary))
 }
 
+function crossings(polygon:Point[],y:number):number[]{
+ return polygon.flatMap((p,i)=>{const q=polygon[(i+1)%polygon.length];return p[1]!==q[1]&&(p[1]-y)*(q[1]-y)<=0?[along(p,q,y)]:[]})
+}
+
 // Text starts at a slot's top edge, where a slanted seam leaves one side far looser than the other. The tighter side is pulled in by
 // half the difference: margins read as even without costing the full slant in line length.
 function balanced(polygon:Point[],slot:SlotRect):SlotRect{
- const y=slot.top,xs=polygon.flatMap((p,i)=>{const q=polygon[(i+1)%polygon.length];return p[1]!==q[1]&&(p[1]-y)*(q[1]-y)<=0?[along(p,q,y)]:[]})
+ const xs=crossings(polygon,slot.top)
  if(xs.length<2)return slot
  const gapLeft=slot.left-Math.min(...xs),gapRight=Math.max(...xs)-slot.left-slot.width,shift=Math.abs(gapLeft-gapRight)/2
  return gapLeft>gapRight?{...slot,width:slot.width-shift}:{...slot,left:slot.left+shift,width:slot.width-shift}
@@ -202,7 +208,7 @@ function balanced(polygon:Point[],slot:SlotRect):SlotRect{
 
 export function createFlowPlan(layout:FlowLayout,width:number,height:number,frame:FlowFrame,emergencyActive=false):FlowPlan{
  const flat={x:0,y:0,offset:0}
- const cells=Object.fromEntries(cellIds.map(id=>[id,{id,shape:null,slot:{...emptySlot},variant:'summary',visible:false,scroll:false}])) as FlowPlan['cells']
+ const cells=Object.fromEntries(cellIds.map(id=>[id,{id,shape:null,slot:{...emptySlot},footer:0,variant:'summary',visible:false,scroll:false}])) as FlowPlan['cells']
  const plan:FlowPlan={layout,mode:frame.mode,width,height,planes:Object.fromEntries(cellIds.map(id=>[id,flat])) as FlowPlan['planes'],cells}
  if(!Number.isFinite(width)||!Number.isFinite(height)||width<=0||height<=0)return plan
  const size=sizes(frame),priority=layoutPriority[layout],call=layout==='emergency'||emergencyActive&&layout!=='calm'
@@ -216,7 +222,9 @@ export function createFlowPlan(layout:FlowLayout,width:number,height:number,fram
   const lead=id===priority&&id!=='emergency'
   const slot=frame.mode==='wide'&&id!=='emergency'&&id!=='scene'&&!lead?balanced(part.polygon,part.slot):part.slot
   const fits=slot.width>=size.full.width&&part.slot.height>=size.full.height
-  cells[id]={...cells[id],shape:shapes[id],slot,visible:true,variant:lead||part.full&&fits?'full':'summary',scroll:lead}
+  const seam=frame.mode==='wide'&&lead?crossings(part.polygon,slot.top+slot.height):[]
+  const footer=seam.length>1?Math.max(0,Math.min(...seam)+footerInset-slot.left):0
+  cells[id]={...cells[id],shape:shapes[id],slot,footer,visible:true,variant:lead||part.full&&fits?'full':'summary',scroll:lead}
  }
  const emergency=cells.emergency,core=emergency.slot,{decoration}=size
  if(emergency.visible)emergency.variant=frame.mode!=='document'&&containsSlot(emergency.shape!,{left:core.left+decoration.left,top:core.top+core.height+decoration.top,width:decoration.width,height:decoration.height})?'full':'summary'
