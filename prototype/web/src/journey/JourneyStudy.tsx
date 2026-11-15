@@ -208,7 +208,11 @@ export function JourneyStudy({embedded=false,previewHeight}:{embedded?:boolean;p
   async function prepareExampleReport() {
     if (!value?.fixtureId || loadingSamples || value.stage !== 'review' && !await prepareToLeave()) return false
     setSampleError('')
-    if (!await sampleEvidence() || !await sampleReport() || value.stage !== 'review' && !await navigate('review')) return false
+    const latest = currentCase.current ?? value
+    const samplesReady = ['sample-front', 'sample-rear'].every(id => latest.evidence.some(item => item.id === id))
+    const reportReady = !!latest.report?.paragraphs.length && latest.report.basedOnRevision === latest.contentRevision
+    if (!reportReady && (!samplesReady && !await sampleEvidence() || !await sampleReport())) return false
+    if (value.stage !== 'review' && !await navigate('review')) return false
     reviewPanel.current?.openReport()
     return true
   }
@@ -299,7 +303,7 @@ export function JourneyStudy({embedded=false,previewHeight}:{embedded?:boolean;p
     return <>
       <div hidden={recordTab !== 'voice'} inert={reloading} aria-busy={reloading} className="journey-editor-holder"><VoiceRecordPanel ref={voicePanel} value={value} mode={voiceMode} onSave={journey.save} durable={journey.saveState === 'saved'} reloadVersion={journey.reloadVersion} navigation={tabs} footer={footer}/></div>
       <div hidden={recordTab !== 'photos'} inert={reloading} aria-busy={reloading} className="journey-editor-holder"><EvidencePanel ref={photoPanel} value={value} onSave={journey.save} onCommand={photoCommand} navigation={tabs} footer={footer}/></div>
-      {handoff && <div hidden={recordTab !== 'phone'} className="journey-editor-holder"><JourneyEditorLayout step="사고 기록" title="휴대폰으로 이어가기" description="사진과 진술은 휴대폰에서 남기고, 차량 화면에서 진행 상황을 볼 수 있어요." guidanceKey="journey-phone-handoff">{tabs}<VehicleHandoffPanel handoff={handoff}/>{footer}</JourneyEditorLayout></div>}
+      {handoff && <div hidden={recordTab !== 'phone'} className="journey-editor-holder"><JourneyEditorLayout step="사고 기록" title="휴대폰으로 이어가기" description="사진과 진술은 휴대폰에서 남기고, 차량 화면에서 진행 상황을 볼 수 있어요.">{tabs}<VehicleHandoffPanel handoff={handoff}/>{footer}</JourneyEditorLayout></div>}
     </>
   }
 

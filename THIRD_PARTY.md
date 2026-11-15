@@ -6,6 +6,7 @@
 | --- | --- |
 | Cult UI, Motion Primitives, shadcn | `prototype/web/third-party/`의 MIT 원문과 변경 출처 |
 | Asta Sans | 같은 폴더의 OFL-1.1과 Android `third-party/asta-sans/OFL.txt` |
+| Paperlogy | README 머리 이미지(`docs/readme-header.svg`)의 문구를 글자 윤곽선으로 바꿔 썼습니다. 폰트 파일은 포함하지 않습니다. [SIL OFL-1.1](https://github.com/Freesentation/paperlogy/blob/main/OFL%20license.txt) |
 | npm 의존성 | `third-party/npm/`의 원문, `third-party/npm-packages.json`의 고정 버전과 출처 |
 | GSAP | Standard “No Charge” License. MIT가 아닙니다. 원문을 보존합니다. |
 | Gradle wrapper | `third-party/gradle-wrapper-LICENSE.txt`의 Apache-2.0 |

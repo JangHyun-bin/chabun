@@ -109,8 +109,10 @@ async function main(){
  }
  const records=[]
  for(const [script,sources]of scripts){
-  const prior=current.get(script),record=await describe(out,script,sources,prior.generatedAt)
-  if(record.audioHash!==prior.audioHash)throw new Error(`Audio changed during generation: ${record.file}`)
+  const prior=current.get(script),described=await describe(out,script,sources,prior.generatedAt)
+  if(described.audioHash!==prior.audioHash)throw new Error(`Audio changed during generation: ${described.file}`)
+  // A clip faded by fade-guidance-edges.mjs keeps its provenance; a newly generated clip has none.
+  const record=prior.postProcess?{...described,postProcess:prior.postProcess}:described
   await writeFile(join(out,record.file.replace(/\.mp3$/,'.json')),JSON.stringify(record,null,2)+'\n');records.push(record)
  }
  for(const name of orphans)await rm(join(out,name))

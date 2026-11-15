@@ -288,7 +288,7 @@ export function JourneyFlow({ value, device, active, saved, onCommand, onSave, o
   }
 
   const guidanceText = scene === 'move' ? flowVoices[safetyStep.id] : stepVoice[scene]
-  const guidance = active && guidanceText && <GuidanceControl text={guidanceText} contextKey={`journey-flow/${value.id}/${scene}/${scene === 'move' ? safetyStep.id : ''}`} />
+  const guidance = active && guidanceText && <GuidanceControl text={guidanceText} />
   const flowEvents = <section className="journey-flow-events" aria-label="대표 흐름 결과 시연"><span>결과 시연 · 실제 전화·전송 없음</span><span>주변 경로·사고 재생은 합성 시연. 저장된 사고 영상과 별개예요.</span>
     {rescue && (call === 'connecting' || call === 'connected') && <button aria-label="시연 event: 통화 종료 확인" onClick={() => onCommand({ type: 'call-end', caseId:value.id, submissionId:rescue.id, now: new Date().toISOString() })}>통화 종료 확인</button>}
     {sending && <button aria-label="시연 event: 보험사 전송 실패" onClick={() => result('failed')}>보험사 전송 실패</button>}
@@ -299,7 +299,7 @@ export function JourneyFlow({ value, device, active, saved, onCommand, onSave, o
     <div className="fs-action-bar"><div className="fs-step-copy" aria-live="polite"><span className="fs-step-label">{step} / 7 · {stageLabels[step - 1]}</span><h1 tabIndex={-1}>{copy.title}</h1><p>{copy.support}</p>{guidance}</div><section className="journey-flow-actions" aria-label="여정 조작">
       <CareAction secondary aria-label="이전 단계" disabled={step === 1 || scene === 'sending'} onClick={() => afterComposition(()=>void back())}><ArrowLeft aria-hidden="true" />이전</CareAction>
       <CareAction data-testid="journey-primary" aria-label={copy.demo ? `다음 · 시연 event: ${copy.action}` : '다음 단계'} aria-describedby="journey-next-action" disabled={blocked} onClick={() => afterComposition(()=>void next())}>다음<ArrowRight aria-hidden="true" /></CareAction>
-      <span id="journey-next-action" className="journey-next-action">{copy.demo ? `시연: ${copy.action}` : copy.action}</span>
+      <span id="journey-next-action" className="journey-next-action">{copy.action}</span>
       <details className="journey-flow-options" onKeyDown={event=>{if(event.key==='Escape'){event.currentTarget.open=false;event.currentTarget.querySelector('summary')?.focus()}}}><summary>시연 설정</summary><div className="journey-flow-options-panel" onClick={event=>{if(event.target instanceof Element&&event.target.closest('button')){const focused=event.currentTarget.contains(document.activeElement),details=event.currentTarget.closest('details')!;details.open=false;if(focused)details.querySelector('summary')?.focus({preventScroll:true})}}}>
         <p className="journey-display-reference">Connect Standard · 2560 × 1440 · 앱 화면 1682 × 1210</p>
         <GuidanceMuteToggle />

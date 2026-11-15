@@ -16,8 +16,15 @@
     "SC04/review"
   ],
   "duration": 2.4,
-  "bytes": 58975,
-  "audioHash": "4d728ebe7d1fb024374732421d3aa1657df9f06ea2158f9887f018ee2577c491",
+  "bytes": 58951,
+  "audioHash": "9892017eb6852eb7873edada5cc6e24f88900b0e39b91e1a1e498c538e480b9b",
   "payloadEncoding": "UTF-8 JSON file",
-  "generatedAt": "2026-11-14T06:37:51.920Z"
+  "generatedAt": "2026-11-14T06:37:51.920Z",
+  "postProcess": {
+    "edgeFadeMs": 5,
+    "reason": "first or last 1 ms peaked above -60 dBFS (-30.5 / -87)",
+    "encoder": "libmp3lame 192 kbps CBR, 44.1 kHz mono",
+    "sourceAudioHash": "4d728ebe7d1fb024374732421d3aa1657df9f06ea2158f9887f018ee2577c491",
+    "sourceBytes": 58975
+  }
 }

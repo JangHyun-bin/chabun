@@ -14,15 +14,15 @@ export function JourneyStatus({tone,children}:{tone:JourneyTone;children:ReactNo
 export function JourneyAction({className='',...props}:ButtonHTMLAttributes<HTMLButtonElement>&{secondary?:boolean}) {
   return <CareAction {...props} className={`journey-action ${className}`}/>
 }
-export function JourneyHeading({step,title,children,guidanceKey=title}:{step?:string;title:string;children?:ReactNode;guidanceKey?:string}) {
+export function JourneyHeading({step,title,children}:{step?:string;title:string;children?:ReactNode}) {
   const text=scripts[title as keyof typeof scripts]
-  return <div className="ac-task-heading"><CareHeading eyebrow={step} title={title}>{children}</CareHeading>{text&&<GuidanceControl text={text} contextKey={guidanceKey}/>}</div>
+  return <div className="ac-task-heading"><CareHeading eyebrow={step} title={title}>{children}</CareHeading>{text&&<GuidanceControl text={text}/>}</div>
 }
-export function JourneyEditorLayout({step,title,description,children,primary,headerAction,guidanceKey=title}:{step?:string;title:string;description:ReactNode;children:ReactNode;primary?:ReactNode;headerAction?:ReactNode;guidanceKey?:string}) {
+export function JourneyEditorLayout({step,title,description,children,primary,headerAction}:{step?:string;title:string;description:ReactNode;children:ReactNode;primary?:ReactNode;headerAction?:ReactNode}) {
   const text=scripts[title as keyof typeof scripts]
   return <>
     <div className="journey-editor-title" data-has-action={headerAction?true:undefined}><CareHeading eyebrow={step} title={title}/>{headerAction}</div>
-    <div className="journey-workspace-scroll"><p className="journey-supporting">{description}</p>{text&&<GuidanceControl text={text} contextKey={guidanceKey}/>}{children}</div>
+    <div className="journey-workspace-scroll"><p className="journey-supporting">{description}</p>{text&&<GuidanceControl text={text}/>}{children}</div>
     {primary&&<div className="journey-editor-primary">{primary}</div>}
   </>
 }

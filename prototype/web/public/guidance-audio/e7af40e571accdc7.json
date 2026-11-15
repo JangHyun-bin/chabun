@@ -16,8 +16,15 @@
     "journey/기억나는 내용을 남겨주세요"
   ],
   "duration": 8.4,
-  "bytes": 203171,
-  "audioHash": "842b3ca4aca0c11ec22bc592b6632e620e73ea5b0705304ce5b1141ed9fe2e46",
+  "bytes": 203147,
+  "audioHash": "16d54de031a9d27cbc48c97f6fee65e0baf1d65a762b875e43c06fdb1e424a4b",
   "payloadEncoding": "UTF-8 JSON file",
-  "generatedAt": "2026-11-14T06:08:30.409Z"
+  "generatedAt": "2026-11-14T06:08:30.409Z",
+  "postProcess": {
+    "edgeFadeMs": 5,
+    "reason": "first or last 1 ms peaked above -60 dBFS (-54.5 / -88)",
+    "encoder": "libmp3lame 192 kbps CBR, 44.1 kHz mono",
+    "sourceAudioHash": "842b3ca4aca0c11ec22bc592b6632e620e73ea5b0705304ce5b1141ed9fe2e46",
+    "sourceBytes": 203171
+  }
 }

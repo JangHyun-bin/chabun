@@ -136,6 +136,7 @@ export function SubmissionPanel({ value, onApprove, onCommand, onCancel, onDirty
     {target === 'insurance' && <div className="journey-report-tools journey-insurer-call"><button onClick={callInsurer}>보험사에 전화하기 · {registeredProfile.insurer.display}</button>{callNote && <p role="status" className="journey-supporting">{callNote}</p>}</div>}
     {approved && <p role="status">승인한 내용이 보관됐어요</p>}
     {currentRequest && <section className="journey-receipt" aria-label="요청 결과">
+      <JourneyStatus tone="unknown">예시 결과 · 실제 접수 아님</JourneyStatus>
       <JourneyStatus tone={currentRequest.status === 'received' ? 'confirmed' : currentRequest.status === 'failed' ? 'failed' : 'pending'}>
         {currentRequest.transport === 'approved' ? '승인 완료 · 전송 전' : currentRequest.transport === 'sending' ? '전송 중 · 접수 미확인' : currentRequest.transport === 'sent' && currentRequest.status === 'sent' ? '전송 완료 · 접수 미확인' : currentRequest.status === 'received' ? '접수 확인됨' : currentRequest.status === 'failed' ? '전송 실패 확인됨' : currentRequest.status === 'not_received' ? '미접수 확인됨' : '접수 결과 확인 중'}
       </JourneyStatus>
@@ -151,7 +152,7 @@ export function SubmissionPanel({ value, onApprove, onCommand, onCancel, onDirty
     </section>}
     {allowed && !preview && <>
       <label className="journey-recipient">수신처<input ref={recipient} maxLength={100} value={draft.recipient} placeholder={target === 'share' ? '상대방 이름이나 연락처' : undefined} onChange={event => change({ recipient: event.target.value })} /></label>
-      <p className="journey-supporting">목적 · {purposes[target]}{target === 'insurance' ? ' · 등록한 보험사를 넣어뒀어요' : ''}</p>
+      <p className="journey-supporting">목적 · {purposes[target]}{target === 'insurance' ? ' · 예시 보험사를 넣어뒀어요' : ''}</p>
       <fieldset className="journey-send-options"><legend>보낼 내용</legend>
         <p className="journey-supporting">확인을 마친 기록과 확보한 자료를 미리 골라뒀어요. 보내고 싶지 않은 항목은 선택을 해제해주세요.</p>
         {value.observations.map(item => <label key={item.id}><input type="checkbox" checked={draft.selection.observationIds.includes(item.id)} onChange={() => toggle('observationIds', item.id)} /><span>{item.label} · {item.value}</span></label>)}

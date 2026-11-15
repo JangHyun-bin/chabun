@@ -149,6 +149,7 @@ test('vehicle cells show only case values and turn warm only when something need
   await expect(unknown.locator('[data-scene-contact]')).toHaveCount(0)
   await expect(normal.locator('[data-vehicle-row="impact"] dd')).toHaveText('우측 전방')
   await expect(normal.locator('[data-vehicle-note="road"]')).toContainText('고속도로')
+  await expect(normal.locator('.vc-detail')).not.toContainText('예시 자료')
   await expect(normal.locator('[data-scene-contact]')).toHaveCount(1)
   for(const column of [unknown,normal])await expect(column.locator('.vc-detail')).toHaveAttribute('data-attention','false')
   await expect(attention.locator('.vc-detail')).toHaveAttribute('data-attention','true')

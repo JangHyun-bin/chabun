@@ -1,5 +1,7 @@
 import {expect,test,type Page} from '@playwright/test'
 import emergencyGuidance from '../src/audio/emergency-guidance.json' with { type: 'json' }
+import journeyGuidance from '../src/audio/journey-guidance.json' with { type: 'json' }
+import {journeyControl} from './helpers/journey-controls'
 
 declare global {interface Window { audioCalls:{src:string;paused:boolean;ended:boolean;fail:boolean}[]; audioFails:boolean; finishAudio:()=>void }}
 function fakeAudio(){
@@ -54,6 +56,23 @@ test('journey tasks use JaeGyu and stop when their retained panel becomes hidden
  await page.getByRole('button',{name:'내용 확인으로',exact:true}).click()
  await expect.poll(async()=>(await active()).filter(src=>src!==record).length).toBe(1)
  expect(await active()).not.toContain(record)
+})
+test('switching send targets keeps one submission guidance playback',async({page})=>{
+ await page.addInitScript(fakeAudio);await page.goto('/?study=journey&fixture=immobile')
+ const button=(name:string)=>page.getByRole('button',{name,exact:true})
+ await button('이 상황으로 시작').click();await button('차량 지원 요청하기').click()
+ await (await journeyControl(page,'기록으로 돌아가기')).click()
+ await button('사진 남기기').click();await button('사진 없이 내용 확인').click()
+ await button('보낼 내용 확인').click()
+ // The asset path is resolved by the browser's Vite graph, like the runtime lookup.
+ const src=await page.evaluate(async text=>{const path='/src/audio/manifest.ts';const {guidanceAsset}=await import(path);return guidanceAsset(text)!.path},journeyGuidance['보낼 범위를 직접 선택해주세요'])
+ const calls=()=>page.evaluate(src=>window.audioCalls.filter(a=>a.src===src),src)
+ await expect.poll(async()=>(await calls()).length,'entering send review speaks once').toBe(1)
+ for(const target of ['차량 지원','상대방 공유','보험사 접수','차량 지원','상대방 공유']){
+  await button(target).click();await expect(button(target)).toHaveAttribute('aria-pressed','true')
+ }
+ await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))))
+ expect(await calls(),'target buttons neither restart nor cut the same guidance').toEqual([{src,paused:false,ended:false,fail:false}])
 })
 test('every scene, journey and runtime script has an exact static speech asset',async({page})=>{
  await page.goto('/?study=design-system')

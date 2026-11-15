@@ -32,7 +32,8 @@ export function StoredClip({ caseId, evidence, revision, saving, range, active =
 
 export type JourneyReviewHandle = { finishBeforeLeave: () => Promise<boolean>; openReport: () => void; openSubmission: () => void; preserveDraft: () => void; recoveryCommand: () => CaseCommand | null }
 export function JourneyReviewPanel({ value, saving, reloading, onCommand, onApprove, onPrepareExample, onCopyPrepared, reloadVersion = 0, explicitTransport=false, mode='study', ref, footer }: { footer?:ReactNode; reloadVersion?: number; explicitTransport?: boolean; mode?:'study'|'product'; value: JourneyCase; saving: boolean; reloading: boolean; onCommand: (command: CaseCommand) => Promise<CommitResult>; onApprove: (input: ApprovalInput, preview: PayloadSnapshot) => Promise<ApprovalCommitResult>; onPrepareExample?: () => Promise<boolean>; onCopyPrepared?: () => Promise<boolean>; ref?: Ref<JourneyReviewHandle> }) {
-  const [tab, setTab] = useState<'records' | 'clips' | 'diagram' | 'report'>(mode === 'product' ? 'records' : 'clips')
+  const hasReport = !!value.report?.paragraphs.length
+  const [tab, setTab] = useState<'records' | 'clips' | 'diagram' | 'report'>(mode === 'product' ? 'records' : hasReport ? 'report' : 'clips')
   const [diagramDirty, setDiagramDirty] = useState(false)
   const [reportDirty, setReportDirty] = useState(false)
   const [submission, setSubmission] = useState(false)

@@ -125,7 +125,7 @@ async function selectOnly(page: import('@playwright/test').Page, label: string) 
 
 test('insurance approval previews exactly selected content and receipt needs an explicit result', async ({ page }) => {
   await openSubmission(page)
-  await expect(page.getByLabel('수신처', { exact: true })).toHaveValue('내 자동차보험 (등록된 보험사)')
+  await expect(page.getByLabel('수신처', { exact: true })).toHaveValue('가온손해보험 (예시)')
   await expect(page.getByRole('checkbox', { name: '전방 영상', exact: true })).toBeChecked()
   await expect(page.getByRole('checkbox', { name: '후방 영상', exact: true })).not.toBeChecked()
   await page.getByLabel('수신처', { exact: true }).fill('선택한 보험사')
@@ -193,7 +193,7 @@ test('unknown cannot resend, explicit failure needs a fresh selection, and agenc
   await page.getByRole('button', { name: '시연 event: 보험사 결과 미확인', exact: true }).click()
   await expect(page.getByRole('button', { name: '선택한 내용 미리보기', exact: true })).toHaveCount(0)
   await page.getByRole('button', { name: '시연 event: 보험사 전송 실패', exact: true }).click()
-  await expect(page.getByLabel('수신처', { exact: true })).toHaveValue('내 자동차보험 (등록된 보험사)')
+  await expect(page.getByLabel('수신처', { exact: true })).toHaveValue('가온손해보험 (예시)')
   await page.getByLabel('수신처', { exact: true }).fill('다시 선택한 보험사')
   await selectOnly(page, '전방 영상')
   await page.getByRole('button', { name: '선택한 내용 미리보기', exact: true }).click()
