@@ -25,8 +25,8 @@ export function createExampleReport(value: JourneyCase): Report | null {
     .map(({ item, reference }, index) => ({
       id: `${exampleParagraphPrefix}media-${index + 1}`, kind: 'observation', revision: 1, confirmedRevision: null,
       text: item.kind === 'photo'
-        ? `사진 자료 "${item.label}"을 경위 확인 자료로 남겼어요.${item.origin === 'sample' ? ' 예시 자료예요.' : ''}`
-        : `${mediaLabels[item.kind]} 자료 "${item.label}"의 ${reference.start}초부터 ${reference.end}초까지를 경위 확인 자료로 연결했어요.${item.origin === 'sample' ? ' 예시 자료예요.' : ''}`,
+        ? `사진 자료 "${item.label}"을 경위 확인 자료로 남겼어요.`
+        : `${mediaLabels[item.kind]} 자료 "${item.label}"의 ${reference.start}초부터 ${reference.end}초까지를 경위 확인 자료로 연결했어요.`,
       references: [reference],
     }))
   for (const [index, statement] of value.statements.entries()) {

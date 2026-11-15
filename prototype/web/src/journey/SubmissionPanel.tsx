@@ -27,12 +27,15 @@ const defaultRecipients: Record<Target, string> = { insurance: registeredProfile
 export function suggestedDraft(value: JourneyCase, target: Target): Draft {
   const evidenceIds = value.evidence.filter(item => item.availability === 'available' && item.assetId).map(item => item.id)
   const selection: PayloadSelection = {
-    observationIds: value.observations.map(item => item.id),
+    // Unconfirmed facts add nothing for the recipient, so only confirmed ones start selected.
+    observationIds: value.observations.filter(item => item.confirmation === 'confirmed').map(item => item.id),
     statementIds: value.statements.filter(item => item.text.trim() && item.confirmedRevision === item.revision).map(item => item.id),
     evidenceIds, includeDiagram: !!value.diagram, includeReport: !!value.report,
   }
-  if (selection.includeReport && !preparePayload(value, selection).ok) selection.includeReport = false
-  if (selection.includeDiagram && !preparePayload(value, selection).ok) selection.includeDiagram = false
+  // Check the diagram and the report on their own so one unreviewed item never drops the other.
+  const base = { ...selection, includeDiagram: false, includeReport: false }
+  selection.includeDiagram = selection.includeDiagram && preparePayload(value, { ...base, includeDiagram: true }).ok
+  selection.includeReport = selection.includeReport && preparePayload(value, { ...base, includeReport: true }).ok
   return { recipient: defaultRecipients[target], selection }
 }
 function emptyDrafts(): Record<Target, Draft | null> { return { insurance: null, vehicle: null, share: null } }
@@ -46,7 +49,7 @@ export function PayloadContent({ payload, caseId, active, exampleReport = false,
   const [opened, setOpened] = useState<string | null>(null)
   const media = payload.evidence.find(item => item.id === opened)
   return <div className="journey-payload">
-    {payload.observations.length > 0 && <section><h3>확인한 정보</h3>{payload.observations.map(item => <p key={item.id}>{item.label} · {item.value}<span>{item.confirmation === 'confirmed' ? '확인됨' : '미확인'} · {item.source === 'user' ? '직접 남긴 내용' : item.source === 'fixture' ? '모의 자료' : '차량 SDK 보고'}</span></p>)}</section>}
+    {payload.observations.length > 0 && <section><h3>확인한 정보</h3>{payload.observations.map(item => <p key={item.id}>{item.label} · {item.value}<span>{item.confirmation === 'confirmed' ? '확인됨' : '미확인'} · {item.source === 'user' ? '직접 남긴 내용' : item.source === 'fixture' ? '차량 정보' : '차량 SDK 보고'}</span></p>)}</section>}
     {payload.statements.length > 0 && <section><h3>남긴 이야기</h3>{payload.statements.map(item => <p key={item.id}>{item.text}</p>)}</section>}
     {payload.report && <section><h3>경위서</h3>{(exampleReport || isExampleReport(payload.report)) && <JourneyStatus tone="unknown">예시 경위서</JourneyStatus>}{payload.report.paragraphs.map(item => <p key={item.id}><span>{{ observation: '자료에서 확인', statement: '직접 남긴 내용', inference: '추정', unknown: '미확인' }[item.kind]}</span>{item.text}</p>)}</section>}
     {payload.diagram && <section><h3>사고 도식</h3><p>확인한 도식 · {payload.diagram.origin === 'user' ? '직접 고친 내용' : '제안된 내용'}</p><DiagramEditor value={payload.diagram} readOnly /></section>}
@@ -57,7 +60,8 @@ export function PayloadContent({ payload, caseId, active, exampleReport = false,
 }
 
 export type SubmissionPanelHandle = { preserveDraft: () => void }
-export function SubmissionPanel({ value, onApprove, onCommand, onCancel, onDirtyChange, active, explicitTransport=false, footer, ref }: {
+export function SubmissionPanel({ value, onApprove, onCommand, onCancel, onDirtyChange, onReviewReport, active, explicitTransport=false, footer, ref }: {
+  onReviewReport?: () => void
   footer?:ReactNode
   ref?:Ref<SubmissionPanelHandle>
   explicitTransport?: boolean
@@ -77,6 +81,8 @@ export function SubmissionPanel({ value, onApprove, onCommand, onCancel, onDirty
   const currentRequest = target === 'share' ? null : value.submissions.find(item => item.id === value.activeSubmissionIds[target])
   const currentShare = target === 'share' ? value.shares.at(-1) : null
   const allowed = target === 'share' || canSubmit(value, target)
+  // The report is what the insurer needs most; when it cannot start selected, say why and offer the way back.
+  const reportPending = value.report?.paragraphs.filter(item => item.confirmedRevision !== item.revision).length ?? 0
   useEffect(() => { onDirtyChange(dirty) }, [dirty, onDirtyChange])
   useEffect(() => {
     if (!dirty) return
@@ -117,8 +123,12 @@ export function SubmissionPanel({ value, onApprove, onCommand, onCancel, onDirty
     } finally { submitting.current = false; setBusy(false) }
   }
   return <section className="journey-submission journey-editor-panel" aria-label="전송 검토">
-    <JourneyEditorLayout step="전송 검토" title="보낼 범위를 직접 선택해주세요" description={'수신처와 내용을 확인한 뒤 요청할 수 있어요.'} primary={allowed||preview ? (preview
-      ? <JourneyAction disabled={busy} onClick={() => void approve()}>{busy ? '승인 내용 보관 중' : target === 'share' ? '이 내용으로 공유 요청' : '이 내용으로 요청'}</JourneyAction>
+    <JourneyEditorLayout step="전송 검토" title="보낼 범위를 직접 선택해주세요" description={'수신처와 내용을 확인한 뒤 요청할 수 있어요.'} headerAction={<button type="button" className="journey-text-action journey-editor-close" disabled={busy || currentRequest?.transport === 'sending'} onClick={() => { setDrafts(emptyDrafts()); setPreview(null); setError(''); onCancel() }}>전송 검토 닫기</button>}
+      primary={allowed||preview ? (preview
+      ? <div className="journey-editor-primary-row">
+          <JourneyAction secondary disabled={busy} onClick={() => { setPreview(null); setError('') }}>선택 다시 하기</JourneyAction>
+          <JourneyAction disabled={busy} onClick={() => void approve()}>{busy ? '승인 내용 보관 중' : target === 'share' ? '이 내용으로 공유 요청' : '이 내용으로 요청'}</JourneyAction>
+        </div>
       : <JourneyAction onClick={showPreview}>선택한 내용 미리보기</JourneyAction>) : null}>
 
     <nav className="journey-record-tabs journey-review-tabs" aria-label="보낼 대상">{(['insurance', 'vehicle', 'share'] as const).map(item => <button key={item} disabled={busy} aria-pressed={target === item} onClick={() => { setTarget(item); setPreview(null); setError(''); setCallNote(''); setApproved(false) }}>{labels[item]}</button>)}</nav>
@@ -149,14 +159,14 @@ export function SubmissionPanel({ value, onApprove, onCommand, onCancel, onDirty
         {value.statements.map((item, index) => <label key={item.id}><input type="checkbox" checked={draft.selection.statementIds.includes(item.id)} onChange={() => toggle('statementIds', item.id)} /><span>남긴 이야기 {index + 1}<small>{item.text}{item.confirmedRevision !== item.revision ? ' · 확인 필요' : ''}</small></span></label>)}
         {value.evidence.map(item => <label key={item.id}><input type="checkbox" aria-label={item.label} disabled={item.availability !== 'available'} checked={draft.selection.evidenceIds.includes(item.id)} onChange={() => toggle('evidenceIds', item.id)} /><span>{item.label}{item.availability !== 'available' && <small>확보하지 못한 자료</small>}</span></label>)}
         {value.diagram && <label><input type="checkbox" checked={draft.selection.includeDiagram} onChange={event => change({ selection: { ...draft.selection, includeDiagram: event.target.checked } })} /><span>사고 도식{value.diagram.confirmedRevision !== value.diagram.revision && <small>확인 필요</small>}</span></label>}
-        {value.report && <label><input type="checkbox" checked={draft.selection.includeReport} onChange={event => change({ selection: { ...draft.selection, includeReport: event.target.checked } })} /><span>경위서</span></label>}
+        {value.report && <label><input type="checkbox" checked={draft.selection.includeReport} onChange={event => change({ selection: { ...draft.selection, includeReport: event.target.checked } })} /><span>경위서{reportPending > 0 && <small>확인하지 않은 문장 {reportPending}개</small>}</span></label>}
+        {value.report && reportPending > 0 && onReviewReport && <div className="journey-report-tools"><button onClick={onReviewReport}>경위서 확인 마치기</button></div>}
       </fieldset>
       {target !== 'share' && <div className="journey-report-tools"><button onClick={() => { onCommand({ type: 'agency-decision', agency: target, decision: 'deferred' }); setError('지금은 보류했어요. 준비되면 다시 검토할 수 있어요.') }}>나중에 결정</button><button onClick={() => { onCommand({ type: 'agency-decision', agency: target, decision: 'declined' }); setError('전송하지 않기로 했어요. 남긴 기록은 유지돼요.') }}>전송하지 않기</button></div>}
     </>}
     {preview && <section className="journey-send-preview" aria-label="보낼 내용 미리보기">
       <h2>이 내용으로 요청할까요?</h2><p>{preview.input.recipient}</p><p className="journey-supporting">목적 · {purposes[target]}</p>
       <PayloadContent payload={preview.payload} caseId={value.id} active={active} exampleReport onMediaFailure={() => setError(failures['missing-evidence'])} />
-      <JourneyAction secondary disabled={busy} onClick={() => { setPreview(null); setError('') }}>선택 다시 하기</JourneyAction>
     </section>}
     {target !== 'share' && value.submissions.some(item => item.agency === target && item.id !== currentRequest?.id) && <details className="journey-receipt" onToggle={pauseCollapsedMedia}><summary>이전 요청 내용</summary>
       {value.submissions.filter(item => item.agency === target && item.id !== currentRequest?.id).map(item => <section key={item.id}><h3>{item.recipient ?? labels[target]}</h3>
@@ -164,7 +174,6 @@ export function SubmissionPanel({ value, onApprove, onCommand, onCancel, onDirty
       </section>)}
     </details>}
     {target === 'share' && value.shares.length > 1 && <details className="journey-receipt" onToggle={pauseCollapsedMedia}><summary>이전 공유 내용</summary>{value.shares.slice(0, -1).map(item => <section key={item.id}><h3>{item.recipient}</h3><PayloadContent payload={item.payload} caseId={value.id} active={active} exampleReport /></section>)}</details>}
-    <JourneyAction secondary disabled={busy || currentRequest?.transport === 'sending'} onClick={() => { setDrafts(emptyDrafts()); setPreview(null); setError(''); onCancel() }}>전송 검토 닫기</JourneyAction>
     {footer}
     </JourneyEditorLayout>
 

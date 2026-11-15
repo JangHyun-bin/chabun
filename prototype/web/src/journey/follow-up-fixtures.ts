@@ -16,7 +16,7 @@ const shops: FollowUpShop[] = [
   { id: 'daon-service', name: '다온 자동차 정비', description: '일반 정비·차량 점검', distanceMeters: 4100,
     intakeAt: null, position: { x: .25, y: .2 } },
 ]
-const ready: FollowUpDirectory = { status: 'ready', shops, source: 'fixture', sourceLabel: '정비소·거리·입고 정보 예시',
+const ready: FollowUpDirectory = { status: 'ready', shops, source: 'fixture', sourceLabel: '정비소·거리·입고 정보',
   updatedAt: '2026-11-10T09:12:00.000Z', origin: { x: .4, y: .7 } }
 export const followUpDirectories: Record<FollowUpDirectoryState, FollowUpDirectory> = {
   ready,

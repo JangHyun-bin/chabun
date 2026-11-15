@@ -189,7 +189,7 @@ test('route and rental retain their own source and result times', async ({ page 
   }))
   const route = page.getByRole('region', { name: '이동 경로', exact: true })
   const rental = page.getByRole('region', { name: '대차 이용', exact: true })
-  await expect(route).toContainText('예시 안내')
+  await expect(route).toContainText('정비소 안내')
   await expect(rental.getByText('직접 확인 요청')).toBeVisible()
   await expect(route.getByText('11월 10일 오후 07:00 확인', { exact: true })).toBeVisible()
   await expect(rental.getByText('11월 10일 오후 06:30 요청', { exact: true })).toBeVisible()

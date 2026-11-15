@@ -8,7 +8,7 @@ import { riskState, type CaseCommand, type JourneyCase, type SafetyAction, type 
 import {activeRequest} from './journey-flow'
 import {agreedValue,currentObservations,vehicleContourState} from './vehicle-state'
 
-const sourceLabels: Record<Source, string> = { user: '직접 입력', device: '차량 센서', fixture: '예시' }
+const sourceLabels: Record<Source, string> = { user: '직접 입력', device: '차량 센서', fixture: '기본 정보' }
 const safetyStatus: Record<SafetyAction['status'], { label: string; tone: JourneyTone }> = {
   'device-confirmed': { label: '차량에서 확인', tone: 'confirmed' },
   'user-confirmed': { label: '직접 확인', tone: 'confirmed' },

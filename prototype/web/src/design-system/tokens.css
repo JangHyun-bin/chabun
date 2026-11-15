@@ -1,5 +1,5 @@
 :root {
-  --ac-scrim:rgb(0 0 0 / .65); --ac-background:#09090c; --ac-surface:#18181c; --ac-control:#303037;
+  --ac-scrim:rgb(0 0 0 / .65); --ac-background:#09090c; --ac-surface:#18181c; --ac-control:#303037; --ac-choice:#26262c;
   --ac-text:#f4f4f8; --ac-muted:#b6b6bf; --ac-line:#37373f; --ac-ink:#141418; --ac-scene-ink:#141418;
   --ac-confirmed:#a7e3bf; --ac-pending:#f2a541; --ac-attention:#ffb39c;
   --ac-info:#6c8ef5; --ac-contact:#ff816a;
@@ -15,13 +15,13 @@
   --ac-type-guide:1.75rem; --ac-type-call:1.75rem; --ac-type-summary:1.75rem;
   --ac-type-checklist:1.125rem; --ac-type-caption:.9375rem; --ac-type-eyebrow:.875rem;
   --ac-type-number:5rem; --ac-leading:1.31;
-  --ac-font:Asta,ui-sans-serif,system-ui,sans-serif; --ac-touch:64px;
+  --ac-font:Asta,ui-sans-serif,system-ui,sans-serif; --ac-touch:64px; /* every tappable control in the vehicle app is at least this tall (spec: 60+) */
   --ac-motion-fast:160ms; --ac-motion-state:240ms; --ac-motion-layout:360ms;
   --ac-ease:cubic-bezier(.22,1,.36,1);
 }
 /* Brand paper and continuity carry the light set; status hues darken until they keep AA on paper, white and the tinted materials at rest. */
 [data-theme=light] {
-  --ac-scrim:rgb(32 32 38 / .4); --ac-background:#eeede8; --ac-surface:#f4f3ef; --ac-control:#fff;
+  --ac-scrim:rgb(32 32 38 / .4); --ac-background:#eeede8; --ac-surface:#f4f3ef; --ac-control:#fff; --ac-choice:#fff;
   --ac-text:#202026; --ac-muted:#5c5c66; --ac-line:#d6d5cf; --ac-ink:#f4f4f8; --ac-scene-ink:#8c8c96;
   --ac-confirmed:#17603c; --ac-pending:#7a4800; --ac-attention:#9c3118;
   --ac-info:#2c47b8; --ac-contact:#9a3209; --ac-contact-core:#fff;

@@ -76,7 +76,7 @@ export function JourneyReviewPanel({ value, saving, reloading, onCommand, onAppr
       <button aria-pressed={tab === 'diagram'} onClick={() => setTab('diagram')}>사고 도식</button>
       <button aria-pressed={tab === 'report'} onClick={() => setTab('report')}>경위서</button>
     </nav>
-    {onPrepareExample && (mode === 'product' || !hasReport) && <section className="journey-review-example" aria-label="예시 경위서 만들기">
+    {onPrepareExample && !value.report && <section className="journey-review-example" aria-label="예시 경위서 만들기">
       <p className="journey-supporting">현재 자료와 진술을 연결하는 예시예요. 자동 사고 분석 결과가 아니며 근거 확인과 수정이 필요해요.</p>
       <JourneyAction secondary disabled={preparing || !canPrepareExample} onClick={() => void prepareExample()}>{preparing ? '예시 경위서 만드는 중' : '예시 경위서 만들기'}</JourneyAction>
       {(diagramDirty || reportDirty) && <p className="journey-supporting">수정 중인 내용을 저장하거나 취소한 뒤 예시를 만들 수 있어요.</p>}
@@ -105,6 +105,6 @@ export function JourneyReviewPanel({ value, saving, reloading, onCommand, onAppr
     </JourneyEditorLayout>
 
     </div>
-    <div ref={submissionContent} hidden={!submission} inert={reloading} aria-busy={reloading} className="journey-editor-holder">{mode === 'product' ? <CopyPanel value={value} onApprove={onApprove} onCopyPrepared={onCopyPrepared} active={submission && value.stage === 'review' && !value.suspended} onCancel={() => setSubmission(false)} onDirtyChange={setSubmissionDirty} /> : <SubmissionPanel ref={submissionPanel} footer={footer} explicitTransport={explicitTransport} value={value} onApprove={onApprove} onCommand={onCommand} active={submission && value.stage === 'review'} onCancel={() => setSubmission(false)} onDirtyChange={setSubmissionDirty} />}</div>
+    <div ref={submissionContent} hidden={!submission} inert={reloading} aria-busy={reloading} className="journey-editor-holder">{mode === 'product' ? <CopyPanel value={value} onApprove={onApprove} onCopyPrepared={onCopyPrepared} active={submission && value.stage === 'review' && !value.suspended} onCancel={() => setSubmission(false)} onDirtyChange={setSubmissionDirty} /> : <SubmissionPanel ref={submissionPanel} footer={footer} explicitTransport={explicitTransport} value={value} onApprove={onApprove} onCommand={onCommand} active={submission && value.stage === 'review'} onCancel={() => setSubmission(false)} onReviewReport={() => { setSubmission(false); setTab('report') }} onDirtyChange={setSubmissionDirty} />}</div>
   </>
 }

@@ -46,7 +46,7 @@
 .journey-review-heading a { display: flex; gap: var(--ac-space-3); align-items: center; }
 .journey-preview-tabs { display: flex; gap: var(--ac-space-2); flex-wrap: wrap; margin-top: var(--ac-space-6); }
 .journey-preview-tabs button { border: 1px solid var(--ac-line); background: transparent; color: var(--ac-muted); border-radius:var(--ac-radius-small); min-height: 44px; padding: var(--ac-space-3) 18px; font-size: 14px; }
-.journey-preview-tabs button[aria-pressed="true"] { background: var(--ac-control); color: var(--ac-text); }
+.journey-preview-tabs button[aria-pressed="true"] { background: var(--ac-text); color: var(--ac-ink); }
 .journey-preview-caption { font-size: 12px; color: var(--ac-muted); margin: var(--ac-space-3) 0 var(--ac-space-6); }
 .journey-component-states { margin-top: var(--ac-space-10); border-top: 1px solid var(--ac-line); padding-block: var(--ac-space-6); }
 .journey-component-states h2 { display: flex; gap: var(--ac-space-3); align-items: center; margin-bottom: var(--ac-space-6); font-size: 18px; }
@@ -92,7 +92,7 @@
 .journey-safety-list > div { border-top: 1px solid var(--ac-line); padding-top: var(--ac-space-6); display: grid; gap: var(--ac-space-4); }
 .journey-safety-list > div > div { display: flex; gap: var(--ac-space-4); flex-wrap: wrap; align-items: center; justify-content: space-between; }
 .journey-safety-list strong { font-weight: 500; }
-.journey-safety-list button { border: 0; border-radius:var(--ac-radius-control); background: var(--ac-control); min-height: 56px; padding: var(--ac-space-3) var(--ac-space-6); font-size: var(--ac-type-supporting); }
+.journey-safety-list button { border: 0; border-radius:var(--ac-radius-control); background: var(--ac-choice); min-height: var(--ac-touch); padding: var(--ac-space-3) var(--ac-space-6); font-size: var(--ac-type-supporting); }
 .journey-countdown { font-size: 64px; font-variant-numeric: tabular-nums; text-align: center; }
 .journey-phone { width: 56px; height: 56px; margin: var(--ac-space-6) auto; }
 .journey-input-label { display: flex; justify-content: space-between; gap: var(--ac-space-4); font-size: var(--ac-type-label); color: var(--ac-muted); }
@@ -100,8 +100,9 @@
 .journey-textarea::placeholder { color: var(--ac-muted); }
 .journey-study [hidden] { display: none !important; }
 .journey-record-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: var(--ac-space-3); }
-.journey-record-tabs button { border: 1px solid var(--ac-line); border-radius:var(--ac-radius-control); min-height: 56px; padding: var(--ac-space-3); color: var(--ac-muted); background: transparent; font-size: var(--ac-type-supporting); }
-.journey-record-tabs button[aria-pressed="true"] { color: var(--ac-text); background: var(--ac-control); }
+.journey-record-tabs button { border: 1px solid var(--ac-line); border-radius:var(--ac-radius-control); min-height: var(--ac-touch); padding: var(--ac-space-3); color: var(--ac-text); background: var(--ac-choice); font-size: var(--ac-type-supporting); }
+/* Selected choices are white; choices still open are the quiet --ac-choice fill. */
+.journey-record-tabs button[aria-pressed="true"] { color: var(--ac-ink); background: var(--ac-text); border-color: var(--ac-text); }
 .journey-review-clips { display: grid; gap: var(--ac-space-6); }
 @media (max-width: 600px) {
   .journey-study { padding: var(--ac-space-4) 0; }

@@ -184,7 +184,7 @@ export function ProductFlow({ session }: { session: PhoneSession }) {
         if (!response.ok) throw new Error('Example video unavailable')
         const blob = await response.blob()
         if (generation !== interruption.current || safetyRef.current) return false
-        const evidence: Evidence = { id: 'example-front-video', label: '전방 영상 · 예시', kind: 'video', origin: 'user',
+        const evidence: Evidence = { id: 'example-front-video', label: '전방 영상', kind: 'video', origin: 'user',
           revision: (previous?.revision ?? 0) + 1, assetId: crypto.randomUUID(), availability: 'available', captureTarget: null,
           metadata: { mime: blob.type, bytes: blob.size, duration: 20, eventTime: 11, capturedAt: null, sourceLabel: '선택한 블랙박스 영상' } }
         const saved = await journey.save({ type: 'evidence-put', evidence }, [{ id: evidence.assetId!, caseId: record.id, blob }])
