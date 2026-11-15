@@ -3,7 +3,7 @@
 ## 구성
 
 - [Release v1.0.0](https://github.com/JangHyun-bin/chabun/releases/tag/v1.0.0)
-- [서명 APK](https://github.com/JangHyun-bin/chabun/releases/download/v1.0.0/chabun-1.0.0.apk)
+- [서명 APK](apk/장희빈_차분_release.apk) (`apk/장희빈_차분_release.apk`, Release에도 같은 파일)
 - [SHA-256](https://github.com/JangHyun-bin/chabun/releases/download/v1.0.0/SHA256SUMS)
 
 ## 실행과 시연
