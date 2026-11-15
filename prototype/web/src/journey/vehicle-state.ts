@@ -16,10 +16,11 @@ function partState(action:SafetyAction|undefined,confirmedValue:string):VehicleP
   if(!action||action.status==='unknown')return {value:'미확인',tone:'unknown'}
   if(action.status==='requested')return {value:'확인 중',tone:'pending'}
   if(action.status==='unavailable')return {value:'지금 할 수 없음',tone:'skipped'}
-  return {value:confirmedValue,tone:'confirmed',source:action.status==='user-confirmed'?'직접 확인':action.source==='fixture'?'예시 자료':'차량 확인'}
+  return {value:confirmedValue,tone:'confirmed',source:action.status==='user-confirmed'?'직접 확인':action.source==='fixture'?undefined:'차량 확인'}
 }
 
-const observationSources:Record<Source,string>={fixture:'예시 자료',device:'차량 확인',user:'직접 확인'}
+// Fixture values carry no tag: the screen assumes a real vehicle link, and the demo disclosure lives in the host strip.
+const observationSources:Record<Source,string|undefined>={fixture:undefined,device:'차량 확인',user:'직접 확인'}
 
 function observedState(observations:Observation[],unknownValue:string):VehiclePartState {
   const known=observations.filter(item=>item.confirmation==='confirmed'||item.confirmation==='attention')

@@ -23,8 +23,8 @@
 .journey-diagram-contact.is-selected circle:not(.journey-diagram-hit-target), .journey-diagram-contact:focus-visible circle:not(.journey-diagram-hit-target) { stroke: var(--ac-text); stroke-width: 7; }
 .journey-reconstruction-note { color: var(--ac-muted); font-size: var(--ac-type-label); line-height: 1.65; }
 .journey-diagram-targets { display: flex; gap: var(--ac-space-2); flex-wrap: wrap; }
-.journey-diagram-targets button { flex: 1; min-height: 48px; min-width: 80px; padding: var(--ac-space-3) var(--ac-space-3); border-radius:var(--ac-radius-small); border: 1px solid var(--ac-line); background: transparent; font: inherit; font-size: var(--ac-type-label); }
-.journey-diagram-targets button[aria-pressed="true"] { background: var(--ac-control); border-color: var(--ac-muted); }
+.journey-diagram-targets button { flex: 1; min-height: 48px; min-width: 80px; padding: var(--ac-space-3) var(--ac-space-3); border-radius:var(--ac-radius-small); border: 1px solid var(--ac-line); background: var(--ac-choice); color: var(--ac-text); font: inherit; font-size: var(--ac-type-label); }
+.journey-diagram-targets button[aria-pressed="true"] { background: var(--ac-text); color: var(--ac-ink); border-color: var(--ac-text); }
 .journey-diagram-controls { display: grid; gap: var(--ac-space-3); border-block: 1px solid var(--ac-line); padding-block: var(--ac-space-6); }
 .journey-diagram-control-label { display: flex; justify-content: space-between; color: var(--ac-muted); font-size: var(--ac-type-label); }
 .journey-diagram-control-label strong { color: var(--ac-text); font-weight: 400; font-variant-numeric: tabular-nums; }

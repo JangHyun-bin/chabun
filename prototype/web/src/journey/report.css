@@ -11,7 +11,7 @@
 .journey-report-meta { display: flex; flex-wrap: wrap; gap: var(--ac-space-2) var(--ac-space-4); font-size: var(--ac-type-label); color: var(--ac-muted); }
 .journey-report-text { font-size: var(--ac-type-body); line-height: 1.65; white-space: pre-wrap; overflow-wrap: anywhere; }
 .journey-report-tools { display: flex; flex-wrap: wrap; gap: var(--ac-space-2); }
-.journey-report-tools button { min-height: 48px; padding: var(--ac-space-2) var(--ac-space-3); background: transparent; border: 1px solid var(--ac-line); border-radius:var(--ac-radius-small); font: inherit; font-size: var(--ac-type-supporting); }
+.journey-report-tools button { min-height: 48px; padding: var(--ac-space-2) var(--ac-space-3); background: var(--ac-choice); color: var(--ac-text); border: 1px solid var(--ac-line); border-radius:var(--ac-radius-small); font: inherit; font-size: var(--ac-type-supporting); }
 .journey-report-editor { display: grid; gap: var(--ac-space-3); }
 .journey-report-editor label { display: grid; gap: var(--ac-space-3); font-size: var(--ac-type-supporting); }
 .journey-report-editor textarea { box-sizing: border-box; width: 100%; min-height: 160px; resize: vertical; padding: var(--ac-space-4); border: 1px solid var(--ac-line); border-radius:var(--ac-radius-control); background: var(--ac-control); color: var(--ac-text); font: inherit; line-height: 1.6; }

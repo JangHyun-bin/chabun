@@ -9,7 +9,7 @@ test('known immobility remains an attention state instead of becoming unknown',a
     const {vehicleContourState}=await import(/* @vite-ignore */ viewPath) as typeof import('../src/journey/vehicle-state')
     return vehicleContourState(createCase(createSession('SC02'),'immobility-test',new Date().toISOString()))
   })
-  expect(state.mobility).toEqual({value:'이동 불가',tone:'failed',source:'예시 자료'})
+  expect(state.mobility).toEqual({value:'이동 불가',tone:'failed'})
 })
 
 test('unknown and conflicting directions do not highlight a vehicle location',async({page})=>{
@@ -30,7 +30,8 @@ test('unknown and conflicting directions do not highlight a vehicle location',as
 test('part states distinguish requested, user confirmed, fixture confirmed and unavailable',async({page})=>{
   await page.goto('/?study=vehicle')
   const hazard=page.locator('[data-vehicle-part="비상등"]')
-  await expect(hazard).toContainText('예시 자료')
+  await expect(hazard).toContainText('켜짐')
+  await expect(hazard).not.toContainText('예시 자료')
   await page.getByLabel('예시 비상등 상태').selectOption('requested')
   await expect(hazard).toContainText('확인 중')
   await expect(page.locator('[data-vehicle-hazards]')).toHaveCount(0)
@@ -146,7 +147,7 @@ test('vehicle cells show only case values and turn warm only when something need
   await expect(unknown.locator('[data-vehicle-row="mobility"] dd')).toHaveText('가능 여부 미확인')
   await expect(unknown.locator('.vc-detail')).not.toContainText('예시 자료')
   await expect(unknown.locator('[data-scene-contact]')).toHaveCount(0)
-  for(const text of ['우측 전방','예시 자료'])await expect(normal.locator('[data-vehicle-row="impact"] dd')).toContainText(text)
+  await expect(normal.locator('[data-vehicle-row="impact"] dd')).toHaveText('우측 전방')
   await expect(normal.locator('[data-vehicle-note="road"]')).toContainText('고속도로')
   await expect(normal.locator('[data-scene-contact]')).toHaveCount(1)
   for(const column of [unknown,normal])await expect(column.locator('.vc-detail')).toHaveAttribute('data-attention','false')
