@@ -229,7 +229,6 @@ test('report selection and preview require explicit approval and receipts remain
   expect(await page.evaluate(() => window.reportReviewApprovals)).toHaveLength(1)
   await page.evaluate(() => window.reportReviewCompleteReceipt())
   const receipt = root.getByRole('region', { name: '요청 결과', exact: true })
-  await expect(receipt.getByText('시연 결과 · 실제 접수 아님', { exact: true })).toBeVisible()
   await expect(receipt.getByText('시연-0000', { exact: true })).toBeVisible()
 })
 

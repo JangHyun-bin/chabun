@@ -34,7 +34,7 @@ test('example sentences refer to current video, photo and spoken statement revis
   expect(report.paragraphs).toHaveLength(4)
   expect(report.paragraphs[0]).toMatchObject({ kind: 'observation', references: [{ evidenceId: 'current-front', evidenceRevision: 3, start: 0, end: 4.5 }] })
   expect(report.paragraphs[0].text).toContain('현재 전방 영상')
-  expect(report.paragraphs[0].text).toContain('시연 자료')
+  expect(report.paragraphs[0].text).not.toContain('시연')
   expect(report.paragraphs[1]).toMatchObject({ kind: 'observation', references: [{ evidenceId: 'current-photo', evidenceRevision: 2, start: null, end: null }] })
   expect(report.paragraphs[1].text).toContain('내 차량 사진')
   expect(report.paragraphs[2]).toMatchObject({ text: value.statements[0].text, kind: 'statement', references: [{ evidenceId: 'current-audio', evidenceRevision: 4, start: 0, end: 2.25 }] })

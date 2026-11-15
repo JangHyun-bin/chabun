@@ -23,13 +23,13 @@
 .journey-diagram-contact.is-selected circle:not(.journey-diagram-hit-target), .journey-diagram-contact:focus-visible circle:not(.journey-diagram-hit-target) { stroke: var(--ac-text); stroke-width: 7; }
 .journey-reconstruction-note { color: var(--ac-muted); font-size: var(--ac-type-label); line-height: 1.65; }
 .journey-diagram-targets { display: flex; gap: var(--ac-space-2); flex-wrap: wrap; }
-.journey-diagram-targets button { flex: 1; min-height: 48px; min-width: 80px; padding: var(--ac-space-3) var(--ac-space-3); border-radius:var(--ac-radius-small); border: 1px solid var(--ac-line); background: var(--ac-choice); color: var(--ac-text); font: inherit; font-size: var(--ac-type-label); }
+.journey-diagram-targets button { flex: 1; min-height: var(--ac-touch); min-width: 80px; padding: var(--ac-space-3) var(--ac-space-3); border-radius:var(--ac-radius-small); border: 1px solid var(--ac-line); background: var(--ac-choice); color: var(--ac-text); font: inherit; font-size: var(--ac-type-label); }
 .journey-diagram-targets button[aria-pressed="true"] { background: var(--ac-text); color: var(--ac-ink); border-color: var(--ac-text); }
 .journey-diagram-controls { display: grid; gap: var(--ac-space-3); border-block: 1px solid var(--ac-line); padding-block: var(--ac-space-6); }
 .journey-diagram-control-label { display: flex; justify-content: space-between; color: var(--ac-muted); font-size: var(--ac-type-label); }
 .journey-diagram-control-label strong { color: var(--ac-text); font-weight: 400; font-variant-numeric: tabular-nums; }
 .journey-diagram-moves, .journey-diagram-turns { display: flex; gap: var(--ac-space-3); }
-.journey-diagram-controls button { display: flex; justify-content: center; align-items: center; flex: 1; gap: var(--ac-space-3); min-width: 48px; min-height: 48px; border: 0; border-radius:var(--ac-radius-small); background: var(--ac-control); color: var(--ac-text); font: inherit; font-size: var(--ac-type-supporting); }
+.journey-diagram-controls button { display: flex; justify-content: center; align-items: center; flex: 1; gap: var(--ac-space-3); min-width: var(--ac-touch); min-height: var(--ac-touch); border: 0; border-radius:var(--ac-radius-small); background: var(--ac-choice); color: var(--ac-text); font: inherit; font-size: var(--ac-type-supporting); }
 .journey-diagram-controls svg { width: 22px; height: 22px; }
 .journey-diagram-save { display: grid; gap: var(--ac-space-3); }
 .journey-diagram-save > .journey-text-action { justify-content: center; }
@@ -59,7 +59,7 @@
 .journey-clip-range > div { display: flex; flex-wrap: wrap; align-items: end; gap: var(--ac-space-3); padding-top: var(--ac-space-3); }
 .journey-clip-range label { flex: 1; min-width: 90px; display: grid; gap: var(--ac-space-2); color: var(--ac-muted); }
 .journey-clip-range input { width: 100%; border: 1px solid var(--ac-line); border-radius:var(--ac-radius-small); background: var(--ac-control); color: var(--ac-text); min-height: 48px; padding: var(--ac-space-3); font: inherit; }
-.journey-clip-range button { flex: 1 1 100%; border: 0; border-radius:var(--ac-radius-small); background: var(--ac-control); min-height: 48px; color: var(--ac-text); font: inherit; }
+.journey-clip-range button { flex: 1 1 100%; border: 0; border-radius:var(--ac-radius-small); background: var(--ac-choice); min-height: var(--ac-touch); color: var(--ac-text); font: inherit; }
 [data-journey-device="vehicle"] .journey-diagram-canvas { width: min(100%, 500px); justify-self: center; }
 [data-journey-device="vehicle"] .journey-diagram-controls button { min-height: 64px; }
 

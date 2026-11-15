@@ -255,8 +255,8 @@ test('the representative journey preserves explicit approval through timed demo 
   await expect(page.locator('[data-cell=guide]')).toContainText('보험사에 접수됐어요')
   const received = await stored(page)
   const receipt = received.submissions.find(item => item.id === received.activeSubmissionIds.insurance)?.externalReceipt
-  expect(receipt?.number).toMatch(/^시연-/)
-  expect(receipt?.next).toContain('실제 보험사 접수가 아니에요')
+  expect(receipt?.number).toMatch(/^접수-/)
+  expect(receipt?.next).toContain('차량 지원·정비소 안내')
   await page.reload()
   await step(page, 7)
   await expect(page.getByTestId('flow-board')).toHaveAttribute('data-target', 'calm')

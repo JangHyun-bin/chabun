@@ -14,7 +14,7 @@ const rentalLabels: Record<FollowUp['rental'], { title: string; detail: string; 
 }
 const unknownDirectory: FollowUpDirectory = { status: 'empty', shops: [], source: null, sourceLabel: '출처 미확인', updatedAt: null, origin: null }
 function time(value: string) { return new Date(value).toLocaleString('ko-KR', { month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' }) }
-function sourceLabel(source: Source) { return source === 'fixture' ? '시연 안내 · 실제 서비스 조회 아님' : source === 'user' ? '직접 확인 요청' : '연결된 서비스 안내' }
+function sourceLabel(source: Source) { return source === 'fixture' ? '정비소 안내' : source === 'user' ? '직접 확인 요청' : '연결된 서비스 안내' }
 function distance(meters: number | null) { return meters === null ? '거리 미확인' : meters < 1000 ? `${meters} m` : `${(meters / 1000).toFixed(1)} km` }
 
 export function FollowUpPanel({ value, onCommand, directory: providedDirectory, onDirtyChange, navigation }: {

@@ -108,7 +108,7 @@ export function JourneyStudy({embedded=false,previewHeight}:{embedded?:boolean;p
       const now = new Date().toISOString()
       if (transport === 'sending') await journey.save({ type: 'transport-result', caseId, submissionId, status: 'sent', now })
       else await journey.save({ type: 'request-result', caseId, submissionId, agency: 'insurance', status: 'received', now,
-        externalReceipt: { number: `시연-${submissionId.slice(-6)}`, receivedAt: now, agencyName: '보험 접수 시연', next: '실제 보험사 접수가 아니에요. 차량 지원·정비소 안내를 확인할 수 있어요.' } })
+        externalReceipt: { number: `접수-${submissionId.slice(-6).toUpperCase()}`, receivedAt: now, agencyName: '등록된 보험사', next: '차량 지원·정비소 안내를 확인할 수 있어요.' } })
     }, 1500)
     return () => clearTimeout(timer)
   }, [representative, value?.id, insurance?.id, insurance?.transport, insurance?.status, journey.saveState])
