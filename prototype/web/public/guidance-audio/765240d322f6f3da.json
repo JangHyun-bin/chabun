@@ -16,8 +16,15 @@
     "SC01/record"
   ],
   "duration": 7.12,
-  "bytes": 172451,
-  "audioHash": "c47da7af99b0bb6392c6759899d93368c0ee159f42144ffc98768f288ad565b7",
+  "bytes": 172427,
+  "audioHash": "c826d9f54db71a9adfa970e1bccefd29a38c5cba5c7a1228e645d8f00c1e1261",
   "payloadEncoding": "UTF-8 JSON file",
-  "generatedAt": "2026-11-14T06:37:44.380Z"
+  "generatedAt": "2026-11-14T06:37:44.380Z",
+  "postProcess": {
+    "edgeFadeMs": 5,
+    "reason": "first or last 1 ms peaked above -60 dBFS (-81.3 / -38.2)",
+    "encoder": "libmp3lame 192 kbps CBR, 44.1 kHz mono",
+    "sourceAudioHash": "c47da7af99b0bb6392c6759899d93368c0ee159f42144ffc98768f288ad565b7",
+    "sourceBytes": 172451
+  }
 }

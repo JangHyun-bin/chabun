@@ -16,8 +16,15 @@
     "journey/사진 남기기"
   ],
   "duration": 8.48,
-  "bytes": 205052,
-  "audioHash": "24ac9209754b5deabd1990b974439d82667daeb8add01280a7f212c49ccfe7e8",
+  "bytes": 205028,
+  "audioHash": "5eecdb3a1f7d402bfedf7501b26b6d0e4c0b834265fa2819b9fcf2f9c843aa2b",
   "payloadEncoding": "UTF-8 JSON file",
-  "generatedAt": "2026-11-14T06:08:32.601Z"
+  "generatedAt": "2026-11-14T06:08:32.601Z",
+  "postProcess": {
+    "edgeFadeMs": 5,
+    "reason": "first or last 1 ms peaked above -60 dBFS (-55.3 / -88)",
+    "encoder": "libmp3lame 192 kbps CBR, 44.1 kHz mono",
+    "sourceAudioHash": "24ac9209754b5deabd1990b974439d82667daeb8add01280a7f212c49ccfe7e8",
+    "sourceBytes": 205052
+  }
 }

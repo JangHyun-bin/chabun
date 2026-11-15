@@ -16,8 +16,15 @@
     "SC02/sending"
   ],
   "duration": 2,
-  "bytes": 49571,
-  "audioHash": "3af3d055895bb04a0a41df57f0abd9137adc9fd83e4b37b3658cf06525999896",
+  "bytes": 49547,
+  "audioHash": "1cd84afb834c89ea8258602c1a6e9208e2bd3bcffea704422f664a0a659841b0",
   "payloadEncoding": "UTF-8 JSON file",
-  "generatedAt": "2026-11-14T06:37:46.397Z"
+  "generatedAt": "2026-11-14T06:37:46.397Z",
+  "postProcess": {
+    "edgeFadeMs": 5,
+    "reason": "first or last 1 ms peaked above -60 dBFS (-80.7 / -29.9)",
+    "encoder": "libmp3lame 192 kbps CBR, 44.1 kHz mono",
+    "sourceAudioHash": "3af3d055895bb04a0a41df57f0abd9137adc9fd83e4b37b3658cf06525999896",
+    "sourceBytes": 49571
+  }
 }
