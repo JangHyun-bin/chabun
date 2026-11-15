@@ -1,6 +1,7 @@
 .journey-flow { min-width:0; --ac-call-action-rows:2; }
-.journey-flow :is(.journey-flow-actions,.fs-board) { --ac-touch:max(48px,calc(var(--ac-type-body)*1.4 + 2*var(--ac-space-2))); }
-.journey-flow .fs-board .ac-action { --ac-touch:calc(max(48px,calc(var(--ac-type-body)*1.4 + 2*var(--ac-space-2)))*1.25); padding:calc(var(--ac-space-2)*1.25) calc(var(--ac-space-8)*1.25); font-size:calc(var(--ac-type-body)*1.25); }
+.journey-flow :is(.journey-flow-actions,.fs-board) { --ac-touch:max(var(--ac-touch-floor,64px),calc(var(--ac-type-body)*1.4 + 2*var(--ac-space-2))); }
+/* Buttons follow the Figma Button component: 64 tall, padding 12/24, body type (26 on the vehicle display). */
+.journey-flow .fs-board .ac-action { padding:var(--ac-space-3) var(--ac-space-6); font-size:var(--ac-type-body); }
 .journey-flow-header { display:grid; gap:var(--ac-space-4); min-width:0; }
 .journey-flow .fs-stages { flex-wrap:nowrap; gap:var(--ac-space-3); padding:0; margin:0; min-height:0; }
 .journey-flow .fs-stages li { min-height:0; }

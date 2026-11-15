@@ -15,7 +15,7 @@
   --ac-type-guide:1.75rem; --ac-type-call:1.75rem; --ac-type-summary:1.75rem;
   --ac-type-checklist:1.125rem; --ac-type-caption:.9375rem; --ac-type-eyebrow:.875rem;
   --ac-type-number:5rem; --ac-leading:1.31;
-  --ac-font:Asta,ui-sans-serif,system-ui,sans-serif; --ac-touch:64px; /* every tappable control in the vehicle app is at least this tall (spec: 60+) */
+  --ac-font:Asta,ui-sans-serif,system-ui,sans-serif; --ac-touch:64px; --ac-touch-floor:64px; /* every tappable control in the vehicle app is at least this tall (Figma size/touch, spec: 60+) */
   --ac-motion-fast:160ms; --ac-motion-state:240ms; --ac-motion-layout:360ms;
   --ac-ease:cubic-bezier(.22,1,.36,1);
 }
@@ -46,9 +46,9 @@
 @media(min-width:2400px) {
   :root { --ac-type-title:2.5rem; --ac-type-guide:2.875rem; --ac-type-call:2.5rem; --ac-type-summary:2.25rem; --ac-type-section:2.25rem; --ac-type-body:1.625rem; --ac-type-supporting:1.375rem; --ac-type-label:1.5rem; --ac-type-caption:1.375rem; --ac-type-eyebrow:1.125rem; --ac-type-checklist:1.75rem; --ac-type-number:8.8125rem; }
 }
-[data-care-device=vehicle] { --ac-touch:64px; }
+[data-care-device=vehicle] { --ac-touch:64px; --ac-touch-floor:64px; }
 :is([data-care-device=mobile],[data-journey-device=mobile]) {
-  --ac-touch:48px; --ac-type-title:1.75rem; --ac-type-guide:1.75rem; --ac-type-call:1.75rem; --ac-type-summary:1.75rem;
+  --ac-touch:48px; --ac-touch-floor:48px; --ac-type-title:1.75rem; --ac-type-guide:1.75rem; --ac-type-call:1.75rem; --ac-type-summary:1.75rem;
   --ac-type-section:1.75rem; --ac-type-body:1.125rem; --ac-type-supporting:.9375rem; --ac-type-label:.875rem;
   --ac-type-caption:.9375rem; --ac-type-eyebrow:.875rem; --ac-type-checklist:1.125rem; --ac-type-number:5rem;
 }
