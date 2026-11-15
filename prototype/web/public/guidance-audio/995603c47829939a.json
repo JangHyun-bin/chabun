@@ -16,8 +16,15 @@
     "journey-flow/received"
   ],
   "duration": 6.8,
-  "bytes": 164928,
-  "audioHash": "ee5304af62075964b575aea3d5d5bbd139096265a6473d40f61efa10534dcdc4",
+  "bytes": 164904,
+  "audioHash": "7e9eb6b2e2cc46545cc2a8c91a10be82bad95b077b2a40c75922ba951ab7a58a",
   "payloadEncoding": "UTF-8 JSON file",
-  "generatedAt": "2026-11-15T05:32:47.336Z"
+  "generatedAt": "2026-11-15T05:32:47.336Z",
+  "postProcess": {
+    "edgeFadeMs": 5,
+    "reason": "first or last 1 ms peaked above -60 dBFS (-45.7 / -89.4)",
+    "encoder": "libmp3lame 192 kbps CBR, 44.1 kHz mono",
+    "sourceAudioHash": "ee5304af62075964b575aea3d5d5bbd139096265a6473d40f61efa10534dcdc4",
+    "sourceBytes": 164928
+  }
 }

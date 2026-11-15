@@ -2,6 +2,8 @@ import { test, expect, type Page } from '@playwright/test'
 import { build, preview, type PreviewServer } from 'vite'
 import { fileURLToPath } from 'node:url'
 import { enterJourneyRecord, openExampleReport, storedJourney as stored } from './helpers/scenario-journey'
+import { mockGuidanceAudio } from './guidance-mock'
+import journeyGuidance from '../src/audio/journey-guidance.json' with { type: 'json' }
 
 type BridgeCall = { method: 'handoff'; command: string; argument: unknown } | { method: 'dial'; number: string }
 type Size = { width: number; height: number }
@@ -230,6 +232,30 @@ test('a vehicle without a dialer keeps the call idle and points the driver to th
   await expect(flow(page)).toHaveAttribute('data-call', 'idle')
   expect(await dials(page)).toEqual(['119'])
   expect((await stored(page)).submissions.filter(item => item.agency === 'rescue')).toHaveLength(0)
+})
+
+test('guidance in a cell keeps speaking while the board animates to the next step', async ({ page }) => {
+  await installBridge(page)
+  await page.addInitScript(mockGuidanceAudio)
+  // Motion stays on: between steps the board fades its cells and makes them inert while it morphs.
+  await page.goto('/?host=pleos-app')
+  await expect(flow(page)).toHaveAttribute('data-step', '1')
+  await flow(page).getByRole('button', { name: '괜찮아요', exact: true }).click()
+  await enterJourneyRecord(page)
+  const board = page.getByTestId('flow-board')
+  await expect(board).toHaveAttribute('data-moving', 'true')
+  await expect(board).toHaveAttribute('data-moving', 'false')
+  await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))))
+  // The asset path is resolved by the browser's Vite graph, like the runtime lookup.
+  const record = await page.evaluate(async text => {
+    const path = '/src/audio/manifest.ts'
+    const { guidanceAsset } = await import(/* @vite-ignore */ path)
+    return guidanceAsset(text)!.path
+  }, journeyGuidance['기억나는 내용을 남겨주세요'])
+  const played = await page.evaluate(() => window.guidanceMock.played)
+  expect(played.filter(src => src === record), 'the record script starts once, not cut and replayed by the transition').toHaveLength(1)
+  expect(played.at(-1)).toBe(record)
+  await expect(page.locator('[data-guidance-state=speaking]')).toHaveCount(1)
 })
 
 test('phone handoff commands round-trip through the native bridge without web fetches or stored credentials', async ({ page }) => {

@@ -16,8 +16,15 @@
     "SC04/initial"
   ],
   "duration": 4.88,
-  "bytes": 118534,
-  "audioHash": "96b2600935922b5a822e66edcd6d44b54ee539228878cd212fef722fbabd0eaa",
+  "bytes": 118510,
+  "audioHash": "b12b8f7251bae9c33afde500c6c0b1b447f7b32926142c19e946e0a7a4726551",
   "payloadEncoding": "UTF-8 JSON file",
-  "generatedAt": "2026-11-14T06:37:51.829Z"
+  "generatedAt": "2026-11-14T06:37:51.829Z",
+  "postProcess": {
+    "edgeFadeMs": 5,
+    "reason": "first or last 1 ms peaked above -60 dBFS (-80.3 / -59)",
+    "encoder": "libmp3lame 192 kbps CBR, 44.1 kHz mono",
+    "sourceAudioHash": "96b2600935922b5a822e66edcd6d44b54ee539228878cd212fef722fbabd0eaa",
+    "sourceBytes": 118534
+  }
 }

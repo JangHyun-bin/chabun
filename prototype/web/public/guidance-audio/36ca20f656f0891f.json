@@ -16,8 +16,15 @@
     "emergency/record_storage_failed"
   ],
   "duration": 7.84,
-  "bytes": 190005,
-  "audioHash": "0544379e91a26c34383c709db91952cfb3f4b4b14d55951864c5b9939d5b729e",
+  "bytes": 189981,
+  "audioHash": "d125d8ad1763cba15a7f81149cfde2b4a0b72aff9ef87e740d625d7368f2dda4",
   "payloadEncoding": "UTF-8 JSON file",
-  "generatedAt": "2026-11-14T06:08:35.166Z"
+  "generatedAt": "2026-11-14T06:08:35.166Z",
+  "postProcess": {
+    "edgeFadeMs": 5,
+    "reason": "first or last 1 ms peaked above -60 dBFS (-80.2 / -52.1)",
+    "encoder": "libmp3lame 192 kbps CBR, 44.1 kHz mono",
+    "sourceAudioHash": "0544379e91a26c34383c709db91952cfb3f4b4b14d55951864c5b9939d5b729e",
+    "sourceBytes": 190005
+  }
 }

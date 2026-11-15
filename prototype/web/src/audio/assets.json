@@ -230,10 +230,17 @@
       "SC01/record"
     ],
     "duration": 7.12,
-    "bytes": 172451,
-    "audioHash": "c47da7af99b0bb6392c6759899d93368c0ee159f42144ffc98768f288ad565b7",
+    "bytes": 172427,
+    "audioHash": "c826d9f54db71a9adfa970e1bccefd29a38c5cba5c7a1228e645d8f00c1e1261",
     "payloadEncoding": "UTF-8 JSON file",
-    "generatedAt": "2026-11-14T06:37:44.380Z"
+    "generatedAt": "2026-11-14T06:37:44.380Z",
+    "postProcess": {
+      "edgeFadeMs": 5,
+      "reason": "first or last 1 ms peaked above -60 dBFS (-81.3 / -38.2)",
+      "encoder": "libmp3lame 192 kbps CBR, 44.1 kHz mono",
+      "sourceAudioHash": "c47da7af99b0bb6392c6759899d93368c0ee159f42144ffc98768f288ad565b7",
+      "sourceBytes": 172451
+    }
   },
   {
     "voiceId": "gJSDQIpSQ56NBGhorBfg",
@@ -253,10 +260,17 @@
       "SC01/record_saved"
     ],
     "duration": 4.16,
-    "bytes": 101607,
-    "audioHash": "0a6c1a8a83b12278753b3edc434f653a36790ceee0369269884b317e7d2f8da2",
+    "bytes": 101583,
+    "audioHash": "4c01e19d451ac87e7e26ccf6bbade8bdec1f18087fc45c38703e0a1203e0cb56",
     "payloadEncoding": "UTF-8 JSON file",
-    "generatedAt": "2026-11-14T06:08:02.122Z"
+    "generatedAt": "2026-11-14T06:08:02.122Z",
+    "postProcess": {
+      "edgeFadeMs": 5,
+      "reason": "first or last 1 ms peaked above -60 dBFS (-53.7 / -84)",
+      "encoder": "libmp3lame 192 kbps CBR, 44.1 kHz mono",
+      "sourceAudioHash": "0a6c1a8a83b12278753b3edc434f653a36790ceee0369269884b317e7d2f8da2",
+      "sourceBytes": 101607
+    }
   },
   {
     "voiceId": "gJSDQIpSQ56NBGhorBfg",
@@ -395,10 +409,17 @@
       "SC02/sending"
     ],
     "duration": 2,
-    "bytes": 49571,
-    "audioHash": "3af3d055895bb04a0a41df57f0abd9137adc9fd83e4b37b3658cf06525999896",
+    "bytes": 49547,
+    "audioHash": "1cd84afb834c89ea8258602c1a6e9208e2bd3bcffea704422f664a0a659841b0",
     "payloadEncoding": "UTF-8 JSON file",
-    "generatedAt": "2026-11-14T06:37:46.397Z"
+    "generatedAt": "2026-11-14T06:37:46.397Z",
+    "postProcess": {
+      "edgeFadeMs": 5,
+      "reason": "first or last 1 ms peaked above -60 dBFS (-80.7 / -29.9)",
+      "encoder": "libmp3lame 192 kbps CBR, 44.1 kHz mono",
+      "sourceAudioHash": "3af3d055895bb04a0a41df57f0abd9137adc9fd83e4b37b3658cf06525999896",
+      "sourceBytes": 49571
+    }
   },
   {
     "voiceId": "gJSDQIpSQ56NBGhorBfg",
@@ -648,10 +669,17 @@
       "SC04/initial"
     ],
     "duration": 4.88,
-    "bytes": 118534,
-    "audioHash": "96b2600935922b5a822e66edcd6d44b54ee539228878cd212fef722fbabd0eaa",
+    "bytes": 118510,
+    "audioHash": "b12b8f7251bae9c33afde500c6c0b1b447f7b32926142c19e946e0a7a4726551",
     "payloadEncoding": "UTF-8 JSON file",
-    "generatedAt": "2026-11-14T06:37:51.829Z"
+    "generatedAt": "2026-11-14T06:37:51.829Z",
+    "postProcess": {
+      "edgeFadeMs": 5,
+      "reason": "first or last 1 ms peaked above -60 dBFS (-80.3 / -59)",
+      "encoder": "libmp3lame 192 kbps CBR, 44.1 kHz mono",
+      "sourceAudioHash": "96b2600935922b5a822e66edcd6d44b54ee539228878cd212fef722fbabd0eaa",
+      "sourceBytes": 118534
+    }
   },
   {
     "voiceId": "gJSDQIpSQ56NBGhorBfg",
@@ -694,10 +722,17 @@
       "SC04/review"
     ],
     "duration": 2.4,
-    "bytes": 58975,
-    "audioHash": "4d728ebe7d1fb024374732421d3aa1657df9f06ea2158f9887f018ee2577c491",
+    "bytes": 58951,
+    "audioHash": "9892017eb6852eb7873edada5cc6e24f88900b0e39b91e1a1e498c538e480b9b",
     "payloadEncoding": "UTF-8 JSON file",
-    "generatedAt": "2026-11-14T06:37:51.920Z"
+    "generatedAt": "2026-11-14T06:37:51.920Z",
+    "postProcess": {
+      "edgeFadeMs": 5,
+      "reason": "first or last 1 ms peaked above -60 dBFS (-30.5 / -87)",
+      "encoder": "libmp3lame 192 kbps CBR, 44.1 kHz mono",
+      "sourceAudioHash": "4d728ebe7d1fb024374732421d3aa1657df9f06ea2158f9887f018ee2577c491",
+      "sourceBytes": 58975
+    }
   },
   {
     "voiceId": "gJSDQIpSQ56NBGhorBfg",
@@ -1156,10 +1191,17 @@
       "journey/기억나는 내용을 남겨주세요"
     ],
     "duration": 8.4,
-    "bytes": 203171,
-    "audioHash": "842b3ca4aca0c11ec22bc592b6632e620e73ea5b0705304ce5b1141ed9fe2e46",
+    "bytes": 203147,
+    "audioHash": "16d54de031a9d27cbc48c97f6fee65e0baf1d65a762b875e43c06fdb1e424a4b",
     "payloadEncoding": "UTF-8 JSON file",
-    "generatedAt": "2026-11-14T06:08:30.409Z"
+    "generatedAt": "2026-11-14T06:08:30.409Z",
+    "postProcess": {
+      "edgeFadeMs": 5,
+      "reason": "first or last 1 ms peaked above -60 dBFS (-54.5 / -88)",
+      "encoder": "libmp3lame 192 kbps CBR, 44.1 kHz mono",
+      "sourceAudioHash": "842b3ca4aca0c11ec22bc592b6632e620e73ea5b0705304ce5b1141ed9fe2e46",
+      "sourceBytes": 203171
+    }
   },
   {
     "voiceId": "gJSDQIpSQ56NBGhorBfg",
@@ -1202,10 +1244,17 @@
       "journey/사진 남기기"
     ],
     "duration": 8.48,
-    "bytes": 205052,
-    "audioHash": "24ac9209754b5deabd1990b974439d82667daeb8add01280a7f212c49ccfe7e8",
+    "bytes": 205028,
+    "audioHash": "5eecdb3a1f7d402bfedf7501b26b6d0e4c0b834265fa2819b9fcf2f9c843aa2b",
     "payloadEncoding": "UTF-8 JSON file",
-    "generatedAt": "2026-11-14T06:08:32.601Z"
+    "generatedAt": "2026-11-14T06:08:32.601Z",
+    "postProcess": {
+      "edgeFadeMs": 5,
+      "reason": "first or last 1 ms peaked above -60 dBFS (-55.3 / -88)",
+      "encoder": "libmp3lame 192 kbps CBR, 44.1 kHz mono",
+      "sourceAudioHash": "24ac9209754b5deabd1990b974439d82667daeb8add01280a7f212c49ccfe7e8",
+      "sourceBytes": 205052
+    }
   },
   {
     "voiceId": "gJSDQIpSQ56NBGhorBfg",
@@ -1294,10 +1343,17 @@
       "emergency/record_storage_failed"
     ],
     "duration": 7.84,
-    "bytes": 190005,
-    "audioHash": "0544379e91a26c34383c709db91952cfb3f4b4b14d55951864c5b9939d5b729e",
+    "bytes": 189981,
+    "audioHash": "d125d8ad1763cba15a7f81149cfde2b4a0b72aff9ef87e740d625d7368f2dda4",
     "payloadEncoding": "UTF-8 JSON file",
-    "generatedAt": "2026-11-14T06:08:35.166Z"
+    "generatedAt": "2026-11-14T06:08:35.166Z",
+    "postProcess": {
+      "edgeFadeMs": 5,
+      "reason": "first or last 1 ms peaked above -60 dBFS (-80.2 / -52.1)",
+      "encoder": "libmp3lame 192 kbps CBR, 44.1 kHz mono",
+      "sourceAudioHash": "0544379e91a26c34383c709db91952cfb3f4b4b14d55951864c5b9939d5b729e",
+      "sourceBytes": 190005
+    }
   },
   {
     "voiceId": "gJSDQIpSQ56NBGhorBfg",
@@ -1777,9 +1833,16 @@
       "journey-flow/received"
     ],
     "duration": 6.8,
-    "bytes": 164928,
-    "audioHash": "ee5304af62075964b575aea3d5d5bbd139096265a6473d40f61efa10534dcdc4",
+    "bytes": 164904,
+    "audioHash": "7e9eb6b2e2cc46545cc2a8c91a10be82bad95b077b2a40c75922ba951ab7a58a",
     "payloadEncoding": "UTF-8 JSON file",
-    "generatedAt": "2026-11-15T05:32:47.336Z"
+    "generatedAt": "2026-11-15T05:32:47.336Z",
+    "postProcess": {
+      "edgeFadeMs": 5,
+      "reason": "first or last 1 ms peaked above -60 dBFS (-45.7 / -89.4)",
+      "encoder": "libmp3lame 192 kbps CBR, 44.1 kHz mono",
+      "sourceAudioHash": "ee5304af62075964b575aea3d5d5bbd139096265a6473d40f61efa10534dcdc4",
+      "sourceBytes": 164928
+    }
   }
 ]

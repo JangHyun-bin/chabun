@@ -20,27 +20,29 @@ export function ContextualGuidanceProvider({ children }: { children: ReactNode }
 }
 
 // A script speaks once each time its screen is shown; state changes that keep the same script never restart or cut it.
-export function GuidanceControl({ text }: { text: string }) {
+// `suspended` takes the screen away from the driver without hiding it (a paused or covered storyboard); lifting it shows the screen again.
+export function GuidanceControl({ text, suspended = false }: { text: string; suspended?: boolean }) {
   const host = useRef<HTMLSpanElement>(null)
   const audio = useGuidanceAudio({ text, host })
   const silent = useSyncExternalStore(subscribe, () => muted)
   const { play, stop } = audio
   useEffect(() => {
-    if (silent) { stop(); return }
+    if (silent || suspended) { stop(); return }
     const node = host.current!
     let audible = false, current = true
+    // Inert only blocks input (a busy panel, a board mid-transition, a drawer above); the screen is still shown, so it neither cuts nor replays the script.
     const update = () => {
-      const next = node.getClientRects().length > 0 && !node.closest('[hidden],[inert],[data-voice-phase="listening"],[data-voice-phase="saving"],[data-voice-phase="saved"]')
+      const next = node.getClientRects().length > 0 && !node.closest('[hidden],[data-voice-phase="listening"],[data-voice-phase="saving"],[data-voice-phase="saved"]')
       // A context replaced within the same task (e.g. storage availability settling) must not speak first.
       if (next && !audible) queueMicrotask(() => { if (current) void play() })
       if (!next && audible) stop()
       audible = next
     }
     const observer = new MutationObserver(update)
-    for (let element: HTMLElement | null = node; element; element = element.parentElement) observer.observe(element, { attributes: true, attributeFilter: ['hidden', 'inert', 'data-voice-phase'] })
+    for (let element: HTMLElement | null = node; element; element = element.parentElement) observer.observe(element, { attributes: true, attributeFilter: ['hidden', 'data-voice-phase'] })
     update()
     return () => { current = false; observer.disconnect() }
-  }, [silent, play, stop])
+  }, [silent, suspended, play, stop])
   return <>
     <span ref={host} aria-hidden="true" style={{ position: 'absolute' }} data-guidance-state={audio.state} />
     {audio.state === 'error' && <div className="ac-guidance-control"><p role="status">음성을 재생하지 못했어요. {text}</p></div>}
