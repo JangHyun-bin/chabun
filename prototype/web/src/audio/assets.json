@@ -1,0 +1,1848 @@
+[
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "응답이 없으면 10초 후 119에 연결해요. 지금 바로 연결하거나 취소할 수 있어요.",
+    "scriptHash": "4588bb45a45f90664c388940d441203d382ed7a04ab970a43af3c63ab33ed136",
+    "file": "4588bb45a45f9066.mp3",
+    "path": "/guidance-audio/4588bb45a45f9066.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "SC01/initial"
+    ],
+    "duration": 5.92,
+    "bytes": 143612,
+    "audioHash": "b75e23af7e484afe5abac5c98b7c40097816384096aaafcc8b42291f73cda37b",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:37:39.268Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "119 연결을 취소했어요. 필요하면 언제든 다시 연결할 수 있어요.",
+    "scriptHash": "1d87905d480c08cf02b9c04963e523f742ce56d853e699dc93d23e4589b4da41",
+    "file": "1d87905d480c08cf.mp3",
+    "path": "/guidance-audio/1d87905d480c08cf.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "SC01/cancelled",
+      "SC03/responded"
+    ],
+    "duration": 4.64,
+    "bytes": 112892,
+    "audioHash": "bfb81ef806b2ba8d5a73cc789cc20cf169469bada0fddc725bd31814992331bc",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:37:38.798Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "응답이 없어 119에 자동으로 연결했어요. 응답할 수 있으면 알려 주세요.",
+    "scriptHash": "4fa4b5b5540e1f68cfc41e1b7bb9f4e53c071a28628218f68dd623c0cdc576a7",
+    "file": "4fa4b5b5540e1f68.mp3",
+    "path": "/guidance-audio/4fa4b5b5540e1f68.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "SC01/auto_contact",
+      "SC03/unanswered"
+    ],
+    "duration": 5.2,
+    "bytes": 126684,
+    "audioHash": "c4a1a04e6ec3d6fdd05be8eb974ed624c45c16782d1217ccd5244696d4a53a32",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:37:38.987Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "119에 연결하고 있어요. 움직일 수 있으면 가드레일 밖으로 대피하세요.",
+    "scriptHash": "168768c73abdf61538ecace7a7c9c5ae173d24e1344605a243ca289179d4fbc7",
+    "file": "168768c73abdf615.mp3",
+    "path": "/guidance-audio/168768c73abdf615.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "SC01/contact_unknown"
+    ],
+    "duration": 4.64,
+    "bytes": 112892,
+    "audioHash": "3afb3a0bb3f4877423d99bdfae50158caf6fdbd83abd2f9ff9f4fd8e040801da",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:37:40.675Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "119와 통화가 연결됐어요. 구호 접수는 아직 확인 전이에요. 움직일 수 있으면 가드레일 밖으로 대피하세요.",
+    "scriptHash": "a3140ac9fa673b9b2e1e007571281d10b328294d042ac94c33d7bf6cfe07f5d8",
+    "file": "a3140ac9fa673b9b.mp3",
+    "path": "/guidance-audio/a3140ac9fa673b9b.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "SC01/connected"
+    ],
+    "duration": 7.52,
+    "bytes": 181855,
+    "audioHash": "34fa38dc8e790b5451abcf4b37a25761e2e7e66bef054dcba2220e4f845ea690",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:37:41.336Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "119에 연결되지 않았어요. 다시 연결해 주세요.",
+    "scriptHash": "43b08760c0fc7144595f855a0b094efe6dea4bbabf1b5a5f04ee01b9ffad4b35",
+    "file": "43b08760c0fc7144.mp3",
+    "path": "/guidance-audio/43b08760c0fc7144.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "SC01/call_failed",
+      "SC01/auto_failed",
+      "SC03/call_failed",
+      "SC03/unanswered_failed"
+    ],
+    "duration": 3.52,
+    "bytes": 85933,
+    "audioHash": "62104019d413fcc84aaece69283553f27487b1bd959b9fbbab7014926fa30be3",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:37:40.647Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "구호 접수가 확인됐어요. 구조대가 올 때까지 안전한 곳에 있어 주세요.",
+    "scriptHash": "68a001b3ebcf6bc122f2116c9d0ff659223c46e5065d9d2b580033bc85f1eecc",
+    "file": "68a001b3ebcf6bc1.mp3",
+    "path": "/guidance-audio/68a001b3ebcf6bc1.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "SC01/received",
+      "SC03/received"
+    ],
+    "duration": 4.56,
+    "bytes": 111011,
+    "audioHash": "4da65bf8ee6116ddbac262302d9f9ddf7e23b2d6cee5b3c7d21fab7a3456c3ea",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:37:42.242Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "구조대가 현장에 도착했어요. 구조대의 안내를 따라 주세요.",
+    "scriptHash": "4078b0a8815cd66c839db17d94007d8121ddde1c683a4049730300741cf41c85",
+    "file": "4078b0a8815cd66c.mp3",
+    "path": "/guidance-audio/4078b0a8815cd66c.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "SC01/arrived"
+    ],
+    "duration": 4.08,
+    "bytes": 99726,
+    "audioHash": "cf5217bea958fbd4f5c59919914417a3f526fedf33fd591bef707a0a97c628da",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:37:42.179Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "구조대 인계가 끝났어요. 차량 지원과 보험 접수는 따로 요청해 주세요.",
+    "scriptHash": "3b5b724fe758107b66b15a7bafa05392877ba986002aae39d04a0efb65b1ef01",
+    "file": "3b5b724fe758107b.mp3",
+    "path": "/guidance-audio/3b5b724fe758107b.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "SC01/handoff"
+    ],
+    "duration": 4.88,
+    "bytes": 118534,
+    "audioHash": "0f7972e28fb9b2a4010852cab888dd47c3401502ae583a1a6e80bf1f33142363",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:37:43.063Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "기억나는 내용을 남겨 주세요. 확실한 것만 적어도 괜찮아요. 직접 보내기 전에는 어디에도 보내지 않아요.",
+    "scriptHash": "765240d322f6f3da54f5f953fbc4c59d0989272ff4611f5f38c724c173237d9d",
+    "file": "765240d322f6f3da.mp3",
+    "path": "/guidance-audio/765240d322f6f3da.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "SC01/record"
+    ],
+    "duration": 7.12,
+    "bytes": 172427,
+    "audioHash": "c826d9f54db71a9adfa970e1bccefd29a38c5cba5c7a1228e645d8f00c1e1261",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:37:44.380Z",
+    "postProcess": {
+      "edgeFadeMs": 5,
+      "reason": "first or last 1 ms peaked above -60 dBFS (-81.3 / -38.2)",
+      "encoder": "libmp3lame 192 kbps CBR, 44.1 kHz mono",
+      "sourceAudioHash": "c47da7af99b0bb6392c6759899d93368c0ee159f42144ffc98768f288ad565b7",
+      "sourceBytes": 172451
+    }
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "사고 기록을 저장했어요. 필요할 때 이어서 고칠 수 있어요.",
+    "scriptHash": "8ca5481629c54e4a500043d22100651f0c56d600ee802934729bdcd1f4ed7b37",
+    "file": "8ca5481629c54e4a.mp3",
+    "path": "/guidance-audio/8ca5481629c54e4a.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "SC01/record_saved"
+    ],
+    "duration": 4.16,
+    "bytes": 101583,
+    "audioHash": "4c01e19d451ac87e7e26ccf6bbade8bdec1f18087fc45c38703e0a1203e0cb56",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:08:02.122Z",
+    "postProcess": {
+      "edgeFadeMs": 5,
+      "reason": "first or last 1 ms peaked above -60 dBFS (-53.7 / -84)",
+      "encoder": "libmp3lame 192 kbps CBR, 44.1 kHz mono",
+      "sourceAudioHash": "0a6c1a8a83b12278753b3edc434f653a36790ceee0369269884b317e7d2f8da2",
+      "sourceBytes": 101607
+    }
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "119와 통화가 연결됐어요. 말할 수 있으면 상황을 알려 주세요.",
+    "scriptHash": "5766fa6fbcaee7241fa12b5a6adea6fbdc494e1101b0237a0b6c8f6796efbb72",
+    "file": "5766fa6fbcaee724.mp3",
+    "path": "/guidance-audio/5766fa6fbcaee724.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "SC01/auto_connected",
+      "SC03/unanswered_connected"
+    ],
+    "duration": 4.56,
+    "bytes": 111011,
+    "audioHash": "2c5c5278f20e67d049a1ecabebc12d3cb592770fb5cc2ee3a85df5e9984124e2",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:37:43.904Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "구호 접수가 확인됐어요. 말할 수 있으면 응답해 주세요.",
+    "scriptHash": "f6f510ce65f5208275266e7d345e8b6c9e657c2a2b9c9650a78a8f840c72fc60",
+    "file": "f6f510ce65f52082.mp3",
+    "path": "/guidance-audio/f6f510ce65f52082.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "SC01/auto_received",
+      "SC03/unanswered_received"
+    ],
+    "duration": 3.92,
+    "bytes": 95964,
+    "audioHash": "a2aa9649b016cfe78c897b605faf50bf7e7c4d48a4c7f70d1be6409456fa0ab2",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:37:44.636Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "구조대 인계가 끝났어요. 구조대의 안내를 따라 주세요.",
+    "scriptHash": "6b5f20cc241cdadd91dc619d756923358201ac8c046460e0b635de0db2af21e5",
+    "file": "6b5f20cc241cdadd.mp3",
+    "path": "/guidance-audio/6b5f20cc241cdadd.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "SC01/auto_handoff",
+      "SC03/handoff",
+      "SC03/unanswered_handoff"
+    ],
+    "duration": 3.92,
+    "bytes": 95964,
+    "audioHash": "509007f94b428978613f008ee497b7b28f8ab18a9aaf2b533c3ebdbab50144a0",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:37:45.389Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "차를 직접 옮기지 말고 차량 지원을 요청하세요.",
+    "scriptHash": "9d2765e6f460ccce2fe344342d205d7531ae729bb59d0f2e01967bbd6f2939e2",
+    "file": "9d2765e6f460ccce.mp3",
+    "path": "/guidance-audio/9d2765e6f460ccce.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "SC02/initial"
+    ],
+    "duration": 3.52,
+    "bytes": 85933,
+    "audioHash": "4b6355ea7902c26680ee1bc9b6b34f434552ae87707cf85f414c30c34d92a8b7",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:37:45.682Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "요청할 내용을 확인해 주세요.",
+    "scriptHash": "8d3229cd86d3d1c5658f42fb0af7981ca18d8acb0d5d2cc21b36d9f9175e20ac",
+    "file": "8d3229cd86d3d1c5.mp3",
+    "path": "/guidance-audio/8d3229cd86d3d1c5.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "SC02/review"
+    ],
+    "duration": 2.08,
+    "bytes": 51452,
+    "audioHash": "53ec6636062c08c7b09de6a11812b8d928fe8f380e9571d03476e2947c4f2341",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:37:45.740Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "차량 지원을 요청하고 있어요.",
+    "scriptHash": "c399268fe2f37b0b00c9799199e67bf0c9afb57285d29b1e1a4e2e3dc6e12d50",
+    "file": "c399268fe2f37b0b.mp3",
+    "path": "/guidance-audio/c399268fe2f37b0b.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "SC02/sending"
+    ],
+    "duration": 2,
+    "bytes": 49547,
+    "audioHash": "1cd84afb834c89ea8258602c1a6e9208e2bd3bcffea704422f664a0a659841b0",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:37:46.397Z",
+    "postProcess": {
+      "edgeFadeMs": 5,
+      "reason": "first or last 1 ms peaked above -60 dBFS (-80.7 / -29.9)",
+      "encoder": "libmp3lame 192 kbps CBR, 44.1 kHz mono",
+      "sourceAudioHash": "3af3d055895bb04a0a41df57f0abd9137adc9fd83e4b37b3658cf06525999896",
+      "sourceBytes": 49571
+    }
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "요청을 보내지 못했어요. 내용을 확인하고 다시 요청해 주세요.",
+    "scriptHash": "6d58de9eb708a18165e8cc5961b84fe1309e8783ac01eb01346411aa8305f71e",
+    "file": "6d58de9eb708a181.mp3",
+    "path": "/guidance-audio/6d58de9eb708a181.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "SC02/failed"
+    ],
+    "duration": 4.4,
+    "bytes": 107249,
+    "audioHash": "f67acb26b2b3becad683e6160d8667c15de5d7d7f8376ccc20798e0d92b4ee03",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:37:47.287Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "차량 지원 요청을 보냈어요. 접수 여부는 아직 확인 중이에요.",
+    "scriptHash": "59f03c83331c2d308814c871c35f52eeabd83daf0c673e04704a605732e3cd5b",
+    "file": "59f03c83331c2d30.mp3",
+    "path": "/guidance-audio/59f03c83331c2d30.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "SC02/waiting"
+    ],
+    "duration": 4.32,
+    "bytes": 105368,
+    "audioHash": "95e53104f846b36590fa2dfcf8afa996c05ff1ba1e09bd489a81383e7da0fa79",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:37:47.481Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "기존 요청을 확인하고 있어요. 같은 요청을 다시 보내지 않아요.",
+    "scriptHash": "007a6e3ee0d3e09776325735cd52756b77b6de2924b03a82cdc7d78b2b398752",
+    "file": "007a6e3ee0d3e097.mp3",
+    "path": "/guidance-audio/007a6e3ee0d3e097.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "SC02/checking"
+    ],
+    "duration": 4.48,
+    "bytes": 109130,
+    "audioHash": "0770286509051ac00be21cae6e4e802fea66786d1546ad8de5adbf0fed69d748",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:08:06.757Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "기억나는 내용을 남겨 주세요. 사고 위치와 경위 중 확실한 것만 적어도 괜찮아요.",
+    "scriptHash": "e9d104b8b52404841bd78c1da6a449a83bc1a64e53a7d7fe85214889529a5982",
+    "file": "e9d104b8b5240484.mp3",
+    "path": "/guidance-audio/e9d104b8b5240484.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "SC02/record"
+    ],
+    "duration": 5.84,
+    "bytes": 141731,
+    "audioHash": "2072ed32d7a787b1e7191ef66f32cf20f3b9b84268e76146c179fda30cca8bd1",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:37:48.284Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "사고 기록을 이 기기에 저장했어요. 아직 아무 곳에도 보내지 않았어요.",
+    "scriptHash": "85a73db6dd5968d79bbe5bc5b27fa48525e020d1e056ac66c4c656398944ce79",
+    "file": "85a73db6dd5968d7.mp3",
+    "path": "/guidance-audio/85a73db6dd5968d7.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "SC02/record_saved"
+    ],
+    "duration": 4.8,
+    "bytes": 116653,
+    "audioHash": "3ed229aba227fc82a0e02b9454a99ec0ab21ee113552b2d8ae6d140ab4a25ec7",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:37:49.016Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "차량 지원 접수가 확인됐어요. 현장 도착은 아직 확인되지 않았어요.",
+    "scriptHash": "9c86b740763759ba231b98dc5a8a53140020b6a30f547445dcdb63a1c023a5a8",
+    "file": "9c86b740763759ba.mp3",
+    "path": "/guidance-audio/9c86b740763759ba.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "SC02/received"
+    ],
+    "duration": 4.8,
+    "bytes": 116653,
+    "audioHash": "5e23ff8d2f1ed1e856c7b8950dc8a1a5309dea70548160d157ee3b155b07ca46",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:08:08.541Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "차량 지원이 도착했어요. 사고 기록과 보험 요청은 그대로 남아 있어요.",
+    "scriptHash": "6297d90b6d3dcbe409495ac6f458603c35c616d4d010a93333fb7f47d915df62",
+    "file": "6297d90b6d3dcbe4.mp3",
+    "path": "/guidance-audio/6297d90b6d3dcbe4.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "SC02/arrived"
+    ],
+    "duration": 5.04,
+    "bytes": 122296,
+    "audioHash": "d8ea5b5231fbae0828ff27f3248a518ee61bba122e9fc05063d565a1c09173c7",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:37:49.247Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "응답이 없으면 10초 후 119에 연결해요. 응답할 수 있으면 지금 연결하거나 취소하세요.",
+    "scriptHash": "a2773467969573ccae11ff84a925396166f04b2b875cf6e024a9a122dd2ad5ad",
+    "file": "a2773467969573cc.mp3",
+    "path": "/guidance-audio/a2773467969573cc.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "SC03/initial"
+    ],
+    "duration": 6.64,
+    "bytes": 161166,
+    "audioHash": "830c502b62174967a9fedea5fca9d6cf861c7cdd429dc6dbe41fbd5f69228af7",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:37:50.125Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "119에 연결하고 있어요. 다친 곳이 있으면 통화로 알려 주세요.",
+    "scriptHash": "19e417ee2a405e14e3197c71b9db4f441f7007c171cf9a0fe8d3644a78d9e7df",
+    "file": "19e417ee2a405e14.mp3",
+    "path": "/guidance-audio/19e417ee2a405e14.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "SC03/contact_unknown"
+    ],
+    "duration": 4.24,
+    "bytes": 103488,
+    "audioHash": "e44c5ed453500631e95399932b528986035bce5dce2e62c8c78538cb023af307",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:37:50.502Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "119와 통화가 연결됐어요. 다친 곳과 지금 상태를 알려 주세요.",
+    "scriptHash": "2ef10a9b39a840987c205668fd74bfef2c0d2ab069cb8f5575a785b1f110ff87",
+    "file": "2ef10a9b39a84098.mp3",
+    "path": "/guidance-audio/2ef10a9b39a84098.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "SC03/connected"
+    ],
+    "duration": 4.72,
+    "bytes": 114772,
+    "audioHash": "2de4a33fafafc2bd4c1b549c32fda9d5b5f120c851b31290d8f1ec9556a0489c",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:37:50.840Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "보낼 기록을 확인해 주세요. 잘못된 내용은 보내기 전에 고칠 수 있어요.",
+    "scriptHash": "4f4f151b9e844c4043315614b5f6fdaeabd6f28a9b9d6031d0996de9213cd99e",
+    "file": "4f4f151b9e844c40.mp3",
+    "path": "/guidance-audio/4f4f151b9e844c40.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "SC04/initial"
+    ],
+    "duration": 4.88,
+    "bytes": 118510,
+    "audioHash": "b12b8f7251bae9c33afde500c6c0b1b447f7b32926142c19e946e0a7a4726551",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:37:51.829Z",
+    "postProcess": {
+      "edgeFadeMs": 5,
+      "reason": "first or last 1 ms peaked above -60 dBFS (-80.3 / -59)",
+      "encoder": "libmp3lame 192 kbps CBR, 44.1 kHz mono",
+      "sourceAudioHash": "96b2600935922b5a822e66edcd6d44b54ee539228878cd212fef722fbabd0eaa",
+      "sourceBytes": 118534
+    }
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "사고 기록을 고쳐 주세요.",
+    "scriptHash": "cd4cad95a743a9bea37c82ac572c1da8a0d9baf9484e069899ee89b4ac2dc8fa",
+    "file": "cd4cad95a743a9be.mp3",
+    "path": "/guidance-audio/cd4cad95a743a9be.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "SC04/record"
+    ],
+    "duration": 1.84,
+    "bytes": 45809,
+    "audioHash": "791fae8b01c1d8975b7b55c90610c3fae36e15e32f23d1248b3552c9370164a2",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:37:51.532Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "보험사에 보낼 내용을 확인해 주세요.",
+    "scriptHash": "0b8f8abacd1b5e2581b3bcb986b8ced79c55eb5a6f7fa3461a33366d12bbab45",
+    "file": "0b8f8abacd1b5e25.mp3",
+    "path": "/guidance-audio/0b8f8abacd1b5e25.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "SC04/review"
+    ],
+    "duration": 2.4,
+    "bytes": 58951,
+    "audioHash": "9892017eb6852eb7873edada5cc6e24f88900b0e39b91e1a1e498c538e480b9b",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:37:51.920Z",
+    "postProcess": {
+      "edgeFadeMs": 5,
+      "reason": "first or last 1 ms peaked above -60 dBFS (-30.5 / -87)",
+      "encoder": "libmp3lame 192 kbps CBR, 44.1 kHz mono",
+      "sourceAudioHash": "4d728ebe7d1fb024374732421d3aa1657df9f06ea2158f9887f018ee2577c491",
+      "sourceBytes": 58975
+    }
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "전송을 보류했어요. 기록은 그대로 보관돼요. 구호와 차량 지원은 계속 진행돼요.",
+    "scriptHash": "ad68dbb258742ca9361748f0d73e9b30bff0f213eaa2dc0dacf3ded1eac3db80",
+    "file": "ad68dbb258742ca9.mp3",
+    "path": "/guidance-audio/ad68dbb258742ca9.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "SC04/deferred",
+      "SC04/support",
+      "SC04/paused"
+    ],
+    "duration": 6.24,
+    "bytes": 151135,
+    "audioHash": "34ad67a4c72e91dd1f10013929532bfb7b89bad64ee6877443a48783a3322939",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:37:53.308Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "보험사에 보내지 않았어요. 승인하지 않은 기록은 보내지 않아요. 다른 지원은 계속 진행돼요.",
+    "scriptHash": "96d6ea73b48c1353d9fb882f9de4947b2c0c90cee34b4910886f2179e0b545f7",
+    "file": "96d6ea73b48c1353.mp3",
+    "path": "/guidance-audio/96d6ea73b48c1353.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "SC04/declined"
+    ],
+    "duration": 7.12,
+    "bytes": 172451,
+    "audioHash": "4d10ed769b78de58891273b9842b9af7539d5b7c0f33901d33da8fc1968fb31b",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:37:53.878Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "보험사에 기록을 보내고 있어요.",
+    "scriptHash": "fafaf59f4983f0f03aebaa4a3919059d0afd5f49ee2c3b7ece4c9f4459a0fdf9",
+    "file": "fafaf59f4983f0f0.mp3",
+    "path": "/guidance-audio/fafaf59f4983f0f0.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "SC04/sending"
+    ],
+    "duration": 2.16,
+    "bytes": 53332,
+    "audioHash": "5ab6be4b8f261e4d9ecc63bd3a77959bcba4d363819751f75b103ed0ca721448",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:37:53.060Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "기록을 보내지 못했어요. 보낼 내용을 확인하고 다시 승인해 주세요.",
+    "scriptHash": "f4f770d0e7ed007a860a6c995328c74768baec4da8393359f7397a002a461021",
+    "file": "f4f770d0e7ed007a.mp3",
+    "path": "/guidance-audio/f4f770d0e7ed007a.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "SC04/failed"
+    ],
+    "duration": 4.64,
+    "bytes": 112892,
+    "audioHash": "030ebca2dce634dbeb6410f02dd4a98371a1fff95844e357a6f28e28d0350e11",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:37:54.704Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "보험사에 기록을 보냈어요. 접수 여부는 아직 확인 전이에요.",
+    "scriptHash": "e67fcda12c003487b55f929e5bdf494a49bd333477eef0e87a48706d43a3040c",
+    "file": "e67fcda12c003487.mp3",
+    "path": "/guidance-audio/e67fcda12c003487.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "SC04/sent"
+    ],
+    "duration": 4.4,
+    "bytes": 107249,
+    "audioHash": "c22f7c44b5e6592f078aeb270d47b1f43aece8aabae23bf296d411e9742f4f9c",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:37:55.022Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "보험사 접수 여부를 확인하고 있어요.",
+    "scriptHash": "4f308960020ea0703b7866ac17aad231bdfcc9cfd2526a6f91aa8eeaeafc5543",
+    "file": "4f308960020ea070.mp3",
+    "path": "/guidance-audio/4f308960020ea070.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "SC04/checking"
+    ],
+    "duration": 2.4,
+    "bytes": 58975,
+    "audioHash": "1740da5f2c36df5380388e6a54a637508dac44d79d4350f619d47e1fc11241b5",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:37:55.127Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "보험사 접수가 확인됐어요. 보상 절차는 보험사 안내를 따라 주세요.",
+    "scriptHash": "66d3ad8f58d9d07f621c2a7a8c242020155e0033d441b72b5499baee95b4b21e",
+    "file": "66d3ad8f58d9d07f.mp3",
+    "path": "/guidance-audio/66d3ad8f58d9d07f.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "SC04/received"
+    ],
+    "duration": 4.8,
+    "bytes": 116653,
+    "audioHash": "3e970a941e033348883a607bd94eec331060cf5db9314500277bcb3c0d3f17d8",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:37:56.460Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "차량 지원 접수는 아직 확인 전이에요. 구호는 접수됐고, 보험사에는 아직 요청하지 않았어요.",
+    "scriptHash": "066d2d75d677ca9e6f19c238274a8e2cb53f79a5ce6a04fb81f380dcd95dceb0",
+    "file": "066d2d75d677ca9e.mp3",
+    "path": "/guidance-audio/066d2d75d677ca9e.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "SC05/initial"
+    ],
+    "duration": 6.8,
+    "bytes": 164928,
+    "audioHash": "bf90fcb041b36d53429dd5318c8d96d0f4605180d589becf0fe1c1bb3f6a5964",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:37:57.097Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "차량 지원 접수 결과를 확인하고 있어요. 새로 요청하지는 않았어요.",
+    "scriptHash": "3e9fd714a4de5eb1cb5b23395fbda6c04031cadb86d1e7e9bb4814e79806e62d",
+    "file": "3e9fd714a4de5eb1.mp3",
+    "path": "/guidance-audio/3e9fd714a4de5eb1.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "SC05/checking"
+    ],
+    "duration": 4.56,
+    "bytes": 111011,
+    "audioHash": "4340cdddd59be0854ac3b8967c58557b2296360a9a66505f6cfc9070cc64096d",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:37:56.869Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "차량 지원이 접수됐어요. 보험사에는 아직 요청하지 않았어요.",
+    "scriptHash": "3d81ab1c960091688509542011295da466680c1552c99766c5eaf37272961dc2",
+    "file": "3d81ab1c96009168.mp3",
+    "path": "/guidance-audio/3d81ab1c96009168.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "SC05/received"
+    ],
+    "duration": 4.4,
+    "bytes": 107249,
+    "audioHash": "f58b5fea22904b01e5f8628e359a3d00e9c6217e47dd96f164eb0334dff2515f",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:37:58.065Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "여기서 잠시 멈췄어요. 기존 요청은 계속 진행돼요. 돌아오면 결과부터 확인해요.",
+    "scriptHash": "2bb1a8f229da750b2956b3c9575ffc8cdd3be2e443c3ec666cfe38a31561aafc",
+    "file": "2bb1a8f229da750b.mp3",
+    "path": "/guidance-audio/2bb1a8f229da750b.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "SC05/suspended"
+    ],
+    "duration": 6.48,
+    "bytes": 157404,
+    "audioHash": "3142df62f863a22ea41e8253ef5581830de134debb79cc7fb96a322dbc5110c4",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:08:24.290Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "접수 결과를 불러오지 못했어요. 보낸 요청은 그대로 있어요.",
+    "scriptHash": "f297b0eb314bcbb671ab9fd415f97d006b679d168ccfea71c3a2fb9b573c7f2f",
+    "file": "f297b0eb314bcbb6.mp3",
+    "path": "/guidance-audio/f297b0eb314bcbb6.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "SC05/lookup_failed"
+    ],
+    "duration": 4.24,
+    "bytes": 103488,
+    "audioHash": "1b984a84335f671d7a698da8fddff07b98ec48df04194da5e984ef62f680f6f7",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:37:58.378Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "차량 지원이 접수되지 않았어요. 내용을 확인하고 다시 요청해 주세요.",
+    "scriptHash": "9937d1a2fddac363176c88c6db8875157864f390e12e6d961f648faedc4a4c87",
+    "file": "9937d1a2fddac363.mp3",
+    "path": "/guidance-audio/9937d1a2fddac363.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "SC05/not_received"
+    ],
+    "duration": 4.88,
+    "bytes": 118534,
+    "audioHash": "e7f9ab656551df70f9c5450b8f68e6461ad3cb743c92a963fb0d0a28e38976c7",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:37:58.871Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "다시 요청할 내용을 확인해 주세요. 바뀐 내용은 다시 승인해야 보낼 수 있어요.",
+    "scriptHash": "f5374a09617635b2c09628af5b26eef670bf4d7aac05cfd53edabff6d298b516",
+    "file": "f5374a09617635b2.mp3",
+    "path": "/guidance-audio/f5374a09617635b2.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "SC05/review"
+    ],
+    "duration": 5.28,
+    "bytes": 128565,
+    "audioHash": "95fb23cca522f0c0446496a3ce1e4636043197bf792e3ad5eb15b77fa5d3ddf1",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:37:59.977Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "차량 지원을 다시 요청하고 있어요.",
+    "scriptHash": "aa0bb8413ac73d36a01f86afd50eee8fda18cf574716fa2a1356afe8263311a3",
+    "file": "aa0bb8413ac73d36.mp3",
+    "path": "/guidance-audio/aa0bb8413ac73d36.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "SC05/sending"
+    ],
+    "duration": 2.4,
+    "bytes": 58975,
+    "audioHash": "07d6067a662f266226001e0874651908b040bc3d18cf2a5158fe5ad43e0ca8b5",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:37:59.521Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "요청을 보내지 못했어요. 보낼 내용을 다시 확인해 주세요.",
+    "scriptHash": "2d90358b7a6ece05c43b6c514470d6d1a91a59eb9cd4883dc636beac7c19aafa",
+    "file": "2d90358b7a6ece05.mp3",
+    "path": "/guidance-audio/2d90358b7a6ece05.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "SC05/send_failed"
+    ],
+    "duration": 4.16,
+    "bytes": 101607,
+    "audioHash": "06a5b0ddb84f99b9d78ac23a08caa0a6cb221646d425e81d670fdc23f0b69ef9",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:38:00.266Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "차량 지원이 현장에 도착했어요. 구조대 인계 상태도 함께 확인해 주세요.",
+    "scriptHash": "2a6dc90499d613fe89d528c5f2c7d99650227fba488c12f56bbbe9d47154b7ae",
+    "file": "2a6dc90499d613fe.mp3",
+    "path": "/guidance-audio/2a6dc90499d613fe.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "SC05/arrived"
+    ],
+    "duration": 4.8,
+    "bytes": 116653,
+    "audioHash": "9fe62e168dc5f4482643c513ca2e193c62278ab456842349a9ce404c59ab96a4",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:38:01.354Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "구조대 인계가 끝났어요. 보험사에는 아직 요청하지 않았어요.",
+    "scriptHash": "1954124a5dcc52fd08cf285f3c75c5b85d80fc4531658e60148a22749b60fbd7",
+    "file": "1954124a5dcc52fd.mp3",
+    "path": "/guidance-audio/1954124a5dcc52fd.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "SC05/handoff"
+    ],
+    "duration": 4.24,
+    "bytes": 103488,
+    "audioHash": "afde58d3d7334a14fecbc4ad7a41a35da82aeca071495a2cb9fe96be88d943cd",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:38:01.557Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "차량에서 확인한 내용이에요. 확인된 정보와 아직 모르는 내용을 구분해요. 충격 정보만으로 차량 손상이나 이동 가능 여부를 판단하지 않아요.",
+    "scriptHash": "6854e2958943d985744e535c3ff2bab89939040ad3203a9f5819ea4a5f9cd430",
+    "file": "6854e2958943d985.mp3",
+    "path": "/guidance-audio/6854e2958943d985.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "journey/차량에서 확인한 내용"
+    ],
+    "duration": 10.24,
+    "bytes": 247056,
+    "audioHash": "dd16486a8bb48e28f15a82300399fcae77126f11720f65f5859c0dc7965df220",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:08:29.958Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "기억나는 내용을 말로 남겨주세요. 확실한 내용만 말해도 돼요. 말하기를 마친 뒤 내용을 확인하고 저장할 수 있어요.",
+    "scriptHash": "e7af40e571accdc77b1ac340d0a14b95a05df62aa0f5fcbef42b557c092bfd02",
+    "file": "e7af40e571accdc7.mp3",
+    "path": "/guidance-audio/e7af40e571accdc7.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "journey/기억나는 내용을 남겨주세요"
+    ],
+    "duration": 8.4,
+    "bytes": 203147,
+    "audioHash": "16d54de031a9d27cbc48c97f6fee65e0baf1d65a762b875e43c06fdb1e424a4b",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:08:30.409Z",
+    "postProcess": {
+      "edgeFadeMs": 5,
+      "reason": "first or last 1 ms peaked above -60 dBFS (-54.5 / -88)",
+      "encoder": "libmp3lame 192 kbps CBR, 44.1 kHz mono",
+      "sourceAudioHash": "842b3ca4aca0c11ec22bc592b6632e620e73ea5b0705304ce5b1141ed9fe2e46",
+      "sourceBytes": 203171
+    }
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "남긴 내용을 확인해주세요. 기억과 다른 내용은 저장 전에 고칠 수 있어요. 확인을 마쳤으면 기록 저장을 눌러주세요.",
+    "scriptHash": "8eb0969f13dc0196c5dcfcfcacb9cb68b71dc20d07b019482148406ef4deb8da",
+    "file": "8eb0969f13dc0196.mp3",
+    "path": "/guidance-audio/8eb0969f13dc0196.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "journey/이렇게 기록할까요?"
+    ],
+    "duration": 8.64,
+    "bytes": 208813,
+    "audioHash": "60c39cbc76d59f86340f7b4e072e0faa9d7f9a0c613b6252d25003ad22d35529",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:08:30.521Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "지금 남길 수 있는 사진만 선택해도 돼요. 사진을 확인한 뒤 저장해주세요. 안전하게 촬영할 수 없다면 건너뛰어도 돼요.",
+    "scriptHash": "0cda98bcb102aa5797a082cd0064f67fe1a4ff3041d2bf305c2c038160712523",
+    "file": "0cda98bcb102aa57.mp3",
+    "path": "/guidance-audio/0cda98bcb102aa57.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "journey/사진 남기기"
+    ],
+    "duration": 8.48,
+    "bytes": 205028,
+    "audioHash": "5eecdb3a1f7d402bfedf7501b26b6d0e4c0b834265fa2819b9fcf2f9c843aa2b",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:08:32.601Z",
+    "postProcess": {
+      "edgeFadeMs": 5,
+      "reason": "first or last 1 ms peaked above -60 dBFS (-55.3 / -88)",
+      "encoder": "libmp3lame 192 kbps CBR, 44.1 kHz mono",
+      "sourceAudioHash": "24ac9209754b5deabd1990b974439d82667daeb8add01280a7f212c49ccfe7e8",
+      "sourceBytes": 205052
+    }
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "남겨진 자료를 살펴보세요. 영상과 사고 도식, 경위서를 각각 확인할 수 있어요. 확인할 수 없는 내용은 그대로 남겨도 돼요.",
+    "scriptHash": "0afe85bba4e32baa36b1c84a5754bb6cf8b17905ab6bc8909015ef016b81cf6f",
+    "file": "0afe85bba4e32baa.mp3",
+    "path": "/guidance-audio/0afe85bba4e32baa.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "journey/남겨진 자료를 살펴보세요"
+    ],
+    "duration": 9.28,
+    "bytes": 224487,
+    "audioHash": "a71589569642d5fd6b5bbef4200a0b3860a022d554305c12755e19b29013be7e",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:08:32.888Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "보낼 범위를 직접 선택해주세요. 수신처와 보낼 내용을 확인한 뒤 요청할 수 있어요. 전송과 접수 확인은 별개예요.",
+    "scriptHash": "ce865a7bbb79f10bab0babb3eece91203cbcea1a18310f1322862d5c6e30ffaf",
+    "file": "ce865a7bbb79f10b.mp3",
+    "path": "/guidance-audio/ce865a7bbb79f10b.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "journey/보낼 범위를 직접 선택해주세요"
+    ],
+    "duration": 8.8,
+    "bytes": 212575,
+    "audioHash": "20791a791e71e49f759da627ccbdcf8619b38acdc6edbf5268fb7fb0e3f4b3ee",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:08:32.831Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "필요한 다음 일을 살펴보세요. 정비소와 이동 경로, 대차 여부를 따로 확인할 수 있어요. 미확인된 결과는 확인될 때까지 그대로 표시해요.",
+    "scriptHash": "c26504c1a1e30085b1fb16edf6971f35020c2ac6056243d63fbeb9f1707a31b4",
+    "file": "c26504c1a1e30085.mp3",
+    "path": "/guidance-audio/c26504c1a1e30085.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "journey/필요한 다음 일을 살펴보세요"
+    ],
+    "duration": 10,
+    "bytes": 241414,
+    "audioHash": "07943e5db3313f6657cab59728c655e8931444f7f0760d339223db26b5322fd8",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:08:35.320Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "기록을 이 기기에 저장하지 못했어요. 입력한 내용은 현재 화면에만 남아 있어요. 화면을 닫으면 사라져요.",
+    "scriptHash": "36ca20f656f0891f525f5b711cfe798a22a547ee2a5a64a6c911363e4a881a51",
+    "file": "36ca20f656f0891f.mp3",
+    "path": "/guidance-audio/36ca20f656f0891f.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "emergency/record_storage_failed"
+    ],
+    "duration": 7.84,
+    "bytes": 189981,
+    "audioHash": "d125d8ad1763cba15a7f81149cfde2b4a0b72aff9ef87e740d625d7368f2dda4",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:08:35.166Z",
+    "postProcess": {
+      "edgeFadeMs": 5,
+      "reason": "first or last 1 ms peaked above -60 dBFS (-80.2 / -52.1)",
+      "encoder": "libmp3lame 192 kbps CBR, 44.1 kHz mono",
+      "sourceAudioHash": "0544379e91a26c34383c709db91952cfb3f4b4b14d55951864c5b9939d5b729e",
+      "sourceBytes": 190005
+    }
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "전송을 보류했어요. 기록은 이 기기에 저장하지 못해 지금 화면에만 남아 있어요. 구호와 차량 지원은 계속 진행돼요.",
+    "scriptHash": "ea2c6da6322b521398c2643edc309940d32a5d12bf618e90a740b194d3c148e5",
+    "file": "ea2c6da6322b5213.mp3",
+    "path": "/guidance-audio/ea2c6da6322b5213.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "emergency/deferred_storage_failed"
+    ],
+    "duration": 8.56,
+    "bytes": 206932,
+    "audioHash": "7dd4f5f68f91ee0f6d74e7309cbd24caef3e01de648d3431755ecd2d3605f6a9",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:38:02.645Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "보험사 접수는 아직 확인되지 않았어요. 구호와 차량 지원은 계속 진행돼요.",
+    "scriptHash": "3981d83b5f4e37f76d7f81d94d70d1822779cd15b4da0ab0ac727d7a44ebf5b3",
+    "file": "3981d83b5f4e37f7.mp3",
+    "path": "/guidance-audio/3981d83b5f4e37f7.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "emergency/insurance_unconfirmed"
+    ],
+    "duration": 5.36,
+    "bytes": 130446,
+    "audioHash": "0dc21ffa211ae3374edb5e362a46822626c6d40709523061c3f4bc69d54cb14e",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:38:03.132Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "보험사에 접수되지 않았어요. 다시 보내려면 보낼 내용을 확인하고 다시 승인해 주세요. 구호와 차량 지원은 계속 진행돼요.",
+    "scriptHash": "4c65a2718900a1b02c2f4efc836926ef7465f05f8fc10539d4e7ff0088953dc1",
+    "file": "4c65a2718900a1b0.mp3",
+    "path": "/guidance-audio/4c65a2718900a1b0.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "emergency/insurance_not_received"
+    ],
+    "duration": 8.72,
+    "bytes": 210694,
+    "audioHash": "fdf1d28054b821ecd9f10be0288236bcbb95abee77f6c85a11bb313a7b701b5d",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:38:04.093Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "괜찮으세요? 충돌을 감지했어요. 다친 사람이 있으면 119 전화 화면을 열 수 있어요.",
+    "scriptHash": "19e351040fe5fa29b3b664e50c9462ec10c5c4e408bb5a733c60f8d59c8ba5c2",
+    "file": "19e351040fe5fa29.mp3",
+    "path": "/guidance-audio/19e351040fe5fa29.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "journey-flow/situation"
+    ],
+    "duration": 6.4,
+    "bytes": 154896,
+    "audioHash": "252e477be2d848028665fa03a0fb398bd5daf46c37863e370526c5a350e1dfad",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T16:59:42.358Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "괜찮으세요? 에어백 전개 신호가 왔어요. 다친 사람이 있는지 먼저 확인해 주세요.",
+    "scriptHash": "13ba79c89df8e345fdbdabdd3decdf49331249cd7e4cf77d019ece8760eab136",
+    "file": "13ba79c89df8e345.mp3",
+    "path": "/guidance-audio/13ba79c89df8e345.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "journey-flow/situation-airbag"
+    ],
+    "duration": 5.6,
+    "bytes": 136088,
+    "audioHash": "c3c2d77ea13ed70a73623ecbc9a97fb7f1e9b1418d5ac08ca1341e561d0e731e",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T16:59:42.106Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "119에 연결할 수 있어요. 다친 사람은 억지로 움직이지 말고, 불이나 연기가 보이면 차에서 멀리 떨어지세요.",
+    "scriptHash": "2b3be4779950387f8660de6b0e65cfc28f5e463615e18b40653d9dc751c250bb",
+    "file": "2b3be4779950387f.mp3",
+    "path": "/guidance-audio/2b3be4779950387f.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "journey-flow/emergency"
+    ],
+    "duration": 7.76,
+    "bytes": 188124,
+    "audioHash": "59fe844de01d2d62003c4d91fe1b66895d0bd3e14a66abfc153ff3da513b616d",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T08:19:55.778Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "119 전화 화면을 열었어요. 실제 발신과 구호 접수는 확인되지 않았어요. 전화 앱에서 직접 연결해 주세요.",
+    "scriptHash": "e8456282a2fd195bb7643fa57706bca3e720919dc01d303f3661d48a24b6d5a7",
+    "file": "e8456282a2fd195b.mp3",
+    "path": "/guidance-audio/e8456282a2fd195b.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "journey-flow/calling"
+    ],
+    "duration": 8.16,
+    "bytes": 197528,
+    "audioHash": "a6d5bf5e65158c2a5aed693b80e14ceb852dec3313ba3f2078e0997af3578934",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T16:59:42.621Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "119와 통화 중이에요. 구호 접수 여부는 통화에서 직접 확인해 주세요.",
+    "scriptHash": "075001994216d44c63038cb10046dc9428c6ea67ab1908f5d9050d578d43c86e",
+    "file": "075001994216d44c.mp3",
+    "path": "/guidance-audio/075001994216d44c.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "journey-flow/call"
+    ],
+    "duration": 4.88,
+    "bytes": 118534,
+    "audioHash": "74152d28aeaaa0f56dc05d093e5afc182256c0d3f709cf0bb951830025a0be83",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-15T05:32:45.244Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "119 통화가 끝났어요. 도움이 더 필요하면 119 전화 화면을 다시 열 수 있어요.",
+    "scriptHash": "2d2244dec3fc219cf5659f094466d94e9d617f079b529deae5fe8537f305a99b",
+    "file": "2d2244dec3fc219c.mp3",
+    "path": "/guidance-audio/2d2244dec3fc219c.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "journey-flow/call-ended"
+    ],
+    "duration": 5.92,
+    "bytes": 143612,
+    "audioHash": "3d1705b3de98fcea1b86b1c622d6a360bdcadccbf106f3b3b3c2ca47f98c4332",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-15T05:32:45.467Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "안전한 곳으로 이동하세요. 차가 다니지 않는 곳으로 피하고, 할 수 있는 것부터 하나씩 해 주세요.",
+    "scriptHash": "44feb051ccdb7e072d276ea599b4aa6e3b9bb923b320ca1e7a95dc998d87c42e",
+    "file": "44feb051ccdb7e07.mp3",
+    "path": "/guidance-audio/44feb051ccdb7e07.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "journey-flow/move"
+    ],
+    "duration": 6.56,
+    "bytes": 159285,
+    "audioHash": "d969f0429ff010ffced80b7b3797de6950e1d2601ea6ce07217394b6496bc3e2",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:40:51.613Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "비상등을 켜세요. 뒤에서 오는 차가 알아볼 수 있게 해 주세요.",
+    "scriptHash": "813d8b04cdd831fa48176002c0f15066ea5d088bf1f3c7dd70ac8d97368a6e79",
+    "file": "813d8b04cdd831fa.mp3",
+    "path": "/guidance-audio/813d8b04cdd831fa.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "journey-flow/hazard"
+    ],
+    "duration": 4,
+    "bytes": 97845,
+    "audioHash": "7b3d918d2226881ab56346b9657923f8034fe2c57fa037991cb5edf02956438f",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T16:59:44.813Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "트렁크를 열어 주세요. 안전하게 열 수 있을 때만 진행하고 차도로 나가지 마세요.",
+    "scriptHash": "6af6336549d2c4248a18be93e8da1577db3d84867fe42f054adcb4930234b7d1",
+    "file": "6af6336549d2c424.mp3",
+    "path": "/guidance-audio/6af6336549d2c424.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "journey-flow/trunk"
+    ],
+    "duration": 5.76,
+    "bytes": 139850,
+    "audioHash": "67eca12dc1821e798adf7bd16e367c477681231986c005c63ac41fc441d027ad",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T16:59:47.239Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "안전하게 나갈 수 있다면 휴대폰을 챙겨 가드레일 밖으로 대피하세요. 이동이 위험하면 무리하지 마세요.",
+    "scriptHash": "7a0189fad8c77a86e51501b1b93b2d29563c802d4b6d6c54e4d32fb06ad13496",
+    "file": "7a0189fad8c77a86.mp3",
+    "path": "/guidance-audio/7a0189fad8c77a86.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "journey-flow/safe-arrival"
+    ],
+    "duration": 7.2,
+    "bytes": 174332,
+    "audioHash": "4437f832c9ed0d19aab35facffc5a577ce92aef41c51c84a4f7972bcd96469ee",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T16:59:47.287Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "주변을 다시 살펴보세요. 차 주변이 안전한지 먼저 확인해 주세요. 남기던 기록은 그대로 있어요.",
+    "scriptHash": "f9d45f7bfa26e2c9fd191560fbb493d5e84d968a4e8dcd199512081e6972041a",
+    "file": "f9d45f7bfa26e2c9.mp3",
+    "path": "/guidance-audio/f9d45f7bfa26e2c9.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "journey-flow/risk-check"
+    ],
+    "duration": 7.36,
+    "bytes": 178093,
+    "audioHash": "4ccd1f73f9090082b3a1eab721c296fb31d7b5be2e8437435ec017f0227c15df",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T08:55:09.992Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "안전한 곳에 있다면, 기억나는 내용을 남겨 둘 수 있어요. 말이나 사진으로 편하게 남겨 주세요.",
+    "scriptHash": "991028f6bfc59f1c86740d865a3c17bee85724099b428d4cc73bcf0debe1c6e3",
+    "file": "991028f6bfc59f1c.mp3",
+    "path": "/guidance-audio/991028f6bfc59f1c.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "journey-flow/ready"
+    ],
+    "duration": 6.4,
+    "bytes": 154896,
+    "audioHash": "dc9616243b708391642c53599a61a4d2d3a4ef283f224db51100ccfc01527b64",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:40:51.955Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "어떻게 부딪혔나요? 말로 하거나 사진을 찍어 두세요. 지금 어려우면 나중에 해도 돼요.",
+    "scriptHash": "2257c92cfcd48c09a10554c8ef2db0f6e3b422dd81122a778896096ffe4a06b3",
+    "file": "2257c92cfcd48c09.mp3",
+    "path": "/guidance-audio/2257c92cfcd48c09.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "journey-flow/record-empty"
+    ],
+    "duration": 6.32,
+    "bytes": 153016,
+    "audioHash": "ab8b255f51077dba26e86164cb384a08c5614548b92b9f50f3388474b888f44c",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T13:37:22.288Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "보험사에 보낼 내용을 확인하세요. 받는 곳과 보낼 자료는 직접 고를 수 있어요.",
+    "scriptHash": "b70f5a5963db1ab6efa8293f07ff5537ecb9cfe269ee5b1a14d1ef754a045bd5",
+    "file": "b70f5a5963db1ab6.mp3",
+    "path": "/guidance-audio/b70f5a5963db1ab6.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "journey-flow/review"
+    ],
+    "duration": 5.68,
+    "bytes": 137969,
+    "audioHash": "22e99945eb693c97cd30f74227b754f78993c8727644a0a8d4a8d3377a483f55",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:40:53.303Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "보내지 못했어요. 기록은 그대로 있고, 승인한 내용 그대로 다시 보낼 수 있어요.",
+    "scriptHash": "05ff77fdc08f06acfc37b4c8532857c0553627f490c1aec20d67b47fb7a12b03",
+    "file": "05ff77fdc08f06ac.mp3",
+    "path": "/guidance-audio/05ff77fdc08f06ac.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "journey-flow/review-failed"
+    ],
+    "duration": 5.68,
+    "bytes": 137969,
+    "audioHash": "f53c079843c652fbf22b7f94225e6eaff930768e7797447aec41a4d6d80bac3f",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T06:40:53.706Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "보험사에 보내지 않기로 했어요. 남긴 기록은 그대로 있고, 나중에 다시 보낼 수 있어요.",
+    "scriptHash": "b99470b4fa263063a878cbb8448da0cc554e981a7de6fb231692f7e90a96851d",
+    "file": "b99470b4fa263063.mp3",
+    "path": "/guidance-audio/b99470b4fa263063.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "journey-flow/review-declined"
+    ],
+    "duration": 5.92,
+    "bytes": 143612,
+    "audioHash": "f50bef70b9bbe9b00d44814a81aca17cc0e014c6ada9cdb8d90a833903b86b9b",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-14T08:55:09.852Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "전송을 마쳤어요. 예시 전송이라 실제 보험사에는 보내지 않았어요.",
+    "scriptHash": "066346ac52fa324ddc62001c0baa6d00bc480b4fc8f3790be782f2f02d7b42df",
+    "file": "066346ac52fa324d.mp3",
+    "path": "/guidance-audio/066346ac52fa324d.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "journey-flow/sent"
+    ],
+    "duration": 6.08,
+    "bytes": 147373,
+    "audioHash": "b386a3c59e989150ca9a404f30957acf0d281d77751a739452a587bd00d81a28",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-15T05:32:45.407Z"
+  },
+  {
+    "voiceId": "gJSDQIpSQ56NBGhorBfg",
+    "voiceName": "David - Calm, Steady and Clear",
+    "model": "eleven_v4",
+    "script": "접수번호를 받았어요. 예시 접수번호예요. 확인한 뒤 다음 할 일을 살펴보세요.",
+    "scriptHash": "995603c47829939a931085a398c8301e9068643ff03f46bd12d4968a0fa02f9a",
+    "file": "995603c47829939a.mp3",
+    "path": "/guidance-audio/995603c47829939a.mp3",
+    "voiceSettings": {
+      "stability": 0.65,
+      "similarity_boost": 0.8,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "sources": [
+      "journey-flow/received"
+    ],
+    "duration": 6.8,
+    "bytes": 164904,
+    "audioHash": "7e9eb6b2e2cc46545cc2a8c91a10be82bad95b077b2a40c75922ba951ab7a58a",
+    "payloadEncoding": "UTF-8 JSON file",
+    "generatedAt": "2026-11-15T05:32:47.336Z",
+    "postProcess": {
+      "edgeFadeMs": 5,
+      "reason": "first or last 1 ms peaked above -60 dBFS (-45.7 / -89.4)",
+      "encoder": "libmp3lame 192 kbps CBR, 44.1 kHz mono",
+      "sourceAudioHash": "ee5304af62075964b575aea3d5d5bbd139096265a6473d40f61efa10534dcdc4",
+      "sourceBytes": 164928
+    }
+  }
+]

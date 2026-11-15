@@ -1,0 +1,15 @@
+.journey-voice { display: grid; gap: var(--ac-space-6); min-width: 0; }
+.journey-voice-listening { display: grid; justify-items: stretch; gap: var(--ac-space-6); }
+.journey-voice-meter { display: flex; justify-content: center; align-items: center; gap: 5px; height: 112px; padding: var(--ac-space-4); }
+
+.journey-voice-clock { text-align: center; font-size: var(--ac-type-section); font-variant-numeric: tabular-nums; }
+.journey-voice-clock span { color: var(--ac-muted); font-size: var(--ac-type-label); }
+.journey-voice-edit, .journey-voice-actions { display: grid; gap: var(--ac-space-3); }
+.journey-voice .journey-textarea { min-height: 180px; }
+.journey-voice-clip { min-width: 0; display: grid; gap: var(--ac-space-4); padding-block: var(--ac-space-6); border-block: 1px solid var(--ac-line); }
+.journey-voice-clip > div { display: flex; align-items: center; gap: var(--ac-space-3); font-size: var(--ac-type-supporting); }
+.journey-voice-clip > div > svg { flex: none; width: 22px; height: 22px; }
+.journey-voice-clip > div > span:last-child { margin-left: auto; color: var(--ac-muted); font-size: var(--ac-type-label); font-variant-numeric: tabular-nums; }
+.journey-voice-clip audio { width: 100%; min-width: 0; height: 48px; }
+.journey-voice-clip p, .journey-voice-message { font-size: var(--ac-type-supporting); color: var(--ac-muted); line-height: 1.6; overflow-wrap: anywhere; }
+.journey-voice .journey-text-action { justify-content: center; }

@@ -1,0 +1,139 @@
+import {expect,test,type Page} from '@playwright/test'
+import emergencyGuidance from '../src/audio/emergency-guidance.json' with { type: 'json' }
+import journeyGuidance from '../src/audio/journey-guidance.json' with { type: 'json' }
+import {journeyControl} from './helpers/journey-controls'
+
+declare global {interface Window { audioCalls:{src:string;paused:boolean;ended:boolean;fail:boolean}[]; audioFails:boolean; finishAudio:()=>void }}
+function fakeAudio(){
+  window.audioCalls=[];window.audioFails=false
+  class Playback extends EventTarget {
+    src:string;currentTime=0;preload='';record:{src:string;paused:boolean;ended:boolean;fail:boolean}
+    constructor(src=''){super();this.src=src;this.record={src,paused:false,ended:false,fail:window.audioFails};window.audioCalls.push(this.record);window.finishAudio=()=>{this.record.ended=true;this.dispatchEvent(new Event('ended'))}}
+    play(){if(this.record.fail)return Promise.reject(new Error('unavailable'));this.dispatchEvent(new Event('playing'));return Promise.resolve()}
+    pause(){this.record.paused=true} load(){} removeAttribute(){}
+  }
+  Object.defineProperty(window,'Audio',{value:Playback})
+}
+// Resuming the storyboard is a driver gesture that starts the scene's guidance again, like entering a new context.
+async function restartGuidance(page:Page){await page.getByRole('button',{name:'시연 일시 중단',exact:true}).click();await page.getByRole('button',{name:'시연 재개',exact:true}).click()}
+const guidanceState=(page:Page)=>page.locator('.emergency-screen [data-guidance-state]')
+test('guidance has no explicit voice button and starts with its context',async({page})=>{
+ await page.addInitScript(fakeAudio);await page.goto('/?study=emergency&scenario=SC01&scene=connected')
+ await expect(page.getByRole('button',{name:/음성 안내/})).toHaveCount(0)
+ await expect.poll(()=>page.evaluate(()=>window.audioCalls.length),'entering a scene speaks once').toBe(1)
+ await restartGuidance(page)
+ await expect.poll(()=>page.evaluate(()=>window.audioCalls.length)).toBe(2)
+ expect(await page.evaluate(()=>window.audioCalls.filter(a=>!a.paused&&!a.ended).length)).toBe(1)
+})
+for(const reason of ['scene','pagehide','hidden'] as const)test(`guidance stops on ${reason} and cannot overlap`,async({page})=>{
+ await page.addInitScript(fakeAudio);await page.goto('/?study=emergency&scenario=SC01&scene=connected')
+ await expect.poll(()=>page.evaluate(()=>window.audioCalls.length)).toBe(1)
+ expect(await page.evaluate(()=>window.audioCalls[0].src)).toMatch(/guidance-audio\/[^/]+\.mp3$/)
+ await expect(guidanceState(page)).toHaveAttribute('data-guidance-state','speaking')
+ if(reason==='scene')await page.getByRole('button',{name:'사고 기록 남기기',exact:true}).click()
+ if(reason==='pagehide')await page.evaluate(()=>window.dispatchEvent(new Event('pagehide')))
+ if(reason==='hidden')await page.evaluate(()=>{Object.defineProperty(document,'visibilityState',{configurable:true,value:'hidden'});document.dispatchEvent(new Event('visibilitychange'))})
+ expect(await page.evaluate(()=>window.audioCalls[0].paused)).toBe(true)
+ expect(await page.evaluate(()=>window.audioCalls.filter(a=>!a.paused&&!a.ended).length)).toBeLessThanOrEqual(1)
+})
+test('asset failure keeps script available and the next context replaces playback',async({page})=>{
+ await page.addInitScript(fakeAudio);await page.addInitScript(()=>{window.audioFails=true})
+ await page.goto('/?study=emergency&scenario=SC01&scene=connected')
+ await page.getByRole('button',{name:'현재 장면 spec',exact:true}).click()
+ const script=await page.locator('#emergency-spec h3').filter({hasText:'음성 원고'}).locator('+ p').innerText()
+ await expect(page.locator('.emergency-screen').getByRole('status')).toHaveText(`음성을 재생하지 못했어요. ${script}`)
+ await page.evaluate(()=>{window.audioFails=false});await restartGuidance(page)
+ await expect(guidanceState(page)).toHaveAttribute('data-guidance-state','speaking')
+ expect(await page.evaluate(()=>window.audioCalls.filter(a=>!a.paused&&!a.ended).length)).toBe(1)
+ await page.evaluate(()=>window.finishAudio());await expect(guidanceState(page)).toHaveAttribute('data-guidance-state','idle')
+})
+test('journey tasks use JaeGyu and stop when their retained panel becomes hidden',async({page})=>{
+ await page.addInitScript(fakeAudio);await page.goto('/?study=journey&fixture=partial-evidence')
+ const active=()=>page.evaluate(()=>window.audioCalls.filter(a=>!a.paused&&!a.ended).map(a=>a.src))
+ await page.getByRole('button',{name:'이 상황으로 시작',exact:true}).click();await page.getByRole('button',{name:'사고 기록 남기기',exact:true}).click()
+ await expect(page.locator('.journey-voice [data-guidance-state]')).toHaveAttribute('data-guidance-state','speaking')
+ const [record]=await active()
+ await page.getByRole('button',{name:'내용 확인으로',exact:true}).click()
+ await expect.poll(async()=>(await active()).filter(src=>src!==record).length).toBe(1)
+ expect(await active()).not.toContain(record)
+})
+test('switching send targets keeps one submission guidance playback',async({page})=>{
+ await page.addInitScript(fakeAudio);await page.goto('/?study=journey&fixture=immobile')
+ const button=(name:string)=>page.getByRole('button',{name,exact:true})
+ await button('이 상황으로 시작').click();await button('차량 지원 요청하기').click()
+ await (await journeyControl(page,'기록으로 돌아가기')).click()
+ await button('사진 남기기').click();await button('사진 없이 내용 확인').click()
+ await button('보낼 내용 확인').click()
+ // The asset path is resolved by the browser's Vite graph, like the runtime lookup.
+ const src=await page.evaluate(async text=>{const path='/src/audio/manifest.ts';const {guidanceAsset}=await import(path);return guidanceAsset(text)!.path},journeyGuidance['보낼 범위를 직접 선택해주세요'])
+ const calls=()=>page.evaluate(src=>window.audioCalls.filter(a=>a.src===src),src)
+ await expect.poll(async()=>(await calls()).length,'entering send review speaks once').toBe(1)
+ for(const target of ['차량 지원','상대방 공유','보험사 접수','차량 지원','상대방 공유']){
+  await button(target).click();await expect(button(target)).toHaveAttribute('aria-pressed','true')
+ }
+ await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))))
+ expect(await calls(),'target buttons neither restart nor cut the same guidance').toEqual([{src,paused:false,ended:false,fail:false}])
+})
+test('every scene, journey and runtime script has an exact static speech asset',async({page})=>{
+ await page.goto('/?study=design-system')
+ // Resolve through the browser's Vite graph to exercise the runtime lookup rather than a Node copy.
+ const result=await page.evaluate(async()=>{
+  const sessionPath='/src/emergency/session.ts',audioPath='/src/audio/manifest.ts',journeyPath='/src/audio/journey-guidance.json',variantsPath='/src/audio/emergency-guidance.json'
+  const {manifest}=await import(sessionPath);const {guidanceAsset}=await import(audioPath)
+  const journey=(await import(journeyPath)).default,variants=(await import(variantsPath)).default
+  const scripts=[...manifest.scenarios.flatMap((s:any)=>s.states.map((state:any)=>state.voice)),...Object.values(journey),...Object.values(variants)]
+  return scripts.filter(text=>!guidanceAsset(text))
+ });expect(result).toEqual([])
+})
+
+test('call spectrum pauses while the document is hidden',async({page})=>{
+ await page.goto('/?study=emergency&scenario=SC01&scene=connected')
+ const spectrum=page.locator('.ac-call-content .ac-spectrum')
+ await spectrum.scrollIntoViewIfNeeded();await expect(spectrum).toHaveAttribute('data-active','true')
+ await page.evaluate(()=>{Object.defineProperty(document,'visibilityState',{configurable:true,value:'hidden'});document.dispatchEvent(new Event('visibilitychange'))})
+ await expect(spectrum).toHaveAttribute('data-active','false')
+})
+
+test('browser decodes the actual JaeGyu asset and pausing the storyboard stops it',async({page})=>{
+ await page.addInitScript(()=>{const AudioClass=window.Audio;Object.defineProperty(window,'Audio',{value:class extends AudioClass{constructor(src?:string){super(src);Object.assign(window,{actualGuide:this})}}})})
+ await page.goto('/?study=emergency&scenario=SC01&scene=connected');await restartGuidance(page)
+ await expect.poll(()=>page.evaluate(()=>(window as typeof window&{actualGuide:HTMLAudioElement}).actualGuide.currentTime)).toBeGreaterThan(.1)
+ await page.getByRole('button',{name:'시연 일시 중단',exact:true}).click()
+ expect(await page.evaluate(()=>(window as typeof window&{actualGuide:HTMLAudioElement}).actualGuide.paused)).toBe(true)
+})
+
+for(const [id,text]of Object.entries(emergencyGuidance))test(`actual runtime asset ${id} has exact hashes and plays in the browser`,async({page})=>{
+ await page.addInitScript(()=>{
+  const AudioClass=window.Audio
+  Object.defineProperty(window,'Audio',{value:class extends AudioClass{constructor(src?:string){super(src);Object.assign(window,{actualGuide:this})}}})
+ })
+ const scene=id==='record_storage_failed'?'record_saved':id==='deferred_storage_failed'?'deferred':'support'
+ const scenario=id==='record_storage_failed'?'SC02':'SC04'
+ await page.goto(`/?study=emergency&scenario=${scenario}&scene=${scene}`)
+ // Seed the real versioned session, then let EmergencyStudy restore it and select the script.
+ await page.evaluate(async({id,scene,scenario})=>{
+  const path='/src/emergency/session.ts';const {createSession,storageKey}=await import(path)
+  const session=createSession(scenario,scene)
+  if(id==='insurance_unconfirmed')session.requests.insurance='unknown'
+  if(id==='insurance_not_received')session.requests.insurance='not_received'
+  localStorage.setItem(storageKey(scenario),JSON.stringify(session))
+ },{id,scene,scenario})
+ if(id.endsWith('storage_failed'))await page.addInitScript(()=>{Storage.prototype.setItem=()=>{throw new DOMException('Blocked','SecurityError')}})
+ await page.reload()
+ await expect(page.locator('.emergency-screen')).toContainText(text)
+ // Asset lookup and crypto run in the browser, where exact runtime text is the public lookup contract.
+ const asset=await page.evaluate(async text=>{
+  const path='/src/audio/manifest.ts';const {guidanceAsset}=await import(path)
+  const asset=guidanceAsset(text);if(!asset)return null
+  const digest=async(bytes:BufferSource)=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes))).map(value=>value.toString(16).padStart(2,'0')).join('')
+  const response=await fetch(asset.path);if(!response.ok)throw new Error(`Missing asset: ${asset.path}`)
+  return {scriptHash:asset.scriptHash,actualScriptHash:await digest(new TextEncoder().encode(text)),audioHash:asset.audioHash,actualAudioHash:await digest(await response.arrayBuffer()),duration:asset.duration}
+ },text)
+ expect(asset,`Required real JaeGyu asset missing for ${id}`).not.toBeNull()
+ expect(asset!.actualScriptHash).toBe(asset!.scriptHash);expect(asset!.actualAudioHash).toBe(asset!.audioHash)
+ expect(asset!.duration).toBeGreaterThan(0)
+ await restartGuidance(page)
+ await expect.poll(()=>page.evaluate(()=>(window as typeof window&{actualGuide:HTMLAudioElement}).actualGuide.currentTime)).toBeGreaterThan(.1)
+ await page.getByRole('button',{name:'시연 일시 중단',exact:true}).click()
+ expect(await page.evaluate(()=>(window as typeof window&{actualGuide:HTMLAudioElement}).actualGuide.paused)).toBe(true)
+})

@@ -1,0 +1,30 @@
+{
+  "voiceId": "gJSDQIpSQ56NBGhorBfg",
+  "voiceName": "David - Calm, Steady and Clear",
+  "model": "eleven_v4",
+  "script": "접수번호를 받았어요. 예시 접수번호예요. 확인한 뒤 다음 할 일을 살펴보세요.",
+  "scriptHash": "995603c47829939a931085a398c8301e9068643ff03f46bd12d4968a0fa02f9a",
+  "file": "995603c47829939a.mp3",
+  "path": "/guidance-audio/995603c47829939a.mp3",
+  "voiceSettings": {
+    "stability": 0.65,
+    "similarity_boost": 0.8,
+    "style": 0.05,
+    "use_speaker_boost": true
+  },
+  "sources": [
+    "journey-flow/received"
+  ],
+  "duration": 6.8,
+  "bytes": 164904,
+  "audioHash": "7e9eb6b2e2cc46545cc2a8c91a10be82bad95b077b2a40c75922ba951ab7a58a",
+  "payloadEncoding": "UTF-8 JSON file",
+  "generatedAt": "2026-11-15T05:32:47.336Z",
+  "postProcess": {
+    "edgeFadeMs": 5,
+    "reason": "first or last 1 ms peaked above -60 dBFS (-45.7 / -89.4)",
+    "encoder": "libmp3lame 192 kbps CBR, 44.1 kHz mono",
+    "sourceAudioHash": "ee5304af62075964b575aea3d5d5bbd139096265a6473d40f61efa10534dcdc4",
+    "sourceBytes": 164928
+  }
+}

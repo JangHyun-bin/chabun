@@ -1,0 +1,36 @@
+.journey-record-tabs.journey-review-tabs { grid-template-columns: repeat(auto-fit, minmax(min(100%, 6rem), 1fr)); }
+.journey-report { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ac-space-6); min-width: 0; }
+.journey-report:focus-visible, .journey-report-paragraph:focus-visible { outline: 2px solid var(--ac-text); outline-offset: 4px; }
+.journey-report-heading { display: flex; gap: var(--ac-space-3); align-items: flex-start; }
+.journey-report-heading > div { min-width: 0; }
+.journey-report-heading > svg { flex: none; width: 24px; height: 24px; margin-top: var(--ac-space-1); }
+.journey-report-heading h2 { font-size: var(--ac-type-section); line-height: 1.4; font-weight: 600; margin-bottom: var(--ac-space-3); }
+.journey-report-example { display: grid; justify-items: start; gap: var(--ac-space-3); margin-bottom: var(--ac-space-3); }
+.journey-review-example { display: grid; gap: var(--ac-space-3); }
+.journey-report-paragraph { display: grid; gap: var(--ac-space-4); min-width: 0; padding-block: var(--ac-space-6); border-block-start: 1px solid var(--ac-line); }
+.journey-report-meta { display: flex; flex-wrap: wrap; gap: var(--ac-space-2) var(--ac-space-4); font-size: var(--ac-type-label); color: var(--ac-muted); }
+.journey-report-text { font-size: var(--ac-type-body); line-height: 1.65; white-space: pre-wrap; overflow-wrap: anywhere; }
+.journey-report-tools { display: flex; flex-wrap: wrap; gap: var(--ac-space-2); }
+.journey-report-tools button { min-height: var(--ac-touch); padding: var(--ac-space-2) var(--ac-space-3); background: var(--ac-choice); color: var(--ac-text); border: 1px solid var(--ac-line); border-radius:var(--ac-radius-small); font: inherit; font-size: var(--ac-type-supporting); }
+.journey-report-editor { display: grid; gap: var(--ac-space-3); }
+.journey-report-editor label { display: grid; gap: var(--ac-space-3); font-size: var(--ac-type-supporting); }
+.journey-report-editor textarea { box-sizing: border-box; width: 100%; min-height: 160px; resize: vertical; padding: var(--ac-space-4); border: 1px solid var(--ac-line); border-radius:var(--ac-radius-control); background: var(--ac-control); color: var(--ac-text); font: inherit; line-height: 1.6; }
+.journey-report-editor .journey-report-reference-choice { display: flex; align-items: center; min-height: 48px; }
+.journey-report-reference-choice input { width: 24px; height: 24px; flex: none; accent-color: var(--ac-text); }
+.journey-report-original, .journey-report-candidate { font-size: var(--ac-type-supporting); color: var(--ac-muted); }
+.journey-report :is(summary) { min-height: 48px; padding-block: var(--ac-space-3); cursor: pointer; }
+.journey-report-original p { padding-block: var(--ac-space-3); white-space: pre-wrap; }
+.journey-report-candidate { padding: var(--ac-space-4); border: 1px solid var(--ac-line); border-radius:var(--ac-radius-control); }
+.journey-report-candidate > :not(summary) { margin-top: var(--ac-space-4); }
+.journey-report-candidate h3 { font-size: var(--ac-type-supporting); color: var(--ac-text); }
+.journey-report-error { font-size: var(--ac-type-supporting); color: var(--ac-muted); }
+.journey-report-drawer { box-sizing: border-box; position: fixed; inset: auto 0 0 auto; margin: 0; width: min(100%, 600px); max-width: 100%; height: min(90dvh, 1000px); max-height: 100%; overflow: auto; border: 1px solid var(--ac-line); border-radius: 24px 24px 0 0; padding: var(--ac-space-6); background: var(--ac-surface); color: var(--ac-text); font-size: var(--ac-type-body); word-break: keep-all; overflow-wrap: anywhere; }
+.journey-report-drawer::backdrop { background: var(--ac-scrim); }
+.ac-vehicle[data-presentation=pleos]>.ac-vehicle-content>.journey-report-drawer[data-hosted] { position: absolute; z-index: 20; inset: var(--ac-space-4) var(--ac-space-4) auto auto; width: min(100% - 2 * var(--ac-space-4), 760px); height: calc(100% - 2 * var(--ac-space-4)); max-height: none; border-radius: var(--ac-radius-card); overscroll-behavior: contain; box-shadow: 0 0 0 100vmax var(--ac-scrim); }
+.journey-report-drawer > header { display: flex; align-items: center; justify-content: space-between; gap: var(--ac-space-4); margin-bottom: var(--ac-space-6); }
+.journey-report-drawer h2 { font-size: var(--ac-type-section); }
+.journey-report-drawer > header button { flex: none; display: grid; place-items: center; width: 48px; height: 48px; background: var(--ac-control); border: 0; border-radius: 50%; color: var(--ac-text); }
+.journey-report-drawer > :not(header) { margin-bottom: var(--ac-space-6); }
+.journey-report-evidence { display: grid; gap: var(--ac-space-4); }
+.journey-report-evidence :is(img,audio) { width: 100%; max-width: 100%; border-radius:var(--ac-radius-small); }
+.journey-report-drawer :focus-visible { outline: 2px solid var(--ac-text); outline-offset: 4px; }

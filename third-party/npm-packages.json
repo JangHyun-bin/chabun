@@ -1,0 +1,1221 @@
+[
+  {
+    "package": "@babel/runtime",
+    "version": "8.1.0",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/@babel/runtime/LICENSE"
+    ]
+  },
+  {
+    "package": "@base-ui/react",
+    "version": "1.9.0",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/@base-ui/react/LICENSE"
+    ]
+  },
+  {
+    "package": "@base-ui/utils",
+    "version": "0.5.0",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/@base-ui/utils/LICENSE"
+    ]
+  },
+  {
+    "package": "@floating-ui/core",
+    "version": "1.8.0",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/@floating-ui/core/LICENSE"
+    ]
+  },
+  {
+    "package": "@floating-ui/dom",
+    "version": "1.8.0",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/@floating-ui/dom/LICENSE"
+    ]
+  },
+  {
+    "package": "@floating-ui/react-dom",
+    "version": "2.1.9",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/@floating-ui/react-dom/LICENSE"
+    ]
+  },
+  {
+    "package": "@floating-ui/utils",
+    "version": "0.2.12",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/@floating-ui/utils/LICENSE"
+    ]
+  },
+  {
+    "package": "@jridgewell/gen-mapping",
+    "version": "0.3.13",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/@jridgewell/gen-mapping/LICENSE"
+    ]
+  },
+  {
+    "package": "@jridgewell/remapping",
+    "version": "2.3.5",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/@jridgewell/remapping/LICENSE"
+    ]
+  },
+  {
+    "package": "@jridgewell/resolve-uri",
+    "version": "3.1.2",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/@jridgewell/resolve-uri/LICENSE"
+    ]
+  },
+  {
+    "package": "@jridgewell/sourcemap-codec",
+    "version": "1.6.0",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/@jridgewell/sourcemap-codec/LICENSE"
+    ]
+  },
+  {
+    "package": "@jridgewell/trace-mapping",
+    "version": "0.3.31",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/@jridgewell/trace-mapping/LICENSE"
+    ]
+  },
+  {
+    "package": "@number-flow/react",
+    "version": "0.6.2",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/@number-flow/react/LICENSE.md"
+    ]
+  },
+  {
+    "package": "@oxc-project/types",
+    "version": "0.156.0",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/@oxc-project/types/LICENSE"
+    ]
+  },
+  {
+    "package": "@playwright/test",
+    "version": "1.64.1",
+    "license": "Apache-2.0",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/@playwright/test/LICENSE",
+      "third-party/npm/@playwright/test/NOTICE"
+    ]
+  },
+  {
+    "package": "@radix-ui/react-compose-refs",
+    "version": "1.1.5",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/@radix-ui/react-compose-refs/LICENSE"
+    ]
+  },
+  {
+    "package": "@radix-ui/react-slot",
+    "version": "1.5.0",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/@radix-ui/react-slot/LICENSE"
+    ]
+  },
+  {
+    "package": "@rolldown/binding-android-arm-eabi",
+    "version": "1.2.16",
+    "license": "MIT",
+    "optional": true,
+    "notice": "not installed on this platform"
+  },
+  {
+    "package": "@rolldown/binding-android-arm64",
+    "version": "1.2.16",
+    "license": "MIT",
+    "optional": true,
+    "notice": "not installed on this platform"
+  },
+  {
+    "package": "@rolldown/binding-darwin-arm64",
+    "version": "1.2.16",
+    "license": "MIT",
+    "optional": true,
+    "notice_provenance": "Installed rolldown@1.2.16 LICENSE; same repository and version as the platform binding",
+    "notice_files": [
+      "third-party/npm/@rolldown/binding-darwin-arm64/LICENSE"
+    ]
+  },
+  {
+    "package": "@rolldown/binding-darwin-x64",
+    "version": "1.2.16",
+    "license": "MIT",
+    "optional": true,
+    "notice": "not installed on this platform"
+  },
+  {
+    "package": "@rolldown/binding-freebsd-x64",
+    "version": "1.2.16",
+    "license": "MIT",
+    "optional": true,
+    "notice": "not installed on this platform"
+  },
+  {
+    "package": "@rolldown/binding-linux-arm-gnueabihf",
+    "version": "1.2.16",
+    "license": "MIT",
+    "optional": true,
+    "notice": "not installed on this platform"
+  },
+  {
+    "package": "@rolldown/binding-linux-arm64-gnu",
+    "version": "1.2.16",
+    "license": "MIT",
+    "optional": true,
+    "notice": "not installed on this platform"
+  },
+  {
+    "package": "@rolldown/binding-linux-arm64-musl",
+    "version": "1.2.16",
+    "license": "MIT",
+    "optional": true,
+    "notice": "not installed on this platform"
+  },
+  {
+    "package": "@rolldown/binding-linux-ppc64-gnu",
+    "version": "1.2.16",
+    "license": "MIT",
+    "optional": true,
+    "notice": "not installed on this platform"
+  },
+  {
+    "package": "@rolldown/binding-linux-s390x-gnu",
+    "version": "1.2.16",
+    "license": "MIT",
+    "optional": true,
+    "notice": "not installed on this platform"
+  },
+  {
+    "package": "@rolldown/binding-linux-x64-gnu",
+    "version": "1.2.16",
+    "license": "MIT",
+    "optional": true,
+    "notice": "not installed on this platform"
+  },
+  {
+    "package": "@rolldown/binding-linux-x64-musl",
+    "version": "1.2.16",
+    "license": "MIT",
+    "optional": true,
+    "notice": "not installed on this platform"
+  },
+  {
+    "package": "@rolldown/binding-openharmony-arm64",
+    "version": "1.2.16",
+    "license": "MIT",
+    "optional": true,
+    "notice": "not installed on this platform"
+  },
+  {
+    "package": "@rolldown/binding-win32-arm64-msvc",
+    "version": "1.2.16",
+    "license": "MIT",
+    "optional": true,
+    "notice": "not installed on this platform"
+  },
+  {
+    "package": "@rolldown/binding-win32-x64-msvc",
+    "version": "1.2.16",
+    "license": "MIT",
+    "optional": true,
+    "notice": "not installed on this platform"
+  },
+  {
+    "package": "@rolldown/pluginutils",
+    "version": "1.0.1",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/@rolldown/pluginutils/LICENSE"
+    ]
+  },
+  {
+    "package": "@tailwindcss/node",
+    "version": "4.3.4",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/@tailwindcss/node/LICENSE"
+    ]
+  },
+  {
+    "package": "@tailwindcss/oxide",
+    "version": "4.3.4",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/@tailwindcss/oxide/LICENSE"
+    ]
+  },
+  {
+    "package": "@tailwindcss/oxide-android-arm64",
+    "version": "4.3.4",
+    "license": "MIT",
+    "optional": true,
+    "notice": "not installed on this platform"
+  },
+  {
+    "package": "@tailwindcss/oxide-darwin-arm64",
+    "version": "4.3.4",
+    "license": "MIT",
+    "optional": true,
+    "notice_files": [
+      "third-party/npm/@tailwindcss/oxide-darwin-arm64/LICENSE"
+    ]
+  },
+  {
+    "package": "@tailwindcss/oxide-darwin-x64",
+    "version": "4.3.4",
+    "license": "MIT",
+    "optional": true,
+    "notice": "not installed on this platform"
+  },
+  {
+    "package": "@tailwindcss/oxide-freebsd-x64",
+    "version": "4.3.4",
+    "license": "MIT",
+    "optional": true,
+    "notice": "not installed on this platform"
+  },
+  {
+    "package": "@tailwindcss/oxide-linux-arm-gnueabihf",
+    "version": "4.3.4",
+    "license": "MIT",
+    "optional": true,
+    "notice": "not installed on this platform"
+  },
+  {
+    "package": "@tailwindcss/oxide-linux-arm64-gnu",
+    "version": "4.3.4",
+    "license": "MIT",
+    "optional": true,
+    "notice": "not installed on this platform"
+  },
+  {
+    "package": "@tailwindcss/oxide-linux-arm64-musl",
+    "version": "4.3.4",
+    "license": "MIT",
+    "optional": true,
+    "notice": "not installed on this platform"
+  },
+  {
+    "package": "@tailwindcss/oxide-linux-x64-gnu",
+    "version": "4.3.4",
+    "license": "MIT",
+    "optional": true,
+    "notice": "not installed on this platform"
+  },
+  {
+    "package": "@tailwindcss/oxide-linux-x64-musl",
+    "version": "4.3.4",
+    "license": "MIT",
+    "optional": true,
+    "notice": "not installed on this platform"
+  },
+  {
+    "package": "@tailwindcss/oxide-wasm32-wasi",
+    "version": "4.3.4",
+    "license": "MIT",
+    "optional": true,
+    "notice_provenance": "Installed tailwindcss@4.3.4 LICENSE; same upstream repository and release version",
+    "notice_files": [
+      "third-party/npm/@tailwindcss/oxide-wasm32-wasi/LICENSE"
+    ]
+  },
+  {
+    "package": "@tailwindcss/oxide-wasm32-wasi/node_modules/@emnapi/core",
+    "version": "1.11.3",
+    "license": "MIT",
+    "optional": true,
+    "notice_files": [
+      "third-party/npm/@tailwindcss/oxide-wasm32-wasi/__nested__/@emnapi/core/LICENSE"
+    ]
+  },
+  {
+    "package": "@tailwindcss/oxide-wasm32-wasi/node_modules/@emnapi/runtime",
+    "version": "1.11.3",
+    "license": "MIT",
+    "optional": true,
+    "notice_files": [
+      "third-party/npm/@tailwindcss/oxide-wasm32-wasi/__nested__/@emnapi/runtime/LICENSE"
+    ]
+  },
+  {
+    "package": "@tailwindcss/oxide-wasm32-wasi/node_modules/@emnapi/wasi-threads",
+    "version": "1.2.3",
+    "license": "MIT",
+    "optional": true,
+    "notice_files": [
+      "third-party/npm/@tailwindcss/oxide-wasm32-wasi/__nested__/@emnapi/wasi-threads/LICENSE"
+    ]
+  },
+  {
+    "package": "@tailwindcss/oxide-wasm32-wasi/node_modules/@napi-rs/wasm-runtime",
+    "version": "1.2.2",
+    "license": "MIT",
+    "optional": true,
+    "notice_provenance": "https://github.com/napi-rs/napi-rs/blob/5b344c367eeed81d1917f7c4d8e65b1adc16de12/LICENSE (npm gitHead)",
+    "notice_files": [
+      "third-party/npm/@tailwindcss/oxide-wasm32-wasi/__nested__/@napi-rs/wasm-runtime/LICENSE"
+    ]
+  },
+  {
+    "package": "@tailwindcss/oxide-wasm32-wasi/node_modules/@tybys/wasm-util",
+    "version": "0.10.3",
+    "license": "MIT",
+    "optional": true,
+    "notice_provenance": "https://api.github.com/repos/toyobayashi/wasm-util/git/blobs/772a335c052c7df8835f91bf47bb1e2845ba201e; npm 0.10.3 declares MIT, upstream published gitHead unavailable, preserved current upstream notice",
+    "notice_files": [
+      "third-party/npm/@tailwindcss/oxide-wasm32-wasi/__nested__/@tybys/wasm-util/LICENSE"
+    ]
+  },
+  {
+    "package": "@tailwindcss/oxide-wasm32-wasi/node_modules/tslib",
+    "version": "2.8.1",
+    "license": "0BSD",
+    "optional": true,
+    "notice_files": [
+      "third-party/npm/@tailwindcss/oxide-wasm32-wasi/__nested__/tslib/LICENSE.txt"
+    ]
+  },
+  {
+    "package": "@tailwindcss/oxide-win32-arm64-msvc",
+    "version": "4.3.4",
+    "license": "MIT",
+    "optional": true,
+    "notice": "not installed on this platform"
+  },
+  {
+    "package": "@tailwindcss/oxide-win32-x64-msvc",
+    "version": "4.3.4",
+    "license": "MIT",
+    "optional": true,
+    "notice": "not installed on this platform"
+  },
+  {
+    "package": "@tailwindcss/vite",
+    "version": "4.3.4",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/@tailwindcss/vite/LICENSE"
+    ]
+  },
+  {
+    "package": "@types/bun",
+    "version": "1.4.4",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/@types/bun/LICENSE"
+    ]
+  },
+  {
+    "package": "@types/node",
+    "version": "26.6.6",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/@types/node/LICENSE"
+    ]
+  },
+  {
+    "package": "@types/qrcode",
+    "version": "1.5.6",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/@types/qrcode/LICENSE"
+    ]
+  },
+  {
+    "package": "@types/react",
+    "version": "19.3.0",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/@types/react/LICENSE"
+    ]
+  },
+  {
+    "package": "@types/react-dom",
+    "version": "19.3.0",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/@types/react-dom/LICENSE"
+    ]
+  },
+  {
+    "package": "@vitejs/plugin-react",
+    "version": "6.2.1",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/@vitejs/plugin-react/LICENSE"
+    ]
+  },
+  {
+    "package": "ansi-regex",
+    "version": "5.0.1",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/ansi-regex/license"
+    ]
+  },
+  {
+    "package": "ansi-styles",
+    "version": "4.3.0",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/ansi-styles/license"
+    ]
+  },
+  {
+    "package": "bun-types",
+    "version": "1.4.4",
+    "license": "MIT",
+    "optional": false,
+    "notice_provenance": "https://github.com/oven-sh/bun/blob/38afee6c84fcf48c0edb2466aa4b27d287a59c30/LICENSE.md (npm gitHead)",
+    "notice_files": [
+      "third-party/npm/bun-types/LICENSE.md"
+    ]
+  },
+  {
+    "package": "camelcase",
+    "version": "5.3.1",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/camelcase/license"
+    ]
+  },
+  {
+    "package": "class-variance-authority",
+    "version": "0.7.1",
+    "license": "Apache-2.0",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/class-variance-authority/LICENSE"
+    ]
+  },
+  {
+    "package": "cliui",
+    "version": "6.0.0",
+    "license": "ISC",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/cliui/LICENSE.txt"
+    ]
+  },
+  {
+    "package": "clsx",
+    "version": "2.1.1",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/clsx/license"
+    ]
+  },
+  {
+    "package": "color-convert",
+    "version": "2.0.1",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/color-convert/LICENSE"
+    ]
+  },
+  {
+    "package": "color-name",
+    "version": "1.1.4",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/color-name/LICENSE"
+    ]
+  },
+  {
+    "package": "csstype",
+    "version": "3.2.3",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/csstype/LICENSE"
+    ]
+  },
+  {
+    "package": "decamelize",
+    "version": "1.2.0",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/decamelize/license"
+    ]
+  },
+  {
+    "package": "detect-libc",
+    "version": "2.1.2",
+    "license": "Apache-2.0",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/detect-libc/LICENSE"
+    ]
+  },
+  {
+    "package": "dijkstrajs",
+    "version": "1.0.3",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/dijkstrajs/LICENSE.md"
+    ]
+  },
+  {
+    "package": "emoji-regex",
+    "version": "8.0.0",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/emoji-regex/LICENSE-MIT.txt"
+    ]
+  },
+  {
+    "package": "enhanced-resolve",
+    "version": "5.26.1",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/enhanced-resolve/LICENSE"
+    ]
+  },
+  {
+    "package": "esm-env",
+    "version": "1.2.2",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/esm-env/LICENSE"
+    ]
+  },
+  {
+    "package": "fake-indexeddb",
+    "version": "6.2.8",
+    "license": "Apache-2.0",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/fake-indexeddb/LICENSE"
+    ]
+  },
+  {
+    "package": "fdir",
+    "version": "6.5.0",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/fdir/LICENSE"
+    ]
+  },
+  {
+    "package": "find-up",
+    "version": "4.1.0",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/find-up/license"
+    ]
+  },
+  {
+    "package": "framer-motion",
+    "version": "14.9.1",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/framer-motion/LICENSE.md"
+    ]
+  },
+  {
+    "package": "fsevents",
+    "version": "2.3.3",
+    "license": "MIT",
+    "optional": true,
+    "notice_files": [
+      "third-party/npm/fsevents/LICENSE"
+    ]
+  },
+  {
+    "package": "get-caller-file",
+    "version": "2.0.5",
+    "license": "ISC",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/get-caller-file/LICENSE.md"
+    ]
+  },
+  {
+    "package": "graceful-fs",
+    "version": "4.2.11",
+    "license": "ISC",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/graceful-fs/LICENSE"
+    ]
+  },
+  {
+    "package": "gsap",
+    "version": "3.15.1",
+    "license": "Standard 'no charge' license: https://gsap.com/standard-license.",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/gsap/gsap-standard-license.txt"
+    ]
+  },
+  {
+    "package": "is-fullwidth-code-point",
+    "version": "3.0.0",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/is-fullwidth-code-point/license"
+    ]
+  },
+  {
+    "package": "jiti",
+    "version": "2.7.0",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/jiti/LICENSE"
+    ]
+  },
+  {
+    "package": "lightningcss",
+    "version": "1.33.0",
+    "license": "MPL-2.0",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/lightningcss/LICENSE"
+    ]
+  },
+  {
+    "package": "lightningcss-android-arm64",
+    "version": "1.33.0",
+    "license": "MPL-2.0",
+    "optional": true,
+    "notice": "not installed on this platform"
+  },
+  {
+    "package": "lightningcss-darwin-arm64",
+    "version": "1.33.0",
+    "license": "MPL-2.0",
+    "optional": true,
+    "notice_files": [
+      "third-party/npm/lightningcss-darwin-arm64/LICENSE"
+    ]
+  },
+  {
+    "package": "lightningcss-darwin-x64",
+    "version": "1.33.0",
+    "license": "MPL-2.0",
+    "optional": true,
+    "notice": "not installed on this platform"
+  },
+  {
+    "package": "lightningcss-freebsd-x64",
+    "version": "1.33.0",
+    "license": "MPL-2.0",
+    "optional": true,
+    "notice": "not installed on this platform"
+  },
+  {
+    "package": "lightningcss-linux-arm-gnueabihf",
+    "version": "1.33.0",
+    "license": "MPL-2.0",
+    "optional": true,
+    "notice": "not installed on this platform"
+  },
+  {
+    "package": "lightningcss-linux-arm64-gnu",
+    "version": "1.33.0",
+    "license": "MPL-2.0",
+    "optional": true,
+    "notice": "not installed on this platform"
+  },
+  {
+    "package": "lightningcss-linux-arm64-musl",
+    "version": "1.33.0",
+    "license": "MPL-2.0",
+    "optional": true,
+    "notice": "not installed on this platform"
+  },
+  {
+    "package": "lightningcss-linux-x64-gnu",
+    "version": "1.33.0",
+    "license": "MPL-2.0",
+    "optional": true,
+    "notice": "not installed on this platform"
+  },
+  {
+    "package": "lightningcss-linux-x64-musl",
+    "version": "1.33.0",
+    "license": "MPL-2.0",
+    "optional": true,
+    "notice": "not installed on this platform"
+  },
+  {
+    "package": "lightningcss-win32-arm64-msvc",
+    "version": "1.33.0",
+    "license": "MPL-2.0",
+    "optional": true,
+    "notice": "not installed on this platform"
+  },
+  {
+    "package": "lightningcss-win32-x64-msvc",
+    "version": "1.33.0",
+    "license": "MPL-2.0",
+    "optional": true,
+    "notice": "not installed on this platform"
+  },
+  {
+    "package": "locate-path",
+    "version": "5.0.0",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/locate-path/license"
+    ]
+  },
+  {
+    "package": "lucide-react",
+    "version": "1.69.0",
+    "license": "ISC",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/lucide-react/LICENSE"
+    ]
+  },
+  {
+    "package": "magic-string",
+    "version": "1.4.5",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/magic-string/LICENSE"
+    ]
+  },
+  {
+    "package": "motion",
+    "version": "14.9.1",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/motion/LICENSE.md"
+    ]
+  },
+  {
+    "package": "motion-dom",
+    "version": "14.9.1",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/motion-dom/LICENSE.md"
+    ]
+  },
+  {
+    "package": "motion-utils",
+    "version": "14.7.0",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/motion-utils/LICENSE.md"
+    ]
+  },
+  {
+    "package": "nanoid",
+    "version": "3.3.20",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/nanoid/LICENSE"
+    ]
+  },
+  {
+    "package": "number-flow",
+    "version": "0.6.2",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/number-flow/LICENSE.md"
+    ]
+  },
+  {
+    "package": "p-limit",
+    "version": "2.3.0",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/p-limit/license"
+    ]
+  },
+  {
+    "package": "p-locate",
+    "version": "4.1.0",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/p-locate/license"
+    ]
+  },
+  {
+    "package": "p-try",
+    "version": "2.2.0",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/p-try/license"
+    ]
+  },
+  {
+    "package": "path-exists",
+    "version": "4.0.0",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/path-exists/license"
+    ]
+  },
+  {
+    "package": "picocolors",
+    "version": "1.1.1",
+    "license": "ISC",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/picocolors/LICENSE"
+    ]
+  },
+  {
+    "package": "picomatch",
+    "version": "4.0.7",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/picomatch/LICENSE"
+    ]
+  },
+  {
+    "package": "playwright",
+    "version": "1.64.1",
+    "license": "Apache-2.0",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/playwright/LICENSE",
+      "third-party/npm/playwright/NOTICE"
+    ]
+  },
+  {
+    "package": "playwright-core",
+    "version": "1.64.1",
+    "license": "Apache-2.0",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/playwright-core/LICENSE",
+      "third-party/npm/playwright-core/NOTICE"
+    ]
+  },
+  {
+    "package": "pngjs",
+    "version": "5.0.0",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/pngjs/LICENSE"
+    ]
+  },
+  {
+    "package": "postcss",
+    "version": "8.5.32",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/postcss/LICENSE"
+    ]
+  },
+  {
+    "package": "qrcode",
+    "version": "1.5.4",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/qrcode/license"
+    ]
+  },
+  {
+    "package": "react",
+    "version": "19.3.1",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/react/LICENSE"
+    ]
+  },
+  {
+    "package": "react-dom",
+    "version": "19.3.1",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/react-dom/LICENSE"
+    ]
+  },
+  {
+    "package": "require-directory",
+    "version": "2.1.1",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/require-directory/LICENSE"
+    ]
+  },
+  {
+    "package": "require-main-filename",
+    "version": "2.0.0",
+    "license": "ISC",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/require-main-filename/LICENSE.txt"
+    ]
+  },
+  {
+    "package": "reselect",
+    "version": "5.3.0",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/reselect/LICENSE"
+    ]
+  },
+  {
+    "package": "rolldown",
+    "version": "1.2.16",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/rolldown/LICENSE",
+      "third-party/npm/rolldown/THIRD-PARTY-LICENSE"
+    ]
+  },
+  {
+    "package": "scheduler",
+    "version": "0.28.0",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/scheduler/LICENSE"
+    ]
+  },
+  {
+    "package": "set-blocking",
+    "version": "2.0.0",
+    "license": "ISC",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/set-blocking/LICENSE.txt"
+    ]
+  },
+  {
+    "package": "source-map-js",
+    "version": "1.2.2",
+    "license": "BSD-3-Clause",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/source-map-js/LICENSE"
+    ]
+  },
+  {
+    "package": "string-width",
+    "version": "4.2.3",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/string-width/license"
+    ]
+  },
+  {
+    "package": "strip-ansi",
+    "version": "6.0.1",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/strip-ansi/license"
+    ]
+  },
+  {
+    "package": "tailwind-merge",
+    "version": "3.7.0",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/tailwind-merge/LICENSE.md"
+    ]
+  },
+  {
+    "package": "tailwindcss",
+    "version": "4.3.4",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/tailwindcss/LICENSE"
+    ]
+  },
+  {
+    "package": "tapable",
+    "version": "2.3.3",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/tapable/LICENSE"
+    ]
+  },
+  {
+    "package": "tinyglobby",
+    "version": "0.2.17",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/tinyglobby/LICENSE"
+    ]
+  },
+  {
+    "package": "tslib",
+    "version": "2.9.1",
+    "license": "0BSD",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/tslib/LICENSE.txt"
+    ]
+  },
+  {
+    "package": "typescript",
+    "version": "5.9.3",
+    "license": "Apache-2.0",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/typescript/LICENSE.txt"
+    ]
+  },
+  {
+    "package": "undici-types",
+    "version": "8.9.0",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/undici-types/LICENSE"
+    ]
+  },
+  {
+    "package": "use-sync-external-store",
+    "version": "1.7.0",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/use-sync-external-store/LICENSE"
+    ]
+  },
+  {
+    "package": "vite",
+    "version": "8.3.6",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/vite/LICENSE.md"
+    ]
+  },
+  {
+    "package": "which-module",
+    "version": "2.0.1",
+    "license": "ISC",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/which-module/LICENSE"
+    ]
+  },
+  {
+    "package": "wrap-ansi",
+    "version": "6.2.0",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/wrap-ansi/license"
+    ]
+  },
+  {
+    "package": "y18n",
+    "version": "4.0.3",
+    "license": "ISC",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/y18n/LICENSE"
+    ]
+  },
+  {
+    "package": "yargs",
+    "version": "15.4.1",
+    "license": "MIT",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/yargs/LICENSE"
+    ]
+  },
+  {
+    "package": "yargs-parser",
+    "version": "18.1.3",
+    "license": "ISC",
+    "optional": false,
+    "notice_files": [
+      "third-party/npm/yargs-parser/LICENSE.txt"
+    ]
+  }
+]

@@ -1,0 +1,105 @@
+.journey-flow { min-width:0; --ac-call-action-rows:2; }
+.journey-flow :is(.journey-flow-actions,.fs-board) { --ac-touch:max(48px,calc(var(--ac-type-body)*1.4 + 2*var(--ac-space-2))); }
+.journey-flow .fs-board .ac-action { --ac-touch:calc(max(48px,calc(var(--ac-type-body)*1.4 + 2*var(--ac-space-2)))*1.25); padding:calc(var(--ac-space-2)*1.25) calc(var(--ac-space-8)*1.25); font-size:calc(var(--ac-type-body)*1.25); }
+.journey-flow-header { display:grid; gap:var(--ac-space-4); min-width:0; }
+.journey-flow .fs-stages { flex-wrap:nowrap; gap:var(--ac-space-3); padding:0; margin:0; min-height:0; }
+.journey-flow .fs-stages li { min-height:0; }
+.journey-flow .fs-action-bar { position:static; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:var(--ac-space-4); align-items:start; padding:0; margin:0; border:0; background:transparent; min-height:0; }
+.journey-flow .fs-step-copy h1 { font-size:var(--ac-type-guide); line-height:1.22; letter-spacing:-.02em; font-weight:600; padding-block:var(--ac-space-1); }
+.journey-flow-actions { position:relative; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); grid-auto-rows:var(--ac-touch); gap:0 var(--ac-space-3); min-width:0; }
+.journey-flow-actions>.ac-action { padding:var(--ac-space-2) var(--ac-space-8); }
+.journey-next-action { grid-column:2; grid-row:2; align-self:center; text-align:right; color:var(--ac-muted); font-size:var(--ac-type-label); line-height:1.3; }
+.journey-flow-options { grid-column:1; grid-row:2; align-self:center; justify-self:start; }
+.journey-flow-options>summary { display:flex; align-items:center; justify-content:center; min-height:var(--ac-touch); padding:var(--ac-space-2) var(--ac-space-6); border-radius:var(--ac-radius-small); color:var(--ac-muted); font-size:var(--ac-type-label); cursor:pointer; list-style:none; }
+.journey-flow-options>summary::-webkit-details-marker { display:none; }
+.journey-flow-options>summary::after { content:'+'; margin-left:var(--ac-space-3); }
+.journey-flow-options[open]>summary::after { content:'−'; }
+.journey-flow-options>summary:focus-visible { outline:4px solid var(--ac-focus); outline-offset:2px; }
+.journey-flow-options-panel { position:absolute; z-index:30; top:100%; right:0; width:min(860px,calc(100vw - 32px)); max-height:65dvh; overflow:auto; overscroll-behavior:contain; padding:var(--ac-space-6); border:1px solid var(--ac-line); border-radius:var(--ac-radius-card); background:var(--ac-surface); }
+.journey-display-reference { color:var(--ac-muted); font-size:var(--ac-type-label); }
+.journey-flow-options-panel :is(.journey-review-controls,.journey-product-tools,.journey-review-events,.journey-flow-events) { margin:var(--ac-space-4) 0; padding:0; }
+.journey-flow-options-panel button { min-height:48px; padding:var(--ac-space-3) var(--ac-space-4); border:1px solid var(--ac-line); border-radius:var(--ac-radius-small); background:var(--ac-control); color:var(--ac-text); font:inherit; }
+.journey-flow-options-panel .ac-guidance-mute { display:inline-flex; align-items:center; gap:var(--ac-space-2); white-space:nowrap; }
+.journey-flow-options-panel :is(button,select) { font-size:var(--ac-type-supporting); }
+.journey-controls-standalone { padding-inline:var(--ac-space-6); }
+.journey-flow-events { display:flex; flex-wrap:wrap; align-items:center; gap:var(--ac-space-3); margin-block:var(--ac-space-4); font-size:var(--ac-type-supporting); }
+.journey-flow-events>span { color:var(--ac-muted); }
+.journey-flow-dashboard { position:relative; min-height:0; }
+
+.journey-flow .fs-cell-body { overflow-wrap:anywhere; }
+.journey-flow .ss-header h2 { font-weight:600; letter-spacing:0; }
+.journey-flow :is(.journey-guide-task,.journey-record-summary) { display:flex; flex-direction:column; align-items:flex-start; gap:var(--ac-space-4); width:100%; min-width:0; }
+.journey-flow :is(.journey-guide-task,.journey-record-summary)[hidden] { display:none; }
+.journey-flow .fs-cell[data-compact=true] :is(.journey-guide-task,.journey-record-summary) { gap:var(--ac-space-2); }
+.journey-cell-choices { display:flex; flex-wrap:wrap; gap:calc(var(--ac-space-3)*1.25); width:100%; }
+.journey-flow .fs-cell-body .journey-cell-summary { font-size:var(--ac-type-label); line-height:1.3; }
+.journey-cell-compact { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:var(--ac-space-2) var(--ac-space-4); width:100%; min-width:0; }
+.journey-cell-compact>div { display:grid; gap:var(--ac-space-1); min-width:0; }
+.journey-cell-compact .journey-cell-summary { overflow:hidden; white-space:nowrap; text-overflow:ellipsis; }
+.journey-cell-compact>.ac-action { white-space:nowrap; }
+.journey-flow .journey-escalate { min-height:var(--ac-touch); padding:0; color:var(--ac-muted); font-size:var(--ac-type-label); text-decoration:underline; text-underline-offset:.25em; cursor:pointer; }
+.journey-flow .journey-guide-copy { display:grid; gap:var(--ac-space-4); width:100%; min-width:0; }
+.journey-record-rows { display:grid; gap:var(--ac-space-2); width:100%; margin:0; }
+.journey-record-rows>div { display:flex; align-items:baseline; justify-content:space-between; gap:var(--ac-space-4); min-width:0; }
+.journey-record-rows :is(dt,dd) { font-size:var(--ac-type-label); line-height:1.3; }
+.journey-record-rows dt { color:var(--ac-muted); }
+.journey-record-rows dd { margin:0; font-weight:600; text-align:right; }
+.journey-record-own { display:grid; gap:var(--ac-space-2); width:100%; padding-top:var(--ac-space-4); border-top:1px solid var(--ac-material-line); }
+.journey-record-own small { color:var(--ac-muted); font-size:var(--ac-type-label); }
+.journey-record-own p { display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:4; overflow:hidden; }
+.journey-flow .fs-call-core { display:grid; align-content:start; gap:var(--ac-space-2); width:100%; }
+/* Same title/note scale as the guide cell so the two 119 panels read as one system; the cell keeps its own padding. */
+.journey-flow .journey-call-copy h2 { font-size:var(--ac-type-guide); font-weight:600; line-height:1.22; letter-spacing:-.02em; }
+.journey-flow .journey-countdown { font-size:var(--ac-type-call); font-variant-numeric:tabular-nums; line-height:1.1; font-weight:600; text-align:start; }
+
+.journey-flow-workspace { container:care-layout / inline-size; display:grid; grid-template-columns:minmax(0,1fr); grid-template-rows:minmax(0,1fr); width:100%; height:100%; min-width:0; min-height:0; }
+.journey-flow [data-flow-mode]:not([data-flow-mode=document]) .fs-cell-body:has(>.journey-flow-workspace:not([hidden]))>.journey-flow-workspace { flex:1 1 0; height:auto; }
+.journey-editor-holder { min-width:0; min-height:0; }
+.journey-workspace-scroll { display:flex; flex-direction:column; gap:var(--ac-space-6); min-width:0; }
+.journey-workspace-scroll>* { flex-shrink:0; }
+.journey-editor-primary { min-width:0; }
+/* Lead cells follow their slanted seams (Figma vehicle frames): the footer starts further in, the header and content above stop short on the right. */
+.journey-flow-workspace .journey-editor-primary { margin-left:var(--fs-footer-left,0px); }
+.journey-flow-workspace .journey-editor-title { margin-right:var(--fs-column-right,0px); }
+/* Touch-only screen: no scrollbar gutter, so scrolled content and the fixed footer share the same right edge. */
+.journey-flow-workspace .journey-workspace-scroll::-webkit-scrollbar { display:none; }
+/* Secondary takes its natural width and the primary fills the rest; on narrow or enlarged text the primary wraps below. */
+.journey-editor-primary-row { display:flex; flex-wrap:wrap; gap:var(--ac-space-3); }
+.journey-editor-primary-row>.ac-action { flex:0 1 auto; min-width:0; }
+.journey-editor-primary-row>.ac-action:last-child { flex:1 1 9em; }
+/* The close link sits on the eyebrow line so the title keeps the full width. */
+.journey-editor-title[data-has-action] { position:relative; }
+.journey-editor-close { position:absolute; top:calc(var(--ac-space-3) * -1); right:0; min-height:var(--ac-touch); padding-block:0; align-items:center; color:var(--ac-muted); font-size:var(--ac-type-label); text-decoration:underline; text-underline-offset:.25em; }
+.journey-flow-workspace .journey-editor-holder { height:100%; }
+.journey-flow-workspace .journey-editor-panel { display:grid; grid-template-columns:minmax(0,1fr); grid-template-rows:auto minmax(0,1fr) auto; gap:var(--ac-space-2); height:100%; min-height:0; min-width:0; }
+.journey-flow-workspace .journey-editor-title .ac-heading { gap:var(--ac-space-1); }
+.journey-flow-workspace .journey-editor-title h1 { font-size:var(--ac-type-guide); line-height:1.22; }
+.journey-flow-workspace .journey-workspace-scroll { overflow-y:auto; overflow-x:hidden; overscroll-behavior:contain; scrollbar-width:none; min-height:0; padding:9px; margin-inline:-9px calc(var(--fs-column-right,0px) - 9px); scroll-padding-block:9px; }
+.journey-flow-workspace .journey-record-tabs { margin:0; }
+.journey-flow-workspace .journey-record-tabs button { min-height:var(--ac-touch); }
+.journey-flow-workspace .journey-textarea { resize:vertical; max-width:100%; }
+
+.journey-flow [data-flow-mode=narrow] .fs-action-bar,
+.journey-flow [data-flow-mode=mobile] .fs-action-bar { grid-template-columns:minmax(0,1fr); gap:var(--ac-space-2); }
+.journey-flow [data-flow-mode=narrow] .fs-stages,
+.journey-flow [data-flow-mode=mobile] .fs-stages { display:flex; overflow:hidden; }
+.journey-flow [data-flow-mode=narrow] .fs-stages li,
+.journey-flow [data-flow-mode=mobile] .fs-stages li { flex-direction:row; white-space:nowrap; }
+.journey-flow [data-flow-mode=narrow] .fs-stages li:not([aria-current]),
+.journey-flow [data-flow-mode=mobile] .fs-stages li:not([aria-current]) { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
+.journey-flow [data-flow-mode=document] .fs-stages { flex-wrap:wrap; }
+.journey-flow [data-flow-mode=document] .fs-action-bar { grid-template-columns:minmax(0,1fr); }
+.journey-flow [data-flow-mode=document] .journey-cell-compact { grid-template-columns:minmax(0,1fr); }
+.journey-flow [data-flow-mode=document] .journey-cell-compact .journey-cell-summary { overflow:visible; white-space:normal; }
+.journey-flow [data-flow-mode=document] .journey-cell-compact>.ac-action { width:100%; white-space:normal; }
+.journey-flow [data-flow-mode=document] .journey-flow-workspace,
+.journey-flow [data-flow-mode=document] .journey-editor-holder,
+.journey-flow [data-flow-mode=document] .journey-editor-panel { height:auto; }
+.journey-flow [data-flow-mode=document] .journey-editor-panel { grid-template-rows:auto auto auto; }
+.journey-flow [data-flow-mode=document] .journey-workspace-scroll { overflow:visible; }
+.journey-flow [data-flow-mode=document] .journey-flow-actions { grid-auto-rows:minmax(var(--ac-touch),auto); }
+@media(max-width:700px) {
+  .journey-flow-events { padding-inline:var(--ac-space-3); }
+  .journey-flow [data-flow-mode=document] .journey-flow-actions { grid-template-columns:minmax(0,1fr); }
+  .journey-flow [data-flow-mode=document] :is(.journey-next-action,.journey-flow-options) { grid-column:1; grid-row:auto; }
+}

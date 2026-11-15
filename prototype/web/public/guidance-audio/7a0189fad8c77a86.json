@@ -1,0 +1,23 @@
+{
+  "voiceId": "gJSDQIpSQ56NBGhorBfg",
+  "voiceName": "David - Calm, Steady and Clear",
+  "model": "eleven_v4",
+  "script": "안전하게 나갈 수 있다면 휴대폰을 챙겨 가드레일 밖으로 대피하세요. 이동이 위험하면 무리하지 마세요.",
+  "scriptHash": "7a0189fad8c77a86e51501b1b93b2d29563c802d4b6d6c54e4d32fb06ad13496",
+  "file": "7a0189fad8c77a86.mp3",
+  "path": "/guidance-audio/7a0189fad8c77a86.mp3",
+  "voiceSettings": {
+    "stability": 0.65,
+    "similarity_boost": 0.8,
+    "style": 0.05,
+    "use_speaker_boost": true
+  },
+  "sources": [
+    "journey-flow/safe-arrival"
+  ],
+  "duration": 7.2,
+  "bytes": 174332,
+  "audioHash": "4437f832c9ed0d19aab35facffc5a577ce92aef41c51c84a4f7972bcd96469ee",
+  "payloadEncoding": "UTF-8 JSON file",
+  "generatedAt": "2026-11-14T16:59:47.287Z"
+}
