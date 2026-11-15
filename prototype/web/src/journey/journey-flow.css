@@ -58,8 +58,9 @@
 .journey-workspace-scroll { display:flex; flex-direction:column; gap:var(--ac-space-6); min-width:0; }
 .journey-workspace-scroll>* { flex-shrink:0; }
 .journey-editor-primary { min-width:0; }
-/* The fixed footer keeps its seam distance at the bottom of a slanted lead cell (Figma vehicle frames). */
-.journey-flow-workspace .journey-editor-primary { margin-left:var(--fs-footer-inset,0px); }
+/* Lead cells follow their slanted seams (Figma vehicle frames): the footer starts further in, the header and content above stop short on the right. */
+.journey-flow-workspace .journey-editor-primary { margin-left:var(--fs-footer-left,0px); }
+.journey-flow-workspace .journey-editor-title { margin-right:var(--fs-column-right,0px); }
 /* Touch-only screen: no scrollbar gutter, so scrolled content and the fixed footer share the same right edge. */
 .journey-flow-workspace .journey-workspace-scroll::-webkit-scrollbar { display:none; }
 /* Secondary takes its natural width and the primary fills the rest; on narrow or enlarged text the primary wraps below. */
@@ -73,7 +74,7 @@
 .journey-flow-workspace .journey-editor-panel { display:grid; grid-template-columns:minmax(0,1fr); grid-template-rows:auto minmax(0,1fr) auto; gap:var(--ac-space-2); height:100%; min-height:0; min-width:0; }
 .journey-flow-workspace .journey-editor-title .ac-heading { gap:var(--ac-space-1); }
 .journey-flow-workspace .journey-editor-title h1 { font-size:var(--ac-type-guide); line-height:1.22; }
-.journey-flow-workspace .journey-workspace-scroll { overflow-y:auto; overflow-x:hidden; overscroll-behavior:contain; scrollbar-width:none; min-height:0; padding:9px; margin-inline:-9px; scroll-padding-block:9px; }
+.journey-flow-workspace .journey-workspace-scroll { overflow-y:auto; overflow-x:hidden; overscroll-behavior:contain; scrollbar-width:none; min-height:0; padding:9px; margin-inline:-9px calc(var(--fs-column-right,0px) - 9px); scroll-padding-block:9px; }
 .journey-flow-workspace .journey-record-tabs { margin:0; }
 .journey-flow-workspace .journey-record-tabs button { min-height:var(--ac-touch); }
 .journey-flow-workspace .journey-textarea { resize:vertical; max-width:100%; }

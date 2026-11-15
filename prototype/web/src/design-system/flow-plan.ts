@@ -1,4 +1,4 @@
-import type {FlowFrame,FlowPlan,FlowPlane,FlowShape,FlowShapeFrame} from './flow-contract'
+import type {FlowFrame,FlowPlan,FlowPlane,FlowPlannedCell,FlowShape,FlowShapeFrame} from './flow-contract'
 import type {CellId,FlowLayout} from './flow-study-model'
 import {roundedPath,type Point,type SlotRect} from './split-geometry'
 
@@ -14,10 +14,9 @@ const layoutWeights:Record<FlowLayout,{record:number;call:number}>={
 const contextShare=.3,sceneShare=.56,tilt=.03,kink=.02,pinch=.015,rise=.03
 const emptySlot:SlotRect={left:0,top:0,width:0,height:0}
 // Content keeps `padding` from a seam and `Sizes.edge` from the app window border, whose corners the system may round.
-// The lead cell's workspace runs `leadPadding` from its side seams without balancing, matching the Figma vehicle frames.
-// Its bottom action row follows the left seam down, so it stays `footerInset` from the seam where it sits
-// (Figma: guide footer 587 and record footer 1058 at 1682×1210; with the workspace's own inner offset, 36 lands within 10px of both).
-const inset=8,padding=24,leadPadding=16,footerInset=36,focusRing=4
+// The lead cell follows the Figma vehicle frames: its column starts `leadInset` inside each seam where the content begins, and the
+// bottom action row slides along the slanted seams by the lean between the top and the row (`footerBand` above the slot bottom).
+const inset=8,padding=24,leadInset=60,footerBand=96,focusRing=4
 type Part={polygon:Point[];slot:SlotRect;full:boolean}
 type Partition=Partial<Record<CellId,Part>>
 type Sizes={edge:number;call:number;decoration:SlotRect;summary:number;context:number;workspace:number;full:{width:number;height:number}}
@@ -68,19 +67,18 @@ function callCore(w:number,h:number,call:number,edge:number):SlotRect{
  return box(Math.max(...spans.map(span=>span[0]))+padding,edge,Math.min(...spans.map(span=>span[1]))-padding,bottom)
 }
 
-function widePartition(layout:FlowLayout,w:number,h:number,edge:number,core:SlotRect|null,lead:CellId):Partition{
+function widePartition(layout:FlowLayout,w:number,h:number,edge:number,core:SlotRect|null):Partition{
  const {a,b,c,d,j1,l}=columns(layout,w,h),corner:Point=[0,0],foot:Point=[0,h],top:Point=[w,0],bottom:Point=[w,h]
- const side=(id:CellId)=>id===lead?leadPadding:padding
- const scene=box(edge,edge,Math.min(a[0],j1[0])-padding,j1[1]-padding),record=box(Math.max(c[0],d[0])+side('record'),edge,w-edge,h-edge)
+ const scene=box(edge,edge,Math.min(a[0],j1[0])-padding,j1[1]-padding),record=box(Math.max(c[0],d[0])+padding,edge,w-edge,h-edge)
  const vehicle:Part={polygon:[l,j1,b,foot],slot:box(edge,l[1]+padding,Math.min(j1[0],b[0])-padding,h-edge),full:true}
  if(!core)return {
-  guide:{polygon:[a,c,d,b,j1],slot:box(Math.max(a[0],b[0])+side('guide'),edge,Math.min(c[0],d[0])-side('guide'),h-edge),full:true},
+  guide:{polygon:[a,c,d,b,j1],slot:box(Math.max(a[0],b[0])+padding,edge,Math.min(c[0],d[0])-padding,h-edge),full:true},
   record:{polygon:[c,top,bottom,d],slot:record,full:true},scene:{polygon:[corner,a,j1,l],slot:scene,full:true},vehicle,
  }
  const [j2,j3]=callSeam(layout,w,h,core.top+core.height)
  return {
   emergency:{polygon:[a,c,j3,j2],slot:core,full:true},
-  guide:{polygon:[j2,j3,d,b,j1],slot:box(Math.max(j2[0],b[0])+side('guide'),Math.max(j2[1],j3[1])+padding,Math.min(j3[0],d[0])-side('guide'),h-edge),full:true},
+  guide:{polygon:[j2,j3,d,b,j1],slot:box(Math.max(j2[0],b[0])+padding,Math.max(j2[1],j3[1])+padding,Math.min(j3[0],d[0])-padding,h-edge),full:true},
   record:{polygon:[c,top,bottom,d,j3],slot:record,full:true},scene:{polygon:[corner,a,j2,j1,l],slot:scene,full:true},vehicle,
  }
 }
@@ -206,13 +204,25 @@ function balanced(polygon:Point[],slot:SlotRect):SlotRect{
  return gapLeft>gapRight?{...slot,width:slot.width-shift}:{...slot,left:slot.left+shift,width:slot.width-shift}
 }
 
+// The lead column is measured from the seams at its top line, so the header (and the close link at its right end) sits `leadInset`
+// inside both seams like the Figma frames. The footer row slides right by the seams' lean down to it: the slot spans the column
+// plus that lean, the column keeps `shear.column` clear on the right and the footer starts `shear.footer` in. A window edge does not lean.
+function sheared(polygon:Point[],slot:SlotRect,width:number,edge:number):{slot:SlotRect;shear:FlowPlannedCell['shear']}{
+ const top=crossings(polygon,slot.top),low=crossings(polygon,slot.top+slot.height-footerBand),bottom=crossings(polygon,slot.top+slot.height)
+ if(top.length<2||low.length<2||bottom.length<2)return {slot,shear:{footer:0,column:0}}
+ const seamLeft=Math.min(...top),seamRight=Math.max(...top),windowRight=seamRight>=width-.5,lean=Math.max(0,Math.min(...low)-seamLeft)
+ const left=Math.max(seamLeft+leadInset,Math.min(...bottom)+inset+2*focusRing),column=windowRight?width-edge:seamRight-leadInset
+ const right=windowRight?column:Math.max(column,Math.min(column+lean,seamRight-padding))
+ return {slot:{...slot,left,width:right-left},shear:{footer:Math.max(0,seamLeft+leadInset+lean-left),column:right-column}}
+}
+
 export function createFlowPlan(layout:FlowLayout,width:number,height:number,frame:FlowFrame,emergencyActive=false):FlowPlan{
  const flat={x:0,y:0,offset:0}
- const cells=Object.fromEntries(cellIds.map(id=>[id,{id,shape:null,slot:{...emptySlot},footer:0,variant:'summary',visible:false,scroll:false}])) as FlowPlan['cells']
+ const cells=Object.fromEntries(cellIds.map(id=>[id,{id,shape:null,slot:{...emptySlot},shear:{footer:0,column:0},variant:'summary',visible:false,scroll:false}])) as FlowPlan['cells']
  const plan:FlowPlan={layout,mode:frame.mode,width,height,planes:Object.fromEntries(cellIds.map(id=>[id,flat])) as FlowPlan['planes'],cells}
  if(!Number.isFinite(width)||!Number.isFinite(height)||width<=0||height<=0)return plan
  const size=sizes(frame),priority=layoutPriority[layout],call=layout==='emergency'||emergencyActive&&layout!=='calm'
- const {partition,height:extent}=frame.mode==='wide'?{partition:widePartition(layout,width,height,size.edge,call?callCore(width,height,size.call,size.edge):null,priority),height}:stackPartition(layout,width,height,size,call,frame.mode!=='document')
+ const {partition,height:extent}=frame.mode==='wide'?{partition:widePartition(layout,width,height,size.edge,call?callCore(width,height,size.call,size.edge):null),height}:stackPartition(layout,width,height,size,call,frame.mode!=='document')
  const solved=solvePlanes(partition)
  plan.height=extent
  plan.planes=Object.fromEntries(cellIds.map(id=>[id,solved[id]??absentPlane(id,solved,extent)])) as FlowPlan['planes']
@@ -220,11 +230,9 @@ export function createFlowPlan(layout:FlowLayout,width:number,height:number,fram
  for(const id of cellIds){
   const part=partition[id];if(!part)continue
   const lead=id===priority&&id!=='emergency'
-  const slot=frame.mode==='wide'&&id!=='emergency'&&id!=='scene'&&!lead?balanced(part.polygon,part.slot):part.slot
+  const {slot,shear}=frame.mode==='wide'&&lead?sheared(part.polygon,part.slot,width,size.edge):{slot:frame.mode==='wide'&&id!=='emergency'&&id!=='scene'?balanced(part.polygon,part.slot):part.slot,shear:{footer:0,column:0}}
   const fits=slot.width>=size.full.width&&part.slot.height>=size.full.height
-  const seam=frame.mode==='wide'&&lead?crossings(part.polygon,slot.top+slot.height):[]
-  const footer=seam.length>1?Math.max(0,Math.min(...seam)+footerInset-slot.left):0
-  cells[id]={...cells[id],shape:shapes[id],slot,footer,visible:true,variant:lead||part.full&&fits?'full':'summary',scroll:lead}
+  cells[id]={...cells[id],shape:shapes[id],slot,shear,visible:true,variant:lead||part.full&&fits?'full':'summary',scroll:lead}
  }
  const emergency=cells.emergency,core=emergency.slot,{decoration}=size
  if(emergency.visible)emergency.variant=frame.mode!=='document'&&containsSlot(emergency.shape!,{left:core.left+decoration.left,top:core.top+core.height+decoration.top,width:decoration.width,height:decoration.height})?'full':'summary'

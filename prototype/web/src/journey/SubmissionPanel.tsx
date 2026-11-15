@@ -165,7 +165,7 @@ export function SubmissionPanel({ value, onApprove, onCommand, onCancel, onDirty
       {target !== 'share' && <div className="journey-report-tools"><button onClick={() => { onCommand({ type: 'agency-decision', agency: target, decision: 'deferred' }); setError('지금은 보류했어요. 준비되면 다시 검토할 수 있어요.') }}>나중에 결정</button><button onClick={() => { onCommand({ type: 'agency-decision', agency: target, decision: 'declined' }); setError('전송하지 않기로 했어요. 남긴 기록은 유지돼요.') }}>전송하지 않기</button></div>}
     </>}
     {preview && <section className="journey-send-preview" aria-label="보낼 내용 미리보기">
-      <h2>이 내용으로 요청할까요?</h2><p>{preview.input.recipient}</p><p className="journey-supporting">목적 · {purposes[target]}</p>
+      <div className="journey-payload"><section><h3>수신처</h3><p><strong>{preview.input.recipient}</strong><span>목적 · {purposes[target]}</span></p></section></div>
       <PayloadContent payload={preview.payload} caseId={value.id} active={active} exampleReport onMediaFailure={() => setError(failures['missing-evidence'])} />
     </section>}
     {target !== 'share' && value.submissions.some(item => item.agency === target && item.id !== currentRequest?.id) && <details className="journey-receipt" onToggle={pauseCollapsedMedia}><summary>이전 요청 내용</summary>
