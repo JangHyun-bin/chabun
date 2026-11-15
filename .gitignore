@@ -13,6 +13,7 @@ local.properties
 *.keystore
 *.p12
 *.apk
+!apk/장희빈_차분_release.apk
 *.sha256
 *.mp4
 !prototype/web/public/journey-samples/front-20s.mp4
