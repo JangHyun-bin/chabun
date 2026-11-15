@@ -1,5 +1,7 @@
 .journey-review-content { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ac-space-6); }
 .journey-submission { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ac-space-6); min-width: 0; }
+/* Figma 04/05: the send review title sits 16px under its eyebrow. */
+.journey-flow-workspace .journey-submission .journey-editor-title .ac-heading { gap: var(--ac-space-4); }
 .journey-submission-error { padding: var(--ac-space-4); border: 1px solid var(--ac-line); border-radius: var(--ac-radius-control); font-size: var(--ac-type-body); }
 .journey-insurer-call { display: grid; justify-items: start; gap: var(--ac-space-3); }
 .journey-recipient { display: grid; gap: var(--ac-space-3); font-size: var(--ac-type-supporting); }
