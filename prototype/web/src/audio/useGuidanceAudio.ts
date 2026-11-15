@@ -4,7 +4,7 @@ export type GuidanceState='idle'|'loading'|'speaking'|'error'
 let activeStop:(()=>void)|null=null
 export function stopGuidanceAudio(){activeStop?.()}
 
-export function useGuidanceAudio({text,key,host}:{text:string;key:string;host?:RefObject<HTMLElement|null>}) {
+export function useGuidanceAudio({text,host}:{text:string;host?:RefObject<HTMLElement|null>}) {
  const [state,setState]=useState<GuidanceState>('idle')
  const generation=useRef(0),dispose=useRef<(()=>void)|null>(null),mounted=useRef(true)
  const stop=useCallback(()=>{
@@ -12,7 +12,7 @@ export function useGuidanceAudio({text,key,host}:{text:string;key:string;host?:R
   if(activeStop===stop)activeStop=null
   if(mounted.current)setState('idle')
  },[])
- useLayoutEffect(()=>{mounted.current=true;stop();return()=>{mounted.current=false;stop()}},[key,text,stop])
+ useLayoutEffect(()=>{mounted.current=true;stop();return()=>{mounted.current=false;stop()}},[text,stop])
  const play=useCallback(async()=>{
   stopGuidanceAudio();stop()
   if(document.visibilityState==='hidden'||(host&&!host.current?.getClientRects().length))return

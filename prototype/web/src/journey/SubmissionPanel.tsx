@@ -126,7 +126,7 @@ export function SubmissionPanel({ value, onApprove, onCommand, onCancel, onDirty
     {target === 'insurance' && <div className="journey-report-tools journey-insurer-call"><button onClick={callInsurer}>보험사에 전화하기 · {registeredProfile.insurer.display}</button>{callNote && <p role="status" className="journey-supporting">{callNote}</p>}</div>}
     {approved && <p role="status">승인한 내용이 보관됐어요</p>}
     {currentRequest && <section className="journey-receipt" aria-label="요청 결과">
-      <JourneyStatus tone="unknown">시연 결과 · 실제 접수 아님</JourneyStatus>
+      <JourneyStatus tone="unknown">예시 결과 · 실제 접수 아님</JourneyStatus>
       <JourneyStatus tone={currentRequest.status === 'received' ? 'confirmed' : currentRequest.status === 'failed' ? 'failed' : 'pending'}>
         {currentRequest.transport === 'approved' ? '승인 완료 · 전송 전' : currentRequest.transport === 'sending' ? '전송 중 · 접수 미확인' : currentRequest.transport === 'sent' && currentRequest.status === 'sent' ? '전송 완료 · 접수 미확인' : currentRequest.status === 'received' ? '접수 확인됨' : currentRequest.status === 'failed' ? '전송 실패 확인됨' : currentRequest.status === 'not_received' ? '미접수 확인됨' : '접수 결과 확인 중'}
       </JourneyStatus>

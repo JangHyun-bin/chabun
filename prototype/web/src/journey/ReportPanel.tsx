@@ -178,7 +178,7 @@ export function ReportPanel({ value, onCommand, reloadVersion = 0, active = true
   </dialog>
   return <section ref={panel} tabIndex={-1} className="journey-report" aria-label="경위서 검토">
     <header className="journey-report-heading"><FileText aria-hidden="true" /><div><h2>내용을 한 문장씩 확인해주세요</h2>
-      {example && <div className="journey-report-example"><JourneyStatus tone="unknown">예시 경위서</JourneyStatus><p className="journey-supporting">현재 자료와 진술을 연결한 시연용 예시예요. 사고 원인·속도·과실을 자동으로 판단하지 않아요.</p></div>}
+      {example && <div className="journey-report-example"><JourneyStatus tone="unknown">예시 경위서</JourneyStatus><p className="journey-supporting">사고 원인·속도·과실은 자동으로 판단하지 않아요.</p></div>}
       <p className="journey-supporting">추정과 미확인은 확인한 뒤에도 그대로 표시돼요.</p></div></header>
     {!paragraphs.length && <p className="journey-supporting">아직 작성된 경위서가 없어요.</p>}
     {paragraphs.map((paragraph, index) => {

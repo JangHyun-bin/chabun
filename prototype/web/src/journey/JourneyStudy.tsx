@@ -108,7 +108,7 @@ export function JourneyStudy({embedded=false,previewHeight}:{embedded?:boolean;p
       const now = new Date().toISOString()
       if (transport === 'sending') await journey.save({ type: 'transport-result', caseId, submissionId, status: 'sent', now })
       else await journey.save({ type: 'request-result', caseId, submissionId, agency: 'insurance', status: 'received', now,
-        externalReceipt: { number: `시연-${submissionId.slice(-6)}`, receivedAt: now, agencyName: '보험 접수 시연', next: '실제 보험사 접수가 아니에요. 차량 지원·정비소 안내를 확인할 수 있어요.' } })
+        externalReceipt: { number: `예시-${submissionId.slice(-6)}`, receivedAt: now, agencyName: '보험 접수 예시', next: '차량 지원·정비소 안내를 확인할 수 있어요.' } })
     }, 1500)
     return () => clearTimeout(timer)
   }, [representative, value?.id, insurance?.id, insurance?.transport, insurance?.status, journey.saveState])
@@ -208,7 +208,11 @@ export function JourneyStudy({embedded=false,previewHeight}:{embedded?:boolean;p
   async function prepareExampleReport() {
     if (!value?.fixtureId || loadingSamples || value.stage !== 'review' && !await prepareToLeave()) return false
     setSampleError('')
-    if (!await sampleEvidence() || !await sampleReport() || value.stage !== 'review' && !await navigate('review')) return false
+    const latest = currentCase.current ?? value
+    const samplesReady = ['sample-front', 'sample-rear'].every(id => latest.evidence.some(item => item.id === id))
+    const reportReady = !!latest.report?.paragraphs.length && latest.report.basedOnRevision === latest.contentRevision
+    if (!reportReady && (!samplesReady && !await sampleEvidence() || !await sampleReport())) return false
+    if (value.stage !== 'review' && !await navigate('review')) return false
     reviewPanel.current?.openReport()
     return true
   }
@@ -295,11 +299,14 @@ export function JourneyStudy({embedded=false,previewHeight}:{embedded?:boolean;p
       <button aria-pressed={recordTab === 'photos'} onClick={() => void selectRecordTab('photos')}>사진 남기기</button>
       {handoff && <button aria-pressed={recordTab === 'phone'} onClick={() => void selectRecordTab('phone')}>휴대폰으로 이어가기</button>}
     </nav>
-    const footer=framed ? null : <JourneyRequests value={value}/>
+    const footer=!framed ? <JourneyRequests value={value}/> : hasJourneyRecord(value) ? <section className="journey-review-example" aria-label="경위서 초안">
+      <p className="journey-supporting">남긴 기록을 문장으로 정리해 근거와 함께 확인할 수 있어요.</p>
+      <JourneyAction disabled={loadingSamples} onClick={() => void prepareExampleReport()}>{loadingSamples ? '경위서 준비 중' : '경위서 초안 보기'}</JourneyAction>
+    </section> : null
     return <>
       <div hidden={recordTab !== 'voice'} inert={reloading} aria-busy={reloading} className="journey-editor-holder"><VoiceRecordPanel ref={voicePanel} value={value} mode={voiceMode} onSave={journey.save} durable={journey.saveState === 'saved'} reloadVersion={journey.reloadVersion} navigation={tabs} footer={footer}/></div>
       <div hidden={recordTab !== 'photos'} inert={reloading} aria-busy={reloading} className="journey-editor-holder"><EvidencePanel ref={photoPanel} value={value} onSave={journey.save} onCommand={photoCommand} navigation={tabs} footer={footer}/></div>
-      {handoff && <div hidden={recordTab !== 'phone'} className="journey-editor-holder"><JourneyEditorLayout step="사고 기록" title="휴대폰으로 이어가기" description="사진과 진술은 휴대폰에서 남기고, 차량 화면에서 진행 상황을 볼 수 있어요." guidanceKey="journey-phone-handoff">{tabs}<VehicleHandoffPanel handoff={handoff}/>{footer}</JourneyEditorLayout></div>}
+      {handoff && <div hidden={recordTab !== 'phone'} className="journey-editor-holder"><JourneyEditorLayout step="사고 기록" title="휴대폰으로 이어가기" description="사진과 진술은 휴대폰에서 남기고, 차량 화면에서 진행 상황을 볼 수 있어요.">{tabs}<VehicleHandoffPanel handoff={handoff}/>{footer}</JourneyEditorLayout></div>}
     </>
   }
 

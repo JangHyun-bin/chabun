@@ -137,20 +137,20 @@ for (const sceneId of ['support', 'paused']) for (const [status, label, source] 
   expect(expected.path, 'C05 requires the exact real asset for this reachable guidance').toBeDefined()
 })
 
-test('same-scene request changes stop audio, reject stale completion and use the latest script', async ({ page }) => {
+test('same-scene request changes keep a same script, stop a replaced one, reject stale completion and use the latest script', async ({ page }) => {
   await mount(page, 'support')
+  await expect.poll(() => calls(page)).toBe(1)
   await page.evaluate(() => window.guidancePatch({ insurance: 'declined' }))
   await expect(surface(page)).toContainText('거절 유지')
-  await expect.poll(() => calls(page)).toBe(2)
   const context = await page.evaluate(() => window.guidanceContext)
   await page.evaluate(() => window.guidancePatch({ insurance: 'deferred' }))
   await expect(surface(page)).toContainText('보류 유지')
-  await expect.poll(() => calls(page)).toBe(3)
-  expect(await page.evaluate(() => window.guidanceCalls[1].paused)).toBe(true)
+  await expect.poll(() => calls(page)).toBe(2)
+  expect(await page.evaluate(() => window.guidanceCalls[0].paused)).toBe(true)
   expect(await page.evaluate(() => window.guidanceContext)).not.toBe(context)
-  await page.evaluate(() => window.guidanceEnd(1))
+  await page.evaluate(() => window.guidanceEnd(0))
   await expect(surface(page).locator('[data-guidance-state]')).toHaveAttribute('data-guidance-state', 'speaking')
-  expect(await page.evaluate(() => window.guidanceCalls[2].paused)).toBe(false)
+  expect(await page.evaluate(() => window.guidanceCalls[1].paused)).toBe(false)
 })
 
 test('same-scene persistence changes cancel success audio and remove durable-storage claims', async ({ page }) => {
@@ -172,16 +172,15 @@ test('deferred storage failure never promises that the record is kept on this de
   await expect(surface(page).getByRole('status')).toContainText(variants.deferred_storage_failed)
 })
 
-for (const change of [{ insurance: 'declined' }, { persistent: false }]) test(`same-script context change ${Object.keys(change)[0]} still cancels playback`, async ({ page }) => {
+for (const change of [{ insurance: 'declined' }, { persistent: false }]) test(`same-script context change ${Object.keys(change)[0]} keeps the one playback`, async ({ page }) => {
   await mount(page, 'support')
   await expect.poll(() => calls(page)).toBe(1)
   const context = await page.evaluate(() => window.guidanceContext)
-  const source = await page.evaluate(() => window.guidanceCalls[0].src)
   await page.evaluate(change => window.guidancePatch(change), change)
   await expect.poll(() => page.evaluate(() => window.guidanceContext)).not.toBe(context)
-  expect(await page.evaluate(() => window.guidanceCalls[0].paused)).toBe(true)
-  await expect.poll(() => calls(page)).toBe(2)
-  expect(await page.evaluate(() => window.guidanceCalls[1].src)).toBe(source)
+  await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))))
+  expect(await page.evaluate(() => window.guidanceCalls)).toEqual([expect.objectContaining({ paused: false })])
+  await expect(surface(page).locator('[data-guidance-state]')).toHaveAttribute('data-guidance-state', 'speaking')
 })
 
 test('storage warnings do not delay the emergency countdown or submit a request', async ({ page }) => {

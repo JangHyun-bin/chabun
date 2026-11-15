@@ -63,7 +63,7 @@ export function currentFrame(time:number){
   const pass=((time%14)+14)%14/14,own=evaluate(ownCurve,6).pose
   const passing={x:130,y:660-pass*820,heading:0}
   const passingPhase=passing.y>own.y+90?'approaching':passing.y>own.y-150?'passing':'ahead'
-  const phase=passingPhase==='approaching'?'뒤에서 접근 중 · 시연':passingPhase==='passing'?'좌측 차량 통과 중 · 시연':'전방으로 통과 · 시연'
+  const phase=passingPhase==='approaching'?'뒤에서 접근 중':passingPhase==='passing'?'좌측 차량 통과 중':'전방으로 통과'
   return {own,other:evaluate(otherCurve,6).pose,passing,passingPhase,phase}
 }
 
