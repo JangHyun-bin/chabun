@@ -13,7 +13,7 @@ import type { VehicleHandoff } from '@/product/vehicle-handoff'
 import { VehicleHandoffPanel } from '@/product/VehicleHandoffPanel'
 import { GuidanceControl, GuidanceMuteToggle } from '@/audio/GuidanceControl'
 import flowVoices from '@/audio/journey-flow-guidance.json'
-import { dial119, hostDemo, inPleosApp } from '@/host/pleos-host'
+import { hostDemo, inPleosApp, openDialer } from '@/host/pleos-host'
 import { HostDemoStrip } from '@/host/HostDemoStrip'
 import '@/design-system/flow-study.css'
 import './journey-flow.css'
@@ -21,22 +21,24 @@ import './journey-flow.css'
 const stepVoice: Partial<Record<FlowScene, string>> = flowVoices
 
 type DialCountdown = { kind: 'idle' | 'cancelled' | 'opened' } | { kind: 'running'; deadline: number; seconds: number }
-const callLabels = { connecting: '119 전화 화면을 열었어요', connected: '통화 연결 시연', ended: '통화 종료 시연' }
+const callLabels = { connecting: '119 전화 화면을 열었어요', connected: '119 통화 중', ended: '119 통화 종료' }
+// The 119 cell owns the call state; while a call screen is open the guide cell only tells the driver how to stay safe.
+const callGuide = { title: '다친 사람은 억지로 움직이지 마세요', note: '불이나 연기가 보이면 차에서 멀리 떨어지세요.' }
 const guideTasks: Partial<Record<FlowScene, { title: string; note: string }>> = {
   situation: { title: '괜찮으세요?', note: '충돌을 감지했어요. 다친 사람이 있거나 위험하면 119 전화 화면을 열 수 있어요.' },
   'situation-airbag': { title: '괜찮으세요?', note: '에어백 전개 신호가 왔어요. 다친 사람이 있는지 먼저 확인해 주세요.' },
   emergency: { title: '119 전화 화면을 열 수 있어요', note: '다친 사람은 억지로 움직이지 마세요. 불이나 연기가 보이면 차에서 멀리 떨어지세요.' },
-  calling: { title: '119 전화 화면을 열었어요', note: '실제 발신과 구호 접수는 확인되지 않았어요.' },
-  call: { title: '통화 연결 시연', note: '실제 통화나 구호 접수를 확인한 상태가 아니에요.' },
-  'call-ended': { title: '통화 종료 시연', note: '도움이 더 필요하면 119 전화 화면을 다시 열 수 있어요.' },
+  calling: callGuide,
+  call: callGuide,
+  'call-ended': callGuide,
   move: { title: '안전한 곳으로 이동하세요', note: '차가 다니지 않는 곳으로 피하세요.' },
   ready: { title: '안전한 곳에 머물러 주세요', note: '이제 기억나는 내용을 남길 수 있어요.' },
   'risk-check': { title: '주변을 다시 살펴보세요', note: '차 주변이 안전한지 확인해 주세요. 남기던 기록은 그대로 있어요.' },
   'record-empty': { title: '어떻게 부딪혔나요?', note: '말로 하거나 사진을 찍어 두세요. 지금 어려우면 나중에 해도 돼요.' },
   record: { title: '남긴 내용으로 예시 경위서를 만들어요', note: '문장에 연결된 근거를 확인하고 내용을 직접 고칠 수 있어요.' },
-  sending: { title: '보험사 전송 시연 중', note: '실제 보험사에 전송하지 않아요. 승인한 자료의 시연 결과를 확인합니다.' },
-  sent: { title: '시연 전송이 끝났어요', note: '실제 보험사 전송이나 접수 결과가 아니에요.' },
-  received: { title: '보험 접수 시연이 끝났어요', note: '시연 접수번호를 확인한 뒤 차량 지원·정비소 안내로 이어갈 수 있어요.' },
+  sending: { title: '보험사로 보내는 중이에요', note: '승인한 내용만 보내요.' },
+  sent: { title: '전송을 마쳤어요', note: '이제 차량 지원·정비소 안내를 볼 수 있어요.' },
+  received: { title: '접수번호를 받았어요', note: '접수번호를 확인한 뒤 차량 지원·정비소 안내로 이어갈 수 있어요.' },
 }
 
 export function JourneyFlow({ value, device, active, saved, onCommand, onSave, onNavigate, onReview, onPrepareReport, onHandoff, recordWorkspace, reviewWorkspace, previewHeight, controls, handoff, appWindow }: {
@@ -143,7 +145,7 @@ export function JourneyFlow({ value, device, active, saved, onCommand, onSave, o
     cancelCountdown()
     if (dialAttempted.current || call !== 'idle' && call !== 'ended') return
     dialAttempted.current = true
-    const dialed = dial119()
+    const dialed = openDialer('119')
     setDialFailed(dialed !== 'opened')
     if (dialed !== 'opened') { dialAttempted.current = false; return }
     setCountdown({ kind: 'opened' })
@@ -210,7 +212,7 @@ export function JourneyFlow({ value, device, active, saved, onCommand, onSave, o
       : scene === 'ready' ? [{ label: '기록 시작', run: () => void next() }]
       : scene === 'risk-check' ? [{ label: '주변을 확인했어요', run: () => acknowledgeRisks(value, new Date().toISOString()).forEach(onCommand) },
         ...emergency ? [] : [{ label: '다친 사람이 있거나 위험해요', run: () => answerSituation(urgentDanger), secondary: true }]]
-      : step === 5 ? [...handoff ? [{ label: '휴대폰으로 이어가기', run: onHandoff }] : [], ...blocked ? [{ label: '나중에 기록할게요', run: () => void onNavigate('follow-up'), secondary: true }] : [], { label: busy ? '예시 경위서 준비 중' : '예시 경위서 만들기', run: () => void next(), disabled: blocked }]
+      : step === 5 ? [...handoff ? [{ label: '휴대폰으로 이어가기', run: onHandoff }] : [], ...blocked ? [{ label: '나중에 기록할게요', run: () => void onNavigate('follow-up'), secondary: true }] : [], { label: busy ? '경위서 준비 중' : scene === 'record' ? '경위서 초안 보기' : '예시 경위서 보기', run: () => void next(), secondary: scene !== 'record' }]
       : scene === 'sent' || scene === 'received' ? [{ label: '차량 지원·정비소 안내 보기', run: () => void next() }, { label: '보낸 내용 보기', run: showSent, secondary: true }]
       : []
     const label = <div className="fs-cell-label"><span>{step === 3 || step === 4 ? '안전 확보' : stageLabels[step - 1]}</span>{(step === 3 || step === 4) && <span>{Math.min(checks + (step === 3 ? 1 : 0), 3)} / 3</span>}</div>
@@ -224,7 +226,6 @@ export function JourneyFlow({ value, device, active, saved, onCommand, onSave, o
       {task && <div className="journey-guide-copy" role={scene === 'risk-check' ? 'alert' : undefined}><h2>{task.title}</h2><p className="fs-cell-muted">{task.note}</p></div>}
       {scene === 'move' && value.safetyActions.find(action => action.id === safetyStep.id)?.status === 'device-confirmed' && <CareStatus tone="confirmed">차량 신호 확인</CareStatus>}
       {scene === 'sending' && <CareStatus tone="pending">보내는 중</CareStatus>}
-      {(scene === 'sent' || scene === 'received') && <CareStatus tone="unknown">{receipt ? '보험 접수 시연 · 실제 접수 아님' : '시연 전송 · 실제 전송 아님'}</CareStatus>}
       {notice && <p role="alert" className="journey-supporting">{notice}</p>}
       {actions.length > 0 && <div className="journey-cell-choices">{actions.map(action => <CareAction key={action.label} secondary={action.secondary} disabled={busy || action.disabled} onClick={() => afterComposition(action.run)}>{action.label}</CareAction>)}</div>}
       {!emergency && scene !== 'risk-check' && (scene.startsWith('situation') || step === 3 || step === 4 || step === 5 || step === 7) && <button type="button" className="journey-text-action journey-escalate" onClick={() => afterComposition(() => void answerSituation(urgentDanger))}>{scene.startsWith('situation') ? '불이나 연기 등 위험이 있어요' : '다친 사람이 있거나 위험해요'}</button>}
@@ -245,8 +246,8 @@ export function JourneyFlow({ value, device, active, saved, onCommand, onSave, o
       { id: 'statements', label: '말로 남긴 이야기', value: statements.length ? `${statements.length}개` : '없음' },
       { id: 'photos', label: '사진', value: count('photo') ? `${count('photo')}장` : '없음' },
       { id: 'audio', label: '음성', value: count('audio') ? `${count('audio')}개` : '없음' },
-      ...count('video') ? [{ id: 'video', label: '영상', value: `${count('video')}개${samples ? ' · 시연 자료' : ''}` }] : [],
-      ...value.diagram ? [{ id: 'diagram', label: '사고 도식', value: value.diagram.origin === 'fixture' ? '시연 자료' : '있음' }] : [],
+      ...count('video') ? [{ id: 'video', label: '영상', value: `${count('video')}개${samples ? ' · 예시' : ''}` }] : [],
+      ...value.diagram ? [{ id: 'diagram', label: '사고 도식', value: value.diagram.origin === 'fixture' ? '예시' : '있음' }] : [],
     ]
     const own = statements[0]?.text
     return <>
@@ -270,7 +271,7 @@ export function JourneyFlow({ value, device, active, saved, onCommand, onSave, o
         {act('지금 연결', () => void startCall())}
         {emergency && act('괜찮아요', () => void answerSituation(noUrgentDanger), true)}
       </> : <>
-        <p>{callLabels[call]}</p>
+        <h2>{callLabels[call]}</h2>
         <CareStatus tone="unknown">실제 통화·구호 접수 미확인</CareStatus>
         {call === 'ended' && act('119 전화 화면 다시 열기', () => { dialAttempted.current = false; void startCall() }, true)}
       </>}
@@ -290,7 +291,7 @@ export function JourneyFlow({ value, device, active, saved, onCommand, onSave, o
   }
 
   const guidanceText = scene === 'move' ? flowVoices[safetyStep.id] : stepVoice[scene]
-  const guidance = active && guidanceText && <GuidanceControl text={guidanceText} contextKey={`journey-flow/${value.id}/${scene}/${scene === 'move' ? safetyStep.id : ''}`} />
+  const guidance = active && guidanceText && <GuidanceControl text={guidanceText} />
   const flowEvents = <section className="journey-flow-events" aria-label="대표 흐름 결과 시연"><span>결과 시연 · 실제 전화·전송 없음</span><span>주변 경로·사고 재생은 합성 시연. 저장된 사고 영상과 별개예요.</span>
     {rescue && (call === 'connecting' || call === 'connected') && <button aria-label="시연 event: 통화 종료 확인" onClick={() => onCommand({ type: 'call-end', caseId:value.id, submissionId:rescue.id, now: new Date().toISOString() })}>통화 종료 확인</button>}
     {sending && <button aria-label="시연 event: 보험사 전송 실패" onClick={() => result('failed')}>보험사 전송 실패</button>}
@@ -301,7 +302,7 @@ export function JourneyFlow({ value, device, active, saved, onCommand, onSave, o
     <div className="fs-action-bar"><div className="fs-step-copy" aria-live="polite"><span className="fs-step-label">{step} / 7 · {stageLabels[step - 1]}</span><h1 tabIndex={-1}>{copy.title}</h1><p>{copy.support}</p>{guidance}</div><section className="journey-flow-actions" aria-label="여정 조작">
       <CareAction secondary aria-label="이전 단계" disabled={step === 1 || scene === 'sending'} onClick={() => afterComposition(()=>void back())}><ArrowLeft aria-hidden="true" />이전</CareAction>
       <CareAction data-testid="journey-primary" aria-label={copy.demo ? `다음 · 시연 event: ${copy.action}` : '다음 단계'} aria-describedby="journey-next-action" disabled={blocked} onClick={() => afterComposition(()=>void next())}>다음<ArrowRight aria-hidden="true" /></CareAction>
-      <span id="journey-next-action" className="journey-next-action">{copy.demo ? `시연: ${copy.action}` : copy.action}</span>
+      <span id="journey-next-action" className="journey-next-action">{copy.action}</span>
       <details className="journey-flow-options" onKeyDown={event=>{if(event.key==='Escape'){event.currentTarget.open=false;event.currentTarget.querySelector('summary')?.focus()}}}><summary>시연 설정</summary><div className="journey-flow-options-panel" onClick={event=>{if(event.target instanceof Element&&event.target.closest('button')){const focused=event.currentTarget.contains(document.activeElement),details=event.currentTarget.closest('details')!;details.open=false;if(focused)details.querySelector('summary')?.focus({preventScroll:true})}}}>
         <p className="journey-display-reference">Connect Standard · 2560 × 1440 · 앱 화면 1682 × 1210</p>
         <GuidanceMuteToggle />

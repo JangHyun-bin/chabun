@@ -18,7 +18,7 @@ const studyNow='2026-11-14T12:12:00.000Z'
 function StudyCellContent({id,state,value,compact,dispatch}:{id:CellId;state:FlowState;value:JourneyCase;compact:boolean;dispatch:Dispatch<FlowEvent>}){
  const noteDialog=useRef<HTMLDialogElement>(null)
  const sent=state.transfer==='sent',failed=state.transfer==='failed',sending=state.transfer==='sending'
- if(id==='emergency')return <><div className="fs-call-core"><div className="fs-cell-label"><span>119 긴급 통화</span><Phone aria-hidden="true"/></div><p>{state.call==='connected'?'통화 연결됨':state.call==='ended'?'통화 종료':'연결 준비'}</p><small>구호 접수 미확인</small></div>{!compact&&<div className="fs-call-decoration" aria-hidden="true"><div className="fs-call-number">119</div><CareSpectrum active={state.call==='connected'&&!state.driving}/></div>}</>
+ if(id==='emergency')return <><div className="fs-call-core"><div className="fs-cell-label"><span>119 긴급 통화</span><Phone aria-hidden="true"/></div><h2>{state.call==='connected'?'통화 연결됨':state.call==='ended'?'통화 종료':'연결 준비'}</h2><small>구호 접수 미확인</small></div>{!compact&&<div className="fs-call-decoration" aria-hidden="true"><div className="fs-call-number">119</div><CareSpectrum active={state.call==='connected'&&!state.driving}/></div>}</>
  if(id==='scene')return <VehicleSceneCell value={value} compact={compact} active/>
  if(id==='vehicle')return <VehicleDetailCell value={value} compact={compact}/>
  if(compact&&id==='record')return <><div className="fs-cell-label">사고 기록</div><p className="fs-summary-status">{state.step>=6?'기록 확인됨':'기록 준비'}</p></>

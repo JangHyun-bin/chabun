@@ -1464,10 +1464,10 @@
     "voiceId": "gJSDQIpSQ56NBGhorBfg",
     "voiceName": "David - Calm, Steady and Clear",
     "model": "eleven_v4",
-    "script": "통화 연결을 시연하고 있어요. 실제 통화나 구호 접수를 확인한 상태가 아니에요.",
-    "scriptHash": "86d4e734d16b312e2125a123dad4015d25c87d38e6f9fd14e1dc325b37aa7b8e",
-    "file": "86d4e734d16b312e.mp3",
-    "path": "/guidance-audio/86d4e734d16b312e.mp3",
+    "script": "119와 통화 중이에요. 구호 접수 여부는 통화에서 직접 확인해 주세요.",
+    "scriptHash": "075001994216d44c63038cb10046dc9428c6ea67ab1908f5d9050d578d43c86e",
+    "file": "075001994216d44c.mp3",
+    "path": "/guidance-audio/075001994216d44c.mp3",
     "voiceSettings": {
       "stability": 0.65,
       "similarity_boost": 0.8,
@@ -1477,20 +1477,20 @@
     "sources": [
       "journey-flow/call"
     ],
-    "duration": 5.6,
-    "bytes": 136088,
-    "audioHash": "fa3b3c895b95aec17f06aac192e6520472455892bfb7d984852dafdf058292f2",
+    "duration": 4.88,
+    "bytes": 118534,
+    "audioHash": "74152d28aeaaa0f56dc05d093e5afc182256c0d3f709cf0bb951830025a0be83",
     "payloadEncoding": "UTF-8 JSON file",
-    "generatedAt": "2026-11-14T16:59:44.813Z"
+    "generatedAt": "2026-11-15T05:32:45.244Z"
   },
   {
     "voiceId": "gJSDQIpSQ56NBGhorBfg",
     "voiceName": "David - Calm, Steady and Clear",
     "model": "eleven_v4",
-    "script": "통화 종료 시연입니다. 도움이 더 필요하면 119 전화 화면을 다시 열 수 있어요.",
-    "scriptHash": "143e299cb6d375550342f32575b056ef3e7f2c84597258c27c421805d7d7a690",
-    "file": "143e299cb6d37555.mp3",
-    "path": "/guidance-audio/143e299cb6d37555.mp3",
+    "script": "119 통화가 끝났어요. 도움이 더 필요하면 119 전화 화면을 다시 열 수 있어요.",
+    "scriptHash": "2d2244dec3fc219cf5659f094466d94e9d617f079b529deae5fe8537f305a99b",
+    "file": "2d2244dec3fc219c.mp3",
+    "path": "/guidance-audio/2d2244dec3fc219c.mp3",
     "voiceSettings": {
       "stability": 0.65,
       "similarity_boost": 0.8,
@@ -1500,11 +1500,11 @@
     "sources": [
       "journey-flow/call-ended"
     ],
-    "duration": 5.76,
-    "bytes": 139850,
-    "audioHash": "7e4b82ba2e30ba5f7cb02e7d8a5ea12b722379d50b9cdc633a8b803344442705",
+    "duration": 5.92,
+    "bytes": 143612,
+    "audioHash": "3d1705b3de98fcea1b86b1c622d6a360bdcadccbf106f3b3b3c2ca47f98c4332",
     "payloadEncoding": "UTF-8 JSON file",
-    "generatedAt": "2026-11-14T16:59:44.864Z"
+    "generatedAt": "2026-11-15T05:32:45.467Z"
   },
   {
     "voiceId": "gJSDQIpSQ56NBGhorBfg",
@@ -1740,10 +1740,10 @@
     "voiceId": "gJSDQIpSQ56NBGhorBfg",
     "voiceName": "David - Calm, Steady and Clear",
     "model": "eleven_v4",
-    "script": "시연 전송이 끝났어요. 실제 보험사 전송이나 접수 결과가 아니에요.",
-    "scriptHash": "e6058e8f416789b2cb3a1d906a56addcb25c3c30a9c17e2d97c7109be5b56d05",
-    "file": "e6058e8f416789b2.mp3",
-    "path": "/guidance-audio/e6058e8f416789b2.mp3",
+    "script": "전송을 마쳤어요. 예시 전송이라 실제 보험사에는 보내지 않았어요.",
+    "scriptHash": "066346ac52fa324ddc62001c0baa6d00bc480b4fc8f3790be782f2f02d7b42df",
+    "file": "066346ac52fa324d.mp3",
+    "path": "/guidance-audio/066346ac52fa324d.mp3",
     "voiceSettings": {
       "stability": 0.65,
       "similarity_boost": 0.8,
@@ -1753,20 +1753,20 @@
     "sources": [
       "journey-flow/sent"
     ],
-    "duration": 5.04,
-    "bytes": 122296,
-    "audioHash": "3da619b70314ae18c3a8810143ecf952404324cb3f3b3f17e5d4394b8b97bb47",
+    "duration": 6.08,
+    "bytes": 147373,
+    "audioHash": "b386a3c59e989150ca9a404f30957acf0d281d77751a739452a587bd00d81a28",
     "payloadEncoding": "UTF-8 JSON file",
-    "generatedAt": "2026-11-14T16:59:46.875Z"
+    "generatedAt": "2026-11-15T05:32:45.407Z"
   },
   {
     "voiceId": "gJSDQIpSQ56NBGhorBfg",
     "voiceName": "David - Calm, Steady and Clear",
     "model": "eleven_v4",
-    "script": "보험 접수 시연이 끝났어요. 시연 접수번호를 확인한 뒤 다음 할 일을 살펴보세요. 실제 접수는 아니에요.",
-    "scriptHash": "d3ac970a3bb94983f16c912929627e8f33256eeca5e70c75c5641664cab5e10a",
-    "file": "d3ac970a3bb94983.mp3",
-    "path": "/guidance-audio/d3ac970a3bb94983.mp3",
+    "script": "접수번호를 받았어요. 예시 접수번호예요. 확인한 뒤 다음 할 일을 살펴보세요.",
+    "scriptHash": "995603c47829939a931085a398c8301e9068643ff03f46bd12d4968a0fa02f9a",
+    "file": "995603c47829939a.mp3",
+    "path": "/guidance-audio/995603c47829939a.mp3",
     "voiceSettings": {
       "stability": 0.65,
       "similarity_boost": 0.8,
@@ -1776,10 +1776,10 @@
     "sources": [
       "journey-flow/received"
     ],
-    "duration": 7.92,
-    "bytes": 191886,
-    "audioHash": "86ab850f2fe2fbce7b7bd736175692bac05bb8fedd46877610a1829efb6b190f",
+    "duration": 6.8,
+    "bytes": 164928,
+    "audioHash": "ee5304af62075964b575aea3d5d5bbd139096265a6473d40f61efa10534dcdc4",
     "payloadEncoding": "UTF-8 JSON file",
-    "generatedAt": "2026-11-14T16:59:49.658Z"
+    "generatedAt": "2026-11-15T05:32:47.336Z"
   }
 ]

@@ -189,7 +189,8 @@ test('now opens the dialer without connecting and the explicit call-end demo sur
   await flow(page).getByRole('button', { name: '다친 사람이 있어요', exact: true }).click()
   await flow(page).getByRole('button', { name: '지금 연결', exact: true }).click()
   await expect(flow(page)).toHaveAttribute('data-call', 'connecting')
-  await expect(flow(page).locator('[data-cell=guide]')).toContainText('119 전화 화면을 열었어요')
+  await expect(flow(page).locator('[data-cell=emergency]')).toContainText('119 전화 화면을 열었어요')
+  await expect(flow(page).locator('[data-cell=guide]')).not.toContainText('119 전화 화면을 열었어요')
   await expect(flow(page).locator('[data-cell=emergency]')).toContainText('실제 통화·구호 접수 미확인')
   await flow(page).getByRole('button', { name: '대피 안내 보기', exact: true }).click()
   await enterJourneyRecord(page)
@@ -289,7 +290,7 @@ test('a build without a backend runs standalone and never offers the phone link'
   const payload = approved.submissions.find(item => item.id === approved.activeSubmissionIds.insurance)?.payload
   await page.getByRole('button', { name: '승인한 내용 보내기', exact: true }).click()
   await expect.poll(async () => (await stored(page)).emergency.requests.insurance).toBe('received')
-  await expect(flow(page).locator('[data-cell=guide]')).toContainText('보험 접수 시연 · 실제 접수 아님')
+  await expect(flow(page).locator('[data-cell=guide]')).toContainText('접수번호를 받았어요')
   await page.getByRole('button', { name: '차량 지원·정비소 안내 보기', exact: true }).click()
   await expect(page.getByRole('heading', { name: '필요한 다음 일을 살펴보세요', exact: true })).toBeVisible()
   await stored(page)

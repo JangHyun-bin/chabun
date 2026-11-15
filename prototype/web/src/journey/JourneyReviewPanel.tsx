@@ -32,7 +32,8 @@ export function StoredClip({ caseId, evidence, revision, saving, range, active =
 
 export type JourneyReviewHandle = { finishBeforeLeave: () => Promise<boolean>; openReport: () => void; openSubmission: () => void; preserveDraft: () => void; recoveryCommand: () => CaseCommand | null }
 export function JourneyReviewPanel({ value, saving, reloading, onCommand, onApprove, onPrepareExample, onCopyPrepared, reloadVersion = 0, explicitTransport=false, mode='study', ref, footer }: { footer?:ReactNode; reloadVersion?: number; explicitTransport?: boolean; mode?:'study'|'product'; value: JourneyCase; saving: boolean; reloading: boolean; onCommand: (command: CaseCommand) => Promise<CommitResult>; onApprove: (input: ApprovalInput, preview: PayloadSnapshot) => Promise<ApprovalCommitResult>; onPrepareExample?: () => Promise<boolean>; onCopyPrepared?: () => Promise<boolean>; ref?: Ref<JourneyReviewHandle> }) {
-  const [tab, setTab] = useState<'records' | 'clips' | 'diagram' | 'report'>(mode === 'product' ? 'records' : 'clips')
+  const hasReport = !!value.report?.paragraphs.length
+  const [tab, setTab] = useState<'records' | 'clips' | 'diagram' | 'report'>(mode === 'product' ? 'records' : hasReport ? 'report' : 'clips')
   const [diagramDirty, setDiagramDirty] = useState(false)
   const [reportDirty, setReportDirty] = useState(false)
   const [submission, setSubmission] = useState(false)
@@ -67,7 +68,7 @@ export function JourneyReviewPanel({ value, saving, reloading, onCommand, onAppr
   }), [preparing, diagramDirty, reportDirty, submissionDirty])
   return <>
     <div ref={reviewContent} hidden={submission} inert={reloading || preparing} aria-busy={reloading || preparing} className="journey-review-content journey-editor-panel">
-    <JourneyEditorLayout guidanceKey={tab+'/'+submission} step="사고 내용 확인" title={mode === 'product' ? '남긴 내용을 확인하세요' : '남겨진 자료를 살펴보세요'} description={'확실하지 않은 내용은 미확인으로 남겨도 돼요.'} primary={<JourneyAction disabled={preparing || diagramDirty || reportDirty} onClick={() => setSubmission(true)}>{mode === 'product' ? '내 사본 범위 선택' : '보낼 내용 확인'}</JourneyAction>}>
+    <JourneyEditorLayout step="사고 내용 확인" title={mode === 'product' ? '남긴 내용을 확인하세요' : '남겨진 자료를 살펴보세요'} description={'확실하지 않은 내용은 미확인으로 남겨도 돼요.'} primary={<JourneyAction disabled={preparing || diagramDirty || reportDirty} onClick={() => setSubmission(true)}>{mode === 'product' ? '내 사본 범위 선택' : '보낼 내용 확인'}</JourneyAction>}>
 
     <nav className="journey-record-tabs journey-review-tabs" aria-label="확인할 자료">
       {mode === 'product' && <button aria-pressed={tab === 'records'} onClick={() => setTab('records')}>사진·음성·글</button>}
@@ -75,7 +76,7 @@ export function JourneyReviewPanel({ value, saving, reloading, onCommand, onAppr
       <button aria-pressed={tab === 'diagram'} onClick={() => setTab('diagram')}>사고 도식</button>
       <button aria-pressed={tab === 'report'} onClick={() => setTab('report')}>경위서</button>
     </nav>
-    {onPrepareExample && <section className="journey-review-example" aria-label="예시 경위서 만들기">
+    {onPrepareExample && (mode === 'product' || !hasReport) && <section className="journey-review-example" aria-label="예시 경위서 만들기">
       <p className="journey-supporting">현재 자료와 진술을 연결하는 예시예요. 자동 사고 분석 결과가 아니며 근거 확인과 수정이 필요해요.</p>
       <JourneyAction secondary disabled={preparing || !canPrepareExample} onClick={() => void prepareExample()}>{preparing ? '예시 경위서 만드는 중' : '예시 경위서 만들기'}</JourneyAction>
       {(diagramDirty || reportDirty) && <p className="journey-supporting">수정 중인 내용을 저장하거나 취소한 뒤 예시를 만들 수 있어요.</p>}
