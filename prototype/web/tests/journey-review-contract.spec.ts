@@ -210,7 +210,7 @@ test('a confirmed report starts selected with its evidence, approval stays expli
     await expect(paragraph.getByText('내용 확인함', { exact: true })).toBeVisible()
   }
   await root.getByRole('button', { name: '보낼 내용 확인', exact: true }).click()
-  await expect(root.getByLabel('수신처', { exact: true })).toHaveValue('내 자동차보험 (등록된 보험사)')
+  await expect(root.getByLabel('수신처', { exact: true })).toHaveValue('가온손해보험 (예시)')
   await expect(root.getByRole('checkbox', { name: '경위서', exact: true })).toBeChecked()
   for (const label of ['전방 영상', '현장 전체 사진', '음성 진술']) await expect(root.getByRole('checkbox', { name: label, exact: true })).toBeChecked()
   await root.getByLabel('수신처', { exact: true }).fill('시연 보험사')
