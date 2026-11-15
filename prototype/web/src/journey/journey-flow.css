@@ -59,11 +59,20 @@
 .journey-workspace-scroll { display:flex; flex-direction:column; gap:var(--ac-space-6); min-width:0; }
 .journey-workspace-scroll>* { flex-shrink:0; }
 .journey-editor-primary { min-width:0; }
+/* Touch-only screen: no scrollbar gutter, so scrolled content and the fixed footer share the same right edge. */
+.journey-flow-workspace .journey-workspace-scroll::-webkit-scrollbar { display:none; }
+/* Secondary takes its natural width and the primary fills the rest; on narrow or enlarged text the primary wraps below. */
+.journey-editor-primary-row { display:flex; flex-wrap:wrap; gap:var(--ac-space-3); }
+.journey-editor-primary-row>.ac-action { flex:0 1 auto; min-width:0; }
+.journey-editor-primary-row>.ac-action:last-child { flex:1 1 9em; }
+/* The close link sits on the eyebrow line so the title keeps the full width. */
+.journey-editor-title[data-has-action] { position:relative; }
+.journey-editor-close { position:absolute; top:calc(var(--ac-space-3) * -1); right:0; min-height:var(--ac-touch); padding-block:0; align-items:center; color:var(--ac-muted); font-size:var(--ac-type-label); text-decoration:underline; text-underline-offset:.25em; }
 .journey-flow-workspace .journey-editor-holder { height:100%; }
 .journey-flow-workspace .journey-editor-panel { display:grid; grid-template-columns:minmax(0,1fr); grid-template-rows:auto minmax(0,1fr) auto; gap:var(--ac-space-2); height:100%; min-height:0; min-width:0; }
 .journey-flow-workspace .journey-editor-title .ac-heading { gap:var(--ac-space-1); }
 .journey-flow-workspace .journey-editor-title h1 { font-size:var(--ac-type-guide); line-height:1.22; }
-.journey-flow-workspace .journey-workspace-scroll { overflow-y:auto; overflow-x:hidden; overscroll-behavior:contain; scrollbar-gutter:stable; min-height:0; padding:9px; margin-inline:-9px; scroll-padding-block:9px; }
+.journey-flow-workspace .journey-workspace-scroll { overflow-y:auto; overflow-x:hidden; overscroll-behavior:contain; scrollbar-width:none; min-height:0; padding:9px; margin-inline:-9px; scroll-padding-block:9px; }
 .journey-flow-workspace .journey-record-tabs { margin:0; }
 .journey-flow-workspace .journey-record-tabs button { min-height:var(--ac-touch); }
 .journey-flow-workspace .journey-textarea { resize:vertical; max-width:100%; }
