@@ -1,0 +1,23 @@
+{
+  "voiceId": "gJSDQIpSQ56NBGhorBfg",
+  "voiceName": "David - Calm, Steady and Clear",
+  "model": "eleven_v4",
+  "script": "기억나는 내용을 말로 남겨주세요. 확실한 내용만 말해도 돼요. 말하기를 마친 뒤 내용을 확인하고 저장할 수 있어요.",
+  "scriptHash": "e7af40e571accdc77b1ac340d0a14b95a05df62aa0f5fcbef42b557c092bfd02",
+  "file": "e7af40e571accdc7.mp3",
+  "path": "/guidance-audio/e7af40e571accdc7.mp3",
+  "voiceSettings": {
+    "stability": 0.65,
+    "similarity_boost": 0.8,
+    "style": 0.05,
+    "use_speaker_boost": true
+  },
+  "sources": [
+    "journey/기억나는 내용을 남겨주세요"
+  ],
+  "duration": 8.4,
+  "bytes": 203171,
+  "audioHash": "842b3ca4aca0c11ec22bc592b6632e620e73ea5b0705304ce5b1141ed9fe2e46",
+  "payloadEncoding": "UTF-8 JSON file",
+  "generatedAt": "2026-11-14T06:08:30.409Z"
+}

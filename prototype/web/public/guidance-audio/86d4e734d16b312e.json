@@ -1,0 +1,23 @@
+{
+  "voiceId": "gJSDQIpSQ56NBGhorBfg",
+  "voiceName": "David - Calm, Steady and Clear",
+  "model": "eleven_v4",
+  "script": "통화 연결을 시연하고 있어요. 실제 통화나 구호 접수를 확인한 상태가 아니에요.",
+  "scriptHash": "86d4e734d16b312e2125a123dad4015d25c87d38e6f9fd14e1dc325b37aa7b8e",
+  "file": "86d4e734d16b312e.mp3",
+  "path": "/guidance-audio/86d4e734d16b312e.mp3",
+  "voiceSettings": {
+    "stability": 0.65,
+    "similarity_boost": 0.8,
+    "style": 0.05,
+    "use_speaker_boost": true
+  },
+  "sources": [
+    "journey-flow/call"
+  ],
+  "duration": 5.6,
+  "bytes": 136088,
+  "audioHash": "fa3b3c895b95aec17f06aac192e6520472455892bfb7d984852dafdf058292f2",
+  "payloadEncoding": "UTF-8 JSON file",
+  "generatedAt": "2026-11-14T16:59:44.813Z"
+}

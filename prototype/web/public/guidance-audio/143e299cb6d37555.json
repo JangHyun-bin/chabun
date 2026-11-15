@@ -1,0 +1,23 @@
+{
+  "voiceId": "gJSDQIpSQ56NBGhorBfg",
+  "voiceName": "David - Calm, Steady and Clear",
+  "model": "eleven_v4",
+  "script": "통화 종료 시연입니다. 도움이 더 필요하면 119 전화 화면을 다시 열 수 있어요.",
+  "scriptHash": "143e299cb6d375550342f32575b056ef3e7f2c84597258c27c421805d7d7a690",
+  "file": "143e299cb6d37555.mp3",
+  "path": "/guidance-audio/143e299cb6d37555.mp3",
+  "voiceSettings": {
+    "stability": 0.65,
+    "similarity_boost": 0.8,
+    "style": 0.05,
+    "use_speaker_boost": true
+  },
+  "sources": [
+    "journey-flow/call-ended"
+  ],
+  "duration": 5.76,
+  "bytes": 139850,
+  "audioHash": "7e4b82ba2e30ba5f7cb02e7d8a5ea12b722379d50b9cdc633a8b803344442705",
+  "payloadEncoding": "UTF-8 JSON file",
+  "generatedAt": "2026-11-14T16:59:44.864Z"
+}

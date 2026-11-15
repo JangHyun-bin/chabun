@@ -1,0 +1,14 @@
+{
+  "provider": "ElevenLabs",
+  "voiceId": "gJSDQIpSQ56NBGhorBfg",
+  "voiceName": "David - Calm, Steady and Clear",
+  "model": "eleven_v4",
+  "script": "정차 중 오른쪽에서 충격을 느꼈어요. 정확한 사고 경위는 확인 중이에요.",
+  "scriptHash": "7ad4b7686474547c1a6a57fbf524ecf398350a19ad735f83b73f539065dddb55",
+  "sourceAudioHash": "e730f87234086727371444bfa67cbdf08a5aa21fdd190a1ce98c09088c056252",
+  "generatedAt": "2026-11-14T17:38:55.672Z",
+  "accountTier": "creator",
+  "accountStatus": "active",
+  "purpose": "Synthetic user-recording example, not microphone capture or speech recognition",
+  "terms": "https://elevenlabs.io/docs/help-center/legal/can-i-publish-the-content-i-generate-on-the-platform"
+}

@@ -1,0 +1,23 @@
+{
+  "voiceId": "gJSDQIpSQ56NBGhorBfg",
+  "voiceName": "David - Calm, Steady and Clear",
+  "model": "eleven_v4",
+  "script": "119 전화 화면을 열었어요. 실제 발신과 구호 접수는 확인되지 않았어요. 전화 앱에서 직접 연결해 주세요.",
+  "scriptHash": "e8456282a2fd195bb7643fa57706bca3e720919dc01d303f3661d48a24b6d5a7",
+  "file": "e8456282a2fd195b.mp3",
+  "path": "/guidance-audio/e8456282a2fd195b.mp3",
+  "voiceSettings": {
+    "stability": 0.65,
+    "similarity_boost": 0.8,
+    "style": 0.05,
+    "use_speaker_boost": true
+  },
+  "sources": [
+    "journey-flow/calling"
+  ],
+  "duration": 8.16,
+  "bytes": 197528,
+  "audioHash": "a6d5bf5e65158c2a5aed693b80e14ceb852dec3313ba3f2078e0997af3578934",
+  "payloadEncoding": "UTF-8 JSON file",
+  "generatedAt": "2026-11-14T16:59:42.621Z"
+}

@@ -1,0 +1,23 @@
+{
+  "voiceId": "gJSDQIpSQ56NBGhorBfg",
+  "voiceName": "David - Calm, Steady and Clear",
+  "model": "eleven_v4",
+  "script": "트렁크를 열어 주세요. 안전하게 열 수 있을 때만 진행하고 차도로 나가지 마세요.",
+  "scriptHash": "6af6336549d2c4248a18be93e8da1577db3d84867fe42f054adcb4930234b7d1",
+  "file": "6af6336549d2c424.mp3",
+  "path": "/guidance-audio/6af6336549d2c424.mp3",
+  "voiceSettings": {
+    "stability": 0.65,
+    "similarity_boost": 0.8,
+    "style": 0.05,
+    "use_speaker_boost": true
+  },
+  "sources": [
+    "journey-flow/trunk"
+  ],
+  "duration": 5.76,
+  "bytes": 139850,
+  "audioHash": "67eca12dc1821e798adf7bd16e367c477681231986c005c63ac41fc441d027ad",
+  "payloadEncoding": "UTF-8 JSON file",
+  "generatedAt": "2026-11-14T16:59:47.239Z"
+}

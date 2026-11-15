@@ -1,0 +1,325 @@
+import { useEffect, useImperativeHandle, useRef, useState, type Ref, type ReactNode } from 'react'
+import { ArrowLeft, ArrowRight, Camera, Check, ImagePlus, RefreshCw, Trash2, X } from 'lucide-react'
+import { captureTargets, LIMITS, type AssetWrite, type CaptureTarget, type CaseCommand, type CommitResult, type Evidence, type JourneyCase } from './case'
+import { useCaseData } from './case-data'
+import { JourneyAction, JourneyEditorLayout, JourneyStatus } from './JourneyLayout'
+import { capturePhoto, validatePhoto } from './capture'
+import './evidence.css'
+import { useEditorDraft } from '@/product/useEditorDraft'
+
+export type EvidencePanelHandle = { finishBeforeLeave: () => Promise<boolean>; preserveDraft: () => Promise<boolean> }
+type Draft = { evidence: Evidence; blob: Blob; url: string }
+type Phase = 'choose' | 'requesting' | 'camera' | 'capturing' | 'decoding' | 'review' | 'saving'
+type Props = {
+  navigation?:ReactNode
+  footer?:ReactNode
+  value: JourneyCase
+  onSave: (command: CaseCommand, assets: AssetWrite[]) => Promise<CommitResult>
+  onCommand: (command: CaseCommand) => void
+  ref?: Ref<EvidencePanelHandle>
+  guided?: { active: boolean; onComplete: () => void }
+}
+
+function StoredPhoto({ caseId, evidence, label }: { caseId: string; evidence: Evidence; label: string }) {
+  const data = useCaseData()
+  const [url, setUrl] = useState<string | null>(null)
+  const [failed, setFailed] = useState(false)
+  useEffect(() => {
+    let cancelled = false
+    let created: string | null = null
+    setUrl(null); setFailed(false)
+    void (async () => {
+      const blob = evidence.assetId ? await data.readAsset(caseId, evidence.assetId) : null
+      if (cancelled) return
+      try {
+        if (!blob) throw new Error('Missing asset')
+        await validatePhoto(blob)
+        if (cancelled) return
+        created = URL.createObjectURL(blob); setUrl(created)
+      } catch { if (!cancelled) setFailed(true) }
+    })().catch(() => { if (!cancelled) setFailed(true) })
+    return () => { cancelled = true; if (created) URL.revokeObjectURL(created) }
+  }, [data, caseId, evidence.assetId])
+  return <div className="journey-photo-thumbnail">{url && !failed
+    ? <img src={url} alt={label} onError={() => setFailed(true)} />
+    : <span>{failed ? '사진을 열 수 없어요' : '사진 확인 중'}</span>}</div>
+}
+
+export function EvidencePanel({ value, onSave, onCommand, ref, navigation, footer, guided }: Props) {
+  const data = useCaseData()
+  const [photos, setPhotos] = useState<Evidence[]>([])
+  const [photosReady, setPhotosReady] = useState(false)
+  const [target, setTarget] = useState<CaptureTarget | null>(null)
+  const [replacement, setReplacement] = useState<Evidence | null>(null)
+  const [draft, setDraft] = useState<Draft | null>(null)
+  const [phase, setPhase] = useState<Phase>('choose')
+  const [message, setMessage] = useState('')
+  const [error, setError] = useState('')
+  const [saveFailed, setSaveFailed] = useState(false)
+  const [stream, setStream] = useState<MediaStream | null>(null)
+  const [cameraReady, setCameraReady] = useState(false)
+  const video = useRef<HTMLVideoElement>(null)
+  const input = useRef<HTMLInputElement>(null)
+  const liveStream = useRef<MediaStream | null>(null)
+  const request = useRef(0)
+  const preparation = useRef(0)
+  const mounted = useRef(true)
+  const saving = useRef<Promise<boolean> | null>(null)
+  const guidedRef = useRef(guided)
+  const guidedInitialized = useRef(false)
+  guidedRef.current = guided
+  const editorDraft = useEditorDraft({ caseId: value.id, kind: 'photo', restore: saved => {
+    setTarget(saved.target); setReplacement(value.evidence.find(item => item.id === saved.replacementId) ?? null)
+    setDraft({ evidence: saved.evidence, blob: saved.blob, url: URL.createObjectURL(saved.blob) })
+    setPhase('review'); setMessage('이 기기에 남긴 사진을 불러왔어요. 확인한 뒤 저장해주세요.')
+  } })
+  const label = captureTargets.find(item => item.id === target)?.label ?? ''
+  const targetPhotos = photos.filter(photo => photo.captureTarget === target && photo.availability === 'available')
+  const currentPhotos = photos.filter(photo => photo.assetId !== null)
+  const obtained = captureTargets.filter(item => photos.some(photo => photo.captureTarget === item.id && photo.availability === 'available')).length
+  const skipped = captureTargets.filter(item => !photos.some(photo => photo.captureTarget === item.id && photo.availability === 'available') && photos.some(photo => photo.captureTarget === item.id && photo.availability === 'skipped')).length
+  const targetDecided = photos.some(photo => photo.captureTarget === target && (photo.availability === 'available' || photo.availability === 'skipped'))
+
+  useEffect(() => {
+    let cancelled = false
+    void data.load(value.id).then(stored => {
+      if (cancelled || stored.kind !== 'found') return
+      setPhotos(stored.value.evidence.filter(e => e.kind === 'photo')); setPhotosReady(true)
+    }).catch(() => { if (!cancelled) setError('저장된 사진을 불러오지 못했어요. 새 사진은 그대로 남아 있어요.') })
+    return () => { cancelled = true }
+  }, [data, value.id, value.revision])
+
+  useEffect(() => {
+    if (!guided || guidedInitialized.current || !photosReady || !editorDraft.ready) return
+    guidedInitialized.current = true
+    if (!draft) setTarget(captureTargets.find(item => !photos.some(photo => photo.captureTarget === item.id && (photo.availability === 'available' || photo.availability === 'skipped')))?.id ?? null)
+  }, [guided, photosReady, editorDraft.ready, photos, draft])
+
+  function stopCamera() {
+    request.current += 1
+    liveStream.current?.getTracks().forEach(track => track.stop())
+    liveStream.current = null
+    setStream(null); setCameraReady(false)
+  }
+
+  useEffect(() => {
+    mounted.current = true
+    const stop = () => { stopCamera(); setPhase(current => ['camera', 'requesting'].includes(current) ? 'choose' : current) }
+    window.addEventListener('pagehide', stop)
+    return () => { mounted.current = false; request.current += 1; preparation.current += 1; liveStream.current?.getTracks().forEach(track => track.stop()); liveStream.current = null; window.removeEventListener('pagehide', stop) }
+  }, [])
+
+  useEffect(() => {
+    if (value.stage === 'record' && !value.suspended && guided?.active !== false) return
+    stopCamera()
+    setPhase(current => ['camera', 'requesting'].includes(current) ? 'choose' : current)
+  }, [value.stage, value.suspended, guided?.active])
+
+  useEffect(() => {
+    if (!stream || !video.current) return
+    const element = video.current
+    element.srcObject = stream
+    void element.play().catch(() => {
+      stopCamera(); setPhase('choose'); setError('카메라를 사용할 수 없어요. 저장된 사진을 선택할 수 있어요.')
+    })
+    return () => { element.pause(); element.srcObject = null }
+  }, [stream])
+
+  useEffect(() => () => { if (draft) URL.revokeObjectURL(draft.url) }, [draft])
+  useEffect(() => {
+    if (editorDraft.ready && draft) void editorDraft.preserve({ kind:'photo', evidence:draft.evidence, blob:draft.blob, target, replacementId:replacement?.id ?? null })
+  }, [draft, target, replacement?.id, editorDraft.ready, editorDraft.preserve])
+
+  useEffect(() => {
+    if (!draft && !['capturing', 'decoding', 'saving'].includes(phase)) return
+    const warn = (event: BeforeUnloadEvent) => { event.preventDefault(); event.returnValue = '' }
+    window.addEventListener('beforeunload', warn)
+    return () => window.removeEventListener('beforeunload', warn)
+  }, [draft, phase])
+
+  useImperativeHandle(ref, () => ({ preserveDraft: async () => !draft || await editorDraft.preserve({ kind:'photo', evidence:draft.evidence, blob:draft.blob, target, replacementId:replacement?.id ?? null }), finishBeforeLeave: async () => {
+    if (!editorDraft.ready) { setError('이 기기의 사진 초안을 먼저 확인해주세요. 불러오지 못했다면 사진 보관 다시 시도를 눌러주세요.'); return false }
+    if (phase === 'capturing' || phase === 'decoding') { setError('사진을 확인하고 있어요. 잠시 뒤 다시 이동해주세요.'); return false }
+    stopCamera()
+    if (saving.current) return saving.current
+    if (draft) { setError('새 사진을 저장하거나 버린 뒤 이동해주세요.'); return false }
+    setPhase('choose')
+    return true
+  } }), [draft, phase, editorDraft.ready, editorDraft.preserve, target, replacement?.id])
+
+  function selectTarget(next: CaptureTarget) {
+    if (!editorDraft.ready || saving.current || draft) return
+    setTarget(next); setReplacement(null); setMessage(''); setError(''); setPhase('choose')
+  }
+
+  function advanceTarget(evidence: Evidence[], completed: CaptureTarget | null) {
+    if (!guidedRef.current?.active) return
+    const remaining = captureTargets.filter(item => !evidence.some(photo => photo.kind === 'photo' && photo.captureTarget === item.id && (photo.availability === 'available' || photo.availability === 'skipped')))
+    const index = captureTargets.findIndex(item => item.id === completed)
+    const next = remaining.find(item => captureTargets.indexOf(item) > index) ?? remaining[0]
+    stopCamera(); setReplacement(null); setError(''); setMessage(''); setPhase('choose')
+    if (next) setTarget(next.id)
+    else { setTarget(null); guidedRef.current.onComplete() }
+  }
+
+  useEffect(() => {
+    if (!draft || saving.current || guidedRef.current?.active === false) return
+    const acknowledged = photos.some(photo => photo.id === draft.evidence.id && photo.assetId === draft.evidence.assetId &&
+      photo.revision === draft.evidence.revision && photo.availability === 'available')
+    if (!acknowledged) return
+    void editorDraft.preserve(null)
+    setDraft(null); setReplacement(null); setPhase('choose'); setError(''); setSaveFailed(false)
+    if (guidedRef.current) advanceTarget(photos, draft.evidence.captureTarget)
+  }, [photos, draft, guided?.active, editorDraft.preserve])
+  function photoSlot() {
+    return replacement ?? photos.find(photo => photo.captureTarget === target && photo.assetId === null) ?? null
+  }
+
+  async function prepare(blob: Blob, sourceLabel: string) {
+    const generation = ++preparation.current
+    setError(''); setMessage(''); setSaveFailed(false)
+    setPhase('decoding')
+    try {
+      const previous = photoSlot()
+      if (!previous?.assetId && currentPhotos.length >= LIMITS.photoCount) throw new Error('사진은 최대 12장까지 남길 수 있어요. 기존 사진을 교체하거나 삭제해주세요.')
+      await validatePhoto(blob)
+      if (generation !== preparation.current || !mounted.current || !target) return
+      const evidence: Evidence = { id: previous?.id ?? crypto.randomUUID(), label, kind: 'photo', origin: 'user',
+        revision: (previous?.revision ?? 0) + 1, captureTarget: target, availability: 'available', assetId: crypto.randomUUID(),
+        metadata: { mime: blob.type, bytes: blob.size, duration: null, capturedAt: new Date().toISOString(), sourceLabel } }
+      setDraft({ evidence, blob, url: URL.createObjectURL(blob) }); setPhase('review')
+    } catch (caught) {
+      if (mounted.current && generation === preparation.current) {
+        setPhase(draft ? 'review' : 'choose'); setError(caught instanceof Error ? caught.message : '사진을 열 수 없어요. 다른 사진을 선택해주세요.')
+      }
+    }
+  }
+
+  async function openCamera() {
+    if (draft) return
+    setError(''); setMessage(''); setCameraReady(false); setPhase('requesting')
+    const generation = ++request.current
+    try {
+      if (!navigator.mediaDevices?.getUserMedia) throw new Error('No camera')
+      const next = await navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: 'environment' } }, audio: false })
+      if (!mounted.current || generation !== request.current) { next.getTracks().forEach(track => track.stop()); return }
+      liveStream.current = next; setStream(next); setPhase('camera')
+    } catch {
+      if (mounted.current && generation === request.current) {
+        stopCamera(); setPhase('choose'); setError('카메라를 사용할 수 없어요. 저장된 사진을 선택할 수 있어요.')
+      }
+    }
+  }
+
+  async function takePhoto() {
+    if (!liveStream.current) return
+    setCameraReady(false); setPhase('capturing')
+    try {
+      const blob = await capturePhoto(liveStream.current)
+      stopCamera()
+      if (mounted.current) await prepare(blob, '직접 촬영')
+    } catch (caught) {
+      stopCamera(); setPhase('choose'); setError(caught instanceof Error ? caught.message : '사진을 찍지 못했어요. 다시 시도해주세요.')
+    }
+  }
+
+  async function commit(command: CaseCommand, assets: AssetWrite[]) {
+    if (saving.current) return saving.current
+    setPhase('saving'); setError(''); setMessage('')
+    const work = Promise.resolve().then(async () => {
+      try {
+        const result = await onSave(command, assets)
+        if (!mounted.current) return result.ok
+        if (!result.ok) {
+          setSaveFailed(true)
+          setError(result.reason === 'quota' ? '이 기록에 사진을 더 저장할 공간이 없어요. 이전 사진과 새 사진은 그대로 남아 있어요.'
+            : '사진을 저장하지 못했어요. 이전 사진과 새 사진은 그대로 남아 있어요.')
+          setPhase(draft ? 'review' : 'choose')
+          return false
+        }
+        setPhotos(result.value.evidence.filter(e => e.kind === 'photo'))
+        await editorDraft.preserve(null)
+        const retained = command.type === 'evidence-remove' && result.value.evidenceHistory.some(item => item.id === command.id)
+        setDraft(null); setReplacement(null); setPhase('choose'); setMessage(command.type === 'evidence-remove'
+          ? retained ? '현재 자료에서 제외했어요. 이전 경위서나 승인 기록에 연결된 원본은 보존돼요.' : '사진을 삭제했어요.' : '사진을 저장했어요.')
+        if (guidedRef.current && command.type === 'evidence-put') advanceTarget(result.value.evidence, command.evidence.captureTarget)
+        return true
+      } catch {
+        if (mounted.current) { setSaveFailed(true); setError('사진을 저장하지 못했어요. 이전 사진과 새 사진은 그대로 남아 있어요.'); setPhase(draft ? 'review' : 'choose') }
+        return false
+      } finally { saving.current = null }
+    })
+    saving.current = work
+    return work
+  }
+
+  function savePhoto() {
+    if (!draft || !draft.evidence.assetId || saving.current || guidedRef.current?.active === false) return
+    void commit({ type: 'evidence-put', evidence: draft.evidence }, [{ id: draft.evidence.assetId, caseId: value.id, blob: draft.blob }])
+  }
+
+  async function skip() {
+    if (!target || draft || targetPhotos.length || saving.current || guidedRef.current?.active === false) return
+    const previous = photoSlot()
+    const evidence: Evidence = { id: previous?.id ?? crypto.randomUUID(), label, kind: 'photo', origin: 'user',
+      revision: (previous?.revision ?? 0) + 1, assetId: null, availability: 'skipped', captureTarget: target,
+      metadata: { mime: '', bytes: 0, duration: null, capturedAt: null, sourceLabel: '사용자가 생략' } }
+    if (await commit({ type: 'evidence-put', evidence }, []) && !guidedRef.current) { setTarget(null); setMessage('이 대상은 지금 생략했어요.') }
+  }
+
+  return <section className="journey-evidence journey-editor-panel" aria-label="사진 자료" data-photo-guided={!!guided} data-current-photo-target={target ?? undefined}>
+    <JourneyEditorLayout step={guided && target ? `사진 ${captureTargets.findIndex(item => item.id === target) + 1} / ${captureTargets.length}` : '현장 기록'} title={guided && target ? label : '사진 남기기'} description={guided ? '안전한 곳에서 남길 수 있는 사진만 기록하세요. 촬영이 어렵다면 이 대상을 생략할 수 있어요.' : '지금 남길 수 있는 사진만 선택해도 돼요.'} primary={target ? (draft
+      ? <JourneyAction disabled={phase === 'saving' || guided?.active === false} onClick={savePhoto}><Check aria-hidden="true" />{phase === 'saving' ? '사진 저장 중' : saveFailed ? '저장 다시 시도' : '이 사진 사용'}</JourneyAction>
+      : phase === 'camera' || phase === 'requesting'
+        ? <JourneyAction disabled={!cameraReady || guided?.active === false} onClick={() => void takePhoto()}><Camera aria-hidden="true" />사진 찍기</JourneyAction>
+        : guided && targetDecided
+          ? <JourneyAction disabled={phase !== 'choose' || !guided.active} onClick={() => advanceTarget(photos, target)}><ArrowRight aria-hidden="true" />다음 촬영 대상으로</JourneyAction>
+          : <JourneyAction disabled={phase !== 'choose' || !editorDraft.ready || guided?.active === false} onClick={() => void openCamera()}><Camera aria-hidden="true" />촬영하기</JourneyAction>)
+      : guided && photosReady && obtained + skipped === captureTargets.length ? <JourneyAction disabled={!guided.active || !editorDraft.ready} onClick={() => guidedRef.current?.active && guidedRef.current.onComplete()}>진술로 계속</JourneyAction> : null}>
+
+    {navigation}
+    <div className="journey-photo-progress">{(data.mode === 'study' || guided) && <><span>확보한 대상</span><strong data-photo-count>{obtained} / {captureTargets.length}</strong><span data-photo-skipped>생략 {skipped}개</span></>}<span>{currentPhotos.length}장 보관 중</span></div>
+    {!target ? <>
+      <div className="journey-photo-targets">{captureTargets.map(item => {
+        const entries = photos.filter(photo => photo.captureTarget === item.id)
+        const count = entries.filter(photo => photo.availability === 'available').length
+        const status = count ? '확보됨' : entries.some(photo => photo.availability === 'skipped') ? '생략' : entries.some(photo => ['failed', 'unavailable'].includes(photo.availability)) ? '확보 못함' : '사진 없음'
+        return <button key={item.id} data-photo-target={item.id} aria-label={item.label + ' 사진'} disabled={!editorDraft.ready} onClick={() => selectTarget(item.id)}>
+          <Camera aria-hidden="true" /><span><strong>{item.label}</strong><JourneyStatus tone={count ? 'confirmed' : status === '생략' ? 'skipped' : 'unknown'}>{status}{count > 0 && ` · ${count}장`}</JourneyStatus></span><ArrowRight aria-hidden="true" />
+        </button>
+      })}</div>
+      {!guided && !obtained && <button className="journey-text-action" onClick={() => onCommand({ type: 'navigate', stage: 'review' })}>사진 없이 내용 확인<ArrowRight aria-hidden="true" /></button>}
+    </> : <>
+      <div className="journey-photo-target-heading"><button className="journey-text-action" disabled={['saving', 'capturing', 'decoding'].includes(phase) || !!draft} onClick={() => { stopCamera(); setTarget(null); setReplacement(null); setPhase('choose'); setError(''); setMessage('') }}><ArrowLeft aria-hidden="true" />{guided ? '촬영 대상 다시 보기' : '사진 목록으로'}</button>{!guided && <h2>{label}</h2>}</div>
+      {targetPhotos.length > 0 && <div className="journey-photo-saved">{targetPhotos.map((photo, index) => <article key={photo.id}>
+        <StoredPhoto caseId={value.id} evidence={photo} label={`${label} 사진 ${index + 1}`} />
+        <div><span>{photo.metadata.sourceLabel}</span><div>
+          <button aria-label={`${label} 사진 ${index + 1} 교체`} disabled={phase !== 'choose' || !!draft} onClick={() => { setReplacement(photo); setMessage(''); setError(''); input.current?.click() }}><RefreshCw aria-hidden="true" />교체</button>
+          <button aria-label={`${label} 사진 ${index + 1} 삭제`} disabled={phase !== 'choose' || !!draft} onClick={() => void commit({ type: 'evidence-remove', id: photo.id }, [])}><Trash2 aria-hidden="true" />삭제</button>
+        </div></div>
+      </article>)}</div>}
+      <input ref={input} type="file" accept="image/jpeg,image/png,image/webp" aria-label="사진 파일 선택" className="journey-photo-file"
+        disabled={phase !== 'choose'} onChange={event => { const file = event.currentTarget.files?.[0]; event.currentTarget.value = ''; if (file) void prepare(file, '사진 선택') }} />
+      {draft ? <div className="journey-photo-review">
+        <img src={draft.url} alt={`저장 전 ${label} 사진`} />
+        <p>{replacement ? '이 사진으로 바꿀까요? 저장될 때까지 이전 사진을 유지해요.' : '이 사진을 기록에 남길까요?'}</p>
+        <JourneyAction secondary disabled={phase === 'saving'} onClick={() => { setDraft(null); setReplacement(null); setPhase('choose'); setError(''); void editorDraft.preserve(null) }}><X aria-hidden="true" />새 사진 버리기</JourneyAction>
+      </div> : phase === 'capturing' || phase === 'decoding' ? <p className="journey-photo-message" role="status">사진을 확인하고 있어요.</p>
+      : phase === 'camera' || phase === 'requesting' ? <div className="journey-photo-camera">
+        <div className="journey-photo-viewfinder"><video ref={video} muted playsInline autoPlay aria-label={`${label} 촬영 화면`} onCanPlay={() => setCameraReady(true)} /><div className="journey-photo-frame" aria-hidden="true" /><span>{phase === 'requesting' ? '카메라 사용을 기다리고 있어요' : label + '이 화면에 들어오게 맞춰주세요'}</span></div>
+        <JourneyAction secondary onClick={() => { stopCamera(); setPhase('choose') }}>촬영 취소</JourneyAction>
+      </div> : <div className="journey-photo-choose">
+        <JourneyAction secondary disabled={phase === 'saving'} onClick={() => { setReplacement(null); input.current?.click() }}><ImagePlus aria-hidden="true" />사진 선택</JourneyAction>
+        {guided && targetDecided && <JourneyAction secondary disabled={phase !== 'choose'} onClick={() => void openCamera()}><Camera aria-hidden="true" />사진 추가로 촬영</JourneyAction>}
+        {!targetPhotos.length && <button className="journey-text-action" disabled={phase === 'saving'} onClick={() => void skip()}>지금 촬영하기 어려워요<ArrowRight aria-hidden="true" /></button>}
+      </div>}
+    </>}
+    {error && <p className="journey-photo-message" role="alert">{error}</p>}
+    {message && <p className="journey-photo-message" role="status">{message}</p>}
+    {!editorDraft.ready && !editorDraft.failed && <p role="status" className="journey-supporting">이 기기의 사진 초안을 확인하고 있어요.</p>}
+    {editorDraft.failed && <p role="alert" className="journey-supporting">이 기기에 새 사진을 보관하지 못했어요. 화면을 닫지 말고 다시 시도해주세요. <button type="button" onClick={() => editorDraft.ready && draft ? void editorDraft.preserve({ kind:'photo', evidence:draft.evidence, blob:draft.blob, target, replacementId:replacement?.id ?? null }) : editorDraft.retry()}>사진 보관 다시 시도</button></p>}
+    {footer}
+    </JourneyEditorLayout>
+
+  </section>
+}
