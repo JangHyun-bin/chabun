@@ -142,7 +142,7 @@ export function SubmissionPanel({ value, onApprove, onCommand, onCancel, onDirty
     </section>}
     {allowed && !preview && <>
       <label className="journey-recipient">수신처<input ref={recipient} maxLength={100} value={draft.recipient} placeholder={target === 'share' ? '상대방 이름이나 연락처' : undefined} onChange={event => change({ recipient: event.target.value })} /></label>
-      <p className="journey-supporting">목적 · {purposes[target]}{target === 'insurance' ? ' · 등록한 보험사를 넣어뒀어요' : ''}</p>
+      <p className="journey-supporting">목적 · {purposes[target]}{target === 'insurance' ? ' · 예시 보험사를 넣어뒀어요' : ''}</p>
       <fieldset className="journey-send-options"><legend>보낼 내용</legend>
         <p className="journey-supporting">확인을 마친 기록과 확보한 자료를 미리 골라뒀어요. 보내고 싶지 않은 항목은 선택을 해제해주세요.</p>
         {value.observations.map(item => <label key={item.id}><input type="checkbox" checked={draft.selection.observationIds.includes(item.id)} onChange={() => toggle('observationIds', item.id)} /><span>{item.label} · {item.value}</span></label>)}
