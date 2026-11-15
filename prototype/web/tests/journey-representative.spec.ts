@@ -216,6 +216,7 @@ test('the representative journey preserves explicit approval through timed demo 
   await page.getByRole('checkbox', { name: /남긴 이야기 1/ }).check()
   await page.getByRole('button', { name: '선택한 내용 미리보기', exact: true }).click()
   await page.getByRole('button', { name: '이 내용으로 요청', exact: true }).click()
+  await expect(page.getByText('승인한 내용이 보관됐어요', { exact: true })).toBeVisible()
   const approved = await stored(page)
   const first = approved.submissions.find(item => item.agency === 'insurance')!
   expect(first.transport).toBe('approved')
@@ -251,7 +252,7 @@ test('the representative journey preserves explicit approval through timed demo 
   await step(page, 7)
   await page.clock.runFor(1600)
   await expect.poll(async () => (await stored(page)).emergency.requests.insurance).toBe('received')
-  await expect(page.locator('[data-cell=guide]')).toContainText('보험 접수 시연 · 실제 접수 아님')
+  await expect(page.locator('[data-cell=guide]')).toContainText('보험사에 접수됐어요')
   const received = await stored(page)
   const receipt = received.submissions.find(item => item.id === received.activeSubmissionIds.insurance)?.externalReceipt
   expect(receipt?.number).toMatch(/^시연-/)

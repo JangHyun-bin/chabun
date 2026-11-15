@@ -309,7 +309,8 @@ test('the product example action opens a labelled report only after its explicit
   await expect(root.getByRole('article', { name: '문장 1', exact: true }).getByText('정차 중 오른쪽에서 충격을 느꼈어요. 정확한 사고 경위는 확인 중이에요.', { exact: true })).toBeVisible()
   await root.getByRole('article', { name: '문장 1', exact: true }).getByRole('button', { name: '정정하기', exact: true }).click()
   await root.getByLabel('문장 내용', { exact: true }).fill('새 예시보다 먼저 보관할 정정 초안이에요.')
-  await expect(root.getByRole('button', { name: '예시 경위서 만들기', exact: true })).toBeDisabled()
+  // Once a report exists the example action is gone, so an edit in progress cannot be replaced by a new example.
+  await expect(root.getByRole('button', { name: '예시 경위서 만들기', exact: true })).toHaveCount(0)
   expect(await page.evaluate(() => window.reportReviewPreparations)).toBe(1)
   expect(await page.evaluate(() => window.reportReviewApprovals)).toEqual([])
   await root.getByRole('button', { name: '정정 취소', exact: true }).click()

@@ -98,7 +98,7 @@ test('complete-journey covers V1–F1 through actual controls and preserves the 
   await expect(page.getByTestId('journey-flow')).toHaveAttribute('data-transfer', 'sending')
   await expect.poll(async () => (await stored(page)).emergency.requests.insurance).toBe('received')
   await expect(page.getByTestId('journey-flow')).toHaveAttribute('data-step', '7')
-  await expect(page.locator('[data-cell=guide]')).toContainText('보험 접수 시연 · 실제 접수 아님')
+  await expect(page.locator('[data-cell=guide]')).toContainText('보험사에 접수됐어요')
   await button(page, '보낸 내용 보기').click()
   await expect(page.getByRole('region', { name: '요청 결과', exact: true })).toContainText(/시연-[\w-]+/)
   await expect(page.getByRole('region', { name: '요청 결과', exact: true })).toContainText('시연 결과 · 실제 접수 아님')

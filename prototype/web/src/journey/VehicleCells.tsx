@@ -103,7 +103,7 @@ export function VehicleSceneCell({value,compact,active}:{value:JourneyCase;compa
     <header className="fs-cell-label vc-head">
       <span className="vc-title" id={titleId}><span>{sceneTitle(value)}</span></span>
       {compact?alert&&<span className="vc-line"><CareStatus tone="failed">{alert.summary}</CareStatus></span>
-        :<span className={`ss-source${past?' ss-source-past':''}`}><i/>{past?'사고 재생 · 시연':'현재 · 시연'}</span>}
+        :<span className={`ss-source${past?' ss-source-past':''}`}><i/>{past?'사고 재생':'현재'}</span>}
       <button ref={expandButton} type="button" className="vc-expand" aria-label="주변 상황 크게 보기" aria-haspopup="dialog" onClick={()=>expand(past?'replay':'current')}><Expand aria-hidden="true"/></button>
     </header>
     {!compact&&<>
@@ -141,7 +141,7 @@ export function VehicleDetailCell({value,compact}:{value:JourneyCase;compact:boo
     <header className="fs-cell-label vc-head"><span className="vc-title" id={titleId}><span>내 차</span></span>{road?<span className="vc-place" data-vehicle-note="road"><MapPin aria-hidden="true"/>{road.value}{road.source&&<small>{road.source}</small>}</span>:<CarFront aria-hidden="true"/>}</header>
     <div className="vc-body">
       <div className="vc-state">
-        <div className="vc-incident" aria-label="충돌 확인 상태"><CareStatus tone={value.fixtureId||deployed?'failed':'unknown'}>{value.fixtureId?'충돌 감지 · 시연':deployed?'충돌 감지 · 에어백 신호':'충돌 정보 미확인'}</CareStatus>{injured&&<CareStatus tone="failed">부상 있음 · 운전자 응답</CareStatus>}</div>
+        <div className="vc-incident" aria-label="충돌 확인 상태"><CareStatus tone={value.fixtureId||deployed?'failed':'unknown'}>{value.fixtureId?'충돌 감지':deployed?'충돌 감지 · 에어백 신호':'충돌 정보 미확인'}</CareStatus>{injured&&<CareStatus tone="failed">부상 있음 · 운전자 응답</CareStatus>}</div>
         <dl className="vc-rows">{rows.map(row=><div key={row.id} data-vehicle-row={row.id}><dt>{row.label}</dt><dd><CareStatus tone={row.state.tone}>{row.state.value}</CareStatus>{row.state.source&&<small>{row.state.source}</small>}</dd></div>)}</dl>
         {risk&&<p data-vehicle-note="risk"><CareStatus tone={risk.acknowledged?'confirmed':'failed'}>{risk.acknowledged?`${risk.summary} · 주변 확인함`:risk.summary}</CareStatus></p>}
       </div>

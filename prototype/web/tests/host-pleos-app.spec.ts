@@ -139,7 +139,7 @@ for (const input of ['okay', 'keyboard', 'pointer']) test(`${input} input stops 
   const injured = await stored(page)
   expect(injured.safetyActions.find(item => item.id === 'injury-reported')).toMatchObject({ status: 'user-confirmed', source: 'user' })
   await page.clock.runFor(3000)
-  if (input === 'okay') await emergency.getByRole('button', { name: '괜찮아요', exact: true }).click()
+  if (input === 'okay') await emergency.getByRole('button', { name: '지금은 연결 안 할게요', exact: true }).click()
   else if (input === 'keyboard') {
     await emergency.getByRole('button', { name: '지금 연결', exact: true }).focus()
     await page.keyboard.press('Tab')
@@ -290,7 +290,7 @@ test('a build without a backend runs standalone and never offers the phone link'
   const payload = approved.submissions.find(item => item.id === approved.activeSubmissionIds.insurance)?.payload
   await page.getByRole('button', { name: '승인한 내용 보내기', exact: true }).click()
   await expect.poll(async () => (await stored(page)).emergency.requests.insurance).toBe('received')
-  await expect(flow(page).locator('[data-cell=guide]')).toContainText('보험 접수 시연 · 실제 접수 아님')
+  await expect(flow(page).locator('[data-cell=guide]')).toContainText('보험사에 접수됐어요')
   await page.getByRole('button', { name: '차량 지원·정비소 안내 보기', exact: true }).click()
   await expect(page.getByRole('heading', { name: '필요한 다음 일을 살펴보세요', exact: true })).toBeVisible()
   await stored(page)

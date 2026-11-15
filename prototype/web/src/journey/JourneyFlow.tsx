@@ -35,9 +35,9 @@ const guideTasks: Partial<Record<FlowScene, { title: string; note: string }>> = 
   'risk-check': { title: '주변을 다시 살펴보세요', note: '차 주변이 안전한지 확인해 주세요. 남기던 기록은 그대로 있어요.' },
   'record-empty': { title: '어떻게 부딪혔나요?', note: '말로 하거나 사진을 찍어 두세요. 지금 어려우면 나중에 해도 돼요.' },
   record: { title: '남긴 내용으로 예시 경위서를 만들어요', note: '문장에 연결된 근거를 확인하고 내용을 직접 고칠 수 있어요.' },
-  sending: { title: '보험사 전송 시연 중', note: '실제 보험사에 전송하지 않아요. 승인한 자료의 시연 결과를 확인합니다.' },
-  sent: { title: '시연 전송이 끝났어요', note: '실제 보험사 전송이나 접수 결과가 아니에요.' },
-  received: { title: '보험 접수 시연이 끝났어요', note: '시연 접수번호를 확인한 뒤 차량 지원·정비소 안내로 이어갈 수 있어요.' },
+  sending: { title: '보험사에 보내는 중이에요', note: '승인한 자료만 보내요.' },
+  sent: { title: '보험사에 보냈어요', note: '접수 결과는 아직 확인 중이에요.' },
+  received: { title: '보험사에 접수됐어요', note: '접수번호를 확인한 뒤 차량 지원·정비소 안내로 이어갈 수 있어요.' },
 }
 
 export function JourneyFlow({ value, device, active, saved, onCommand, onSave, onNavigate, onReview, onPrepareReport, onHandoff, recordWorkspace, reviewWorkspace, previewHeight, controls, handoff, appWindow }: {
@@ -211,7 +211,7 @@ export function JourneyFlow({ value, device, active, saved, onCommand, onSave, o
       : scene === 'ready' ? [{ label: '기록 시작', run: () => void next() }]
       : scene === 'risk-check' ? [{ label: '주변을 확인했어요', run: () => acknowledgeRisks(value, new Date().toISOString()).forEach(onCommand) },
         ...emergency ? [] : [{ label: '다친 사람이 있거나 위험해요', run: () => answerSituation(urgentDanger), secondary: true }]]
-      : step === 5 ? [...handoff ? [{ label: '휴대폰으로 이어가기', run: onHandoff }] : [], ...blocked ? [{ label: '나중에 기록할게요', run: () => void onNavigate('follow-up'), secondary: true }] : [], { label: busy ? '예시 경위서 준비 중' : '예시 경위서 만들기', run: () => void next(), disabled: blocked }]
+      : step === 5 ? [{ label: busy ? '예시 경위서 준비 중' : '예시 경위서 만들기', run: () => void next(), disabled: blocked }, ...handoff ? [{ label: '휴대폰으로 이어가기', run: onHandoff, secondary: true }] : [], ...blocked ? [{ label: '나중에 기록할게요', run: () => void onNavigate('follow-up'), secondary: true }] : []]
       : scene === 'sent' || scene === 'received' ? [{ label: '차량 지원·정비소 안내 보기', run: () => void next() }, { label: '보낸 내용 보기', run: showSent, secondary: true }]
       : []
     const label = <div className="fs-cell-label"><span>{step === 3 || step === 4 ? '안전 확보' : stageLabels[step - 1]}</span>{(step === 3 || step === 4) && <span>{Math.min(checks + (step === 3 ? 1 : 0), 3)} / 3</span>}</div>
@@ -225,7 +225,6 @@ export function JourneyFlow({ value, device, active, saved, onCommand, onSave, o
       {task && <div className="journey-guide-copy" role={scene === 'risk-check' ? 'alert' : undefined}><h2>{task.title}</h2><p className="fs-cell-muted">{task.note}</p></div>}
       {scene === 'move' && value.safetyActions.find(action => action.id === safetyStep.id)?.status === 'device-confirmed' && <CareStatus tone="confirmed">차량 신호 확인</CareStatus>}
       {scene === 'sending' && <CareStatus tone="pending">보내는 중</CareStatus>}
-      {(scene === 'sent' || scene === 'received') && <CareStatus tone="unknown">{receipt ? '보험 접수 시연 · 실제 접수 아님' : '시연 전송 · 실제 전송 아님'}</CareStatus>}
       {notice && <p role="alert" className="journey-supporting">{notice}</p>}
       {actions.length > 0 && <div className="journey-cell-choices">{actions.map(action => <CareAction key={action.label} secondary={action.secondary} disabled={busy || action.disabled} onClick={() => afterComposition(action.run)}>{action.label}</CareAction>)}</div>}
       {!emergency && scene !== 'risk-check' && (scene.startsWith('situation') || step === 3 || step === 4 || step === 5 || step === 7) && <button type="button" className="journey-text-action journey-escalate" onClick={() => afterComposition(() => void answerSituation(urgentDanger))}>{scene.startsWith('situation') ? '불이나 연기 등 위험이 있어요' : '다친 사람이 있거나 위험해요'}</button>}
@@ -235,7 +234,6 @@ export function JourneyFlow({ value, device, active, saved, onCommand, onSave, o
     const available = value.evidence.filter(item => item.availability === 'available')
     const count = (kind: string) => available.filter(item => item.kind === kind).length
     const statements = value.statements.filter(item => item.text.trim())
-    const samples = available.some(item => item.origin === 'sample')
     const saved = statements.length + available.length + (value.diagram ? 1 : 0)
     const label = <div className="fs-cell-label"><span>사고 내용 기록 중</span><FileText aria-hidden="true" /></div>
     if (compact) {
@@ -246,8 +244,8 @@ export function JourneyFlow({ value, device, active, saved, onCommand, onSave, o
       { id: 'statements', label: '말로 남긴 이야기', value: statements.length ? `${statements.length}개` : '없음' },
       { id: 'photos', label: '사진', value: count('photo') ? `${count('photo')}장` : '없음' },
       { id: 'audio', label: '음성', value: count('audio') ? `${count('audio')}개` : '없음' },
-      ...count('video') ? [{ id: 'video', label: '영상', value: `${count('video')}개${samples ? ' · 시연 자료' : ''}` }] : [],
-      ...value.diagram ? [{ id: 'diagram', label: '사고 도식', value: value.diagram.origin === 'fixture' ? '시연 자료' : '있음' }] : [],
+      ...count('video') ? [{ id: 'video', label: '영상', value: `${count('video')}개` }] : [],
+      ...value.diagram ? [{ id: 'diagram', label: '사고 도식', value: '있음' }] : [],
     ]
     const own = statements[0]?.text
     return <>
@@ -269,7 +267,7 @@ export function JourneyFlow({ value, device, active, saved, onCommand, onSave, o
         </>}
         {countdown.kind === 'cancelled' && <CareStatus tone="unknown">입력하여 자동 진행을 멈췄어요</CareStatus>}
         {act('지금 연결', () => void startCall())}
-        {emergency && act('괜찮아요', () => void answerSituation(noUrgentDanger), true)}
+        {emergency && act(safetyConfirmed(value, 'injury-reported') ? '지금은 연결 안 할게요' : '괜찮아요', () => void answerSituation(noUrgentDanger), true)}
       </> : <>
         <div className="journey-guide-copy journey-call-copy"><h2>{callStatus[call]}</h2><p className="fs-cell-muted">실제 통화·구호 접수 미확인</p></div>
         {call === 'ended' && act('119 전화 화면 다시 열기', () => { dialAttempted.current = false; void startCall() }, true)}

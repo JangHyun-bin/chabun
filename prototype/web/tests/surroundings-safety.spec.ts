@@ -6,7 +6,7 @@ for(const colorScheme of ['light','dark'] as const){
     await page.goto('/?study=surroundings&view=current')
     const scene=page.locator('.ss-scene')
     const approaching=scene.getByRole('img',{name:'뒤에서 접근 중 · 시연',exact:true})
-    const refuge=scene.getByRole('img',{name:'가드레일 밖 대피 지점 · 시연 · 현장 안전 확인 필요',exact:true})
+    const refuge=scene.getByRole('img',{name:'가드레일 밖 대피 지점 · 현장 안전 확인 필요',exact:true})
     await expect(approaching).toBeVisible()
     await expect(refuge).toBeVisible()
     await expect(scene.getByText('2차로',{exact:true})).toBeVisible()

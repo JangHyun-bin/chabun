@@ -57,10 +57,10 @@ export function SceneSafetyMarkers({time}:{time:number}){
       <path d={`M130 ${passing.y+82}v46M122 ${passing.y-96}l8 -14 8 14`} className="ss-approach-arrow" aria-hidden="true"/>
       <text className="ss-safety-label" x="130" y={passing.y+108} textAnchor="middle"><tspan x="130">{label}</tspan><tspan x="130" dy="24" className="ss-safety-note">시연</tspan></text>
     </g>
-    <g className="ss-refuge" role="img" aria-label="가드레일 밖 대피 지점 · 시연 · 현장 안전 확인 필요">
+    <g className="ss-refuge" role="img" aria-label="가드레일 밖 대피 지점 · 현장 안전 확인 필요">
       <circle className="ss-refuge-point" cx={refuge.x} cy={refuge.y} r="20"/>
       <path className="ss-refuge-symbol" d={`M${refuge.x} ${refuge.y-12}v24m-9 -9 9 9 9 -9`} aria-hidden="true"/>
-      <text className="ss-safety-label" x={refuge.x} y={refuge.y+48} textAnchor="middle"><tspan x={refuge.x}>가드레일 밖</tspan><tspan x={refuge.x} dy="24">대피 지점 · 시연</tspan><tspan x={refuge.x} dy="24" className="ss-safety-note">현장 안전 확인 필요</tspan></text>
+      <text className="ss-safety-label" x={refuge.x} y={refuge.y+48} textAnchor="middle"><tspan x={refuge.x}>가드레일 밖</tspan><tspan x={refuge.x} dy="24">대피 지점</tspan><tspan x={refuge.x} dy="24" className="ss-safety-note">현장 안전 확인 필요</tspan></text>
     </g>
   </g>
 }

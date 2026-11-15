@@ -27,12 +27,15 @@ const defaultRecipients: Record<Target, string> = { insurance: registeredProfile
 export function suggestedDraft(value: JourneyCase, target: Target): Draft {
   const evidenceIds = value.evidence.filter(item => item.availability === 'available' && item.assetId).map(item => item.id)
   const selection: PayloadSelection = {
-    observationIds: value.observations.map(item => item.id),
+    // Unconfirmed facts add nothing for the recipient, so only confirmed ones start selected.
+    observationIds: value.observations.filter(item => item.confirmation === 'confirmed').map(item => item.id),
     statementIds: value.statements.filter(item => item.text.trim() && item.confirmedRevision === item.revision).map(item => item.id),
     evidenceIds, includeDiagram: !!value.diagram, includeReport: !!value.report,
   }
-  if (selection.includeReport && !preparePayload(value, selection).ok) selection.includeReport = false
-  if (selection.includeDiagram && !preparePayload(value, selection).ok) selection.includeDiagram = false
+  // Check the diagram and the report on their own so one unreviewed item never drops the other.
+  const base = { ...selection, includeDiagram: false, includeReport: false }
+  selection.includeDiagram = selection.includeDiagram && preparePayload(value, { ...base, includeDiagram: true }).ok
+  selection.includeReport = selection.includeReport && preparePayload(value, { ...base, includeReport: true }).ok
   return { recipient: defaultRecipients[target], selection }
 }
 function emptyDrafts(): Record<Target, Draft | null> { return { insurance: null, vehicle: null, share: null } }
@@ -57,7 +60,8 @@ export function PayloadContent({ payload, caseId, active, exampleReport = false,
 }
 
 export type SubmissionPanelHandle = { preserveDraft: () => void }
-export function SubmissionPanel({ value, onApprove, onCommand, onCancel, onDirtyChange, active, explicitTransport=false, footer, ref }: {
+export function SubmissionPanel({ value, onApprove, onCommand, onCancel, onDirtyChange, onReviewReport, active, explicitTransport=false, footer, ref }: {
+  onReviewReport?: () => void
   footer?:ReactNode
   ref?:Ref<SubmissionPanelHandle>
   explicitTransport?: boolean
@@ -77,6 +81,8 @@ export function SubmissionPanel({ value, onApprove, onCommand, onCancel, onDirty
   const currentRequest = target === 'share' ? null : value.submissions.find(item => item.id === value.activeSubmissionIds[target])
   const currentShare = target === 'share' ? value.shares.at(-1) : null
   const allowed = target === 'share' || canSubmit(value, target)
+  // The report is what the insurer needs most; when it cannot start selected, say why and offer the way back.
+  const reportPending = value.report?.paragraphs.filter(item => item.confirmedRevision !== item.revision).length ?? 0
   useEffect(() => { onDirtyChange(dirty) }, [dirty, onDirtyChange])
   useEffect(() => {
     if (!dirty) return
@@ -153,7 +159,8 @@ export function SubmissionPanel({ value, onApprove, onCommand, onCancel, onDirty
         {value.statements.map((item, index) => <label key={item.id}><input type="checkbox" checked={draft.selection.statementIds.includes(item.id)} onChange={() => toggle('statementIds', item.id)} /><span>남긴 이야기 {index + 1}<small>{item.text}{item.confirmedRevision !== item.revision ? ' · 확인 필요' : ''}</small></span></label>)}
         {value.evidence.map(item => <label key={item.id}><input type="checkbox" aria-label={item.label} disabled={item.availability !== 'available'} checked={draft.selection.evidenceIds.includes(item.id)} onChange={() => toggle('evidenceIds', item.id)} /><span>{item.label}{item.availability !== 'available' && <small>확보하지 못한 자료</small>}</span></label>)}
         {value.diagram && <label><input type="checkbox" checked={draft.selection.includeDiagram} onChange={event => change({ selection: { ...draft.selection, includeDiagram: event.target.checked } })} /><span>사고 도식{value.diagram.confirmedRevision !== value.diagram.revision && <small>확인 필요</small>}</span></label>}
-        {value.report && <label><input type="checkbox" checked={draft.selection.includeReport} onChange={event => change({ selection: { ...draft.selection, includeReport: event.target.checked } })} /><span>경위서</span></label>}
+        {value.report && <label><input type="checkbox" checked={draft.selection.includeReport} onChange={event => change({ selection: { ...draft.selection, includeReport: event.target.checked } })} /><span>경위서{reportPending > 0 && <small>확인하지 않은 문장 {reportPending}개</small>}</span></label>}
+        {value.report && reportPending > 0 && onReviewReport && <div className="journey-report-tools"><button onClick={onReviewReport}>경위서 확인 마치기</button></div>}
       </fieldset>
       {target !== 'share' && <div className="journey-report-tools"><button onClick={() => { onCommand({ type: 'agency-decision', agency: target, decision: 'deferred' }); setError('지금은 보류했어요. 준비되면 다시 검토할 수 있어요.') }}>나중에 결정</button><button onClick={() => { onCommand({ type: 'agency-decision', agency: target, decision: 'declined' }); setError('전송하지 않기로 했어요. 남긴 기록은 유지돼요.') }}>전송하지 않기</button></div>}
     </>}

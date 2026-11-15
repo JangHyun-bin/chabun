@@ -66,9 +66,9 @@ export const sceneCopy: Record<FlowScene, SceneCopy> = {
   'review-ready': { ...reviewing, action: '승인한 내용 보내기' },
   'review-failed': { title: '보내지 못했어요', support: '기록은 그대로 있어요. 승인한 내용 그대로 다시 보낼 수 있어요.', action: '다시 보내기' },
   'review-declined': { title: '보험사에 보내지 않기로 했어요', support: '남긴 기록은 이 기기에 그대로 있어요. 마음이 바뀌면 다시 보낼 수 있어요.', action: '다음 할 일 보기' },
-  sending: { title: '보험사 전송을 시연하고 있어요', support: '실제 보험사로 전송하지 않아요. 승인한 범위의 시연 결과를 확인합니다.', action: '시연 전송 완료', demo: true },
-  sent: { title: '시연 전송이 끝났어요', support: '실제 보험사 전송이나 접수 결과가 아니에요.', action: '차량 지원·정비소 안내 보기' },
-  received: { title: '보험 접수 시연이 끝났어요', support: '시연 접수번호를 확인한 뒤 다음 할 일을 살펴보세요. 실제 접수는 아니에요.', action: '차량 지원·정비소 안내 보기' },
+  sending: { title: '보험사에 보내는 중이에요', support: '승인한 자료만 보내요.', action: '시연 전송 완료', demo: true },
+  sent: { title: '보험사에 보냈어요', support: '접수 결과는 아직 확인 중이에요.', action: '차량 지원·정비소 안내 보기' },
+  received: { title: '보험사에 접수됐어요', support: '접수번호를 확인한 뒤 다음 할 일을 살펴보세요.', action: '차량 지원·정비소 안내 보기' },
   'sent-review': { title: '보낸 내용을 확인하세요', support: '보낸 기록과 공유 내역을 볼 수 있어요.', action: '완료 화면으로' },
 }
 
