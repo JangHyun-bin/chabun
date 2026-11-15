@@ -1,4 +1,4 @@
-.product-app { min-height:100dvh; --ac-touch:48px; line-height:1.5; word-break:keep-all; overflow-wrap:break-word; }
+.product-app { min-height:100dvh; background:var(--ac-app-background); --ac-touch:48px; line-height:1.5; word-break:keep-all; overflow-wrap:break-word; }
 .product-app [hidden] { display:none!important; }
 .product-main { display:grid; align-content:start; gap:var(--ac-space-6); width:min(100%,800px); margin:auto; padding:var(--ac-space-6) var(--ac-space-6) max(var(--ac-space-8),env(safe-area-inset-bottom)); }
 .product-card,.product-workspace { display:grid; gap:var(--ac-space-6); min-width:0; padding:var(--ac-space-6); border:1px solid var(--ac-line); border-radius:var(--ac-radius-card); background:var(--ac-surface); }

@@ -51,7 +51,7 @@
 .journey-flow .fs-call-core>.fs-cell-muted { font-size:var(--ac-type-supporting); line-height:1.5; }
 /* Same title/note scale as the guide cell so the two 119 panels read as one system; the cell keeps its own padding. */
 .journey-flow .journey-call-copy h2 { font-size:var(--ac-type-guide); font-weight:600; line-height:1.22; letter-spacing:-.02em; }
-.journey-countdown { font-size:var(--ac-type-call); font-variant-numeric:tabular-nums; line-height:1.1; font-weight:600; }
+.journey-countdown { font-size:var(--ac-type-number); font-variant-numeric:tabular-nums; line-height:1; font-weight:400; letter-spacing:-.055em; }
 
 .journey-flow-workspace { container:care-layout / inline-size; display:grid; grid-template-columns:minmax(0,1fr); grid-template-rows:minmax(0,1fr); width:100%; height:100%; min-width:0; min-height:0; }
 .journey-flow [data-flow-mode]:not([data-flow-mode=document]) .fs-cell-body:has(>.journey-flow-workspace:not([hidden]))>.journey-flow-workspace { flex:1 1 0; height:auto; }
